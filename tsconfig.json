@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "%/*": ["blanco/main/typescript/*"],
+      "%%/*": ["blanco/main/vuecomponent/*"]
+    }
+  },
+  "include": [
+    "src/**/*.json",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.json",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "blanco/main/**/*.ts",
+    "blanco/main/**/*.vue"
+  ],
+  "exclude": [
+    ".idea",
+    "node_modules"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
