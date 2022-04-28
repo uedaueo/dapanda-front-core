@@ -1,15 +1,12 @@
 import {defineComponent} from "vue";
 import {helloMessageSetup} from "@/sample/components/HelloMessage/HelloMessageSetup";
-import { HelloMessageEmitsOptions } from "@/sample/components/HelloMessage/HelloMessageEmitsOptions";
+import {helloMessageEmitsOptions} from "@/sample/components/HelloMessage/HelloMessageEmitsOptions";
+import {helloMessagePropsOptions} from "@/sample/components/HelloMessage/HelloMessagePropsOptions";
 
 export default defineComponent({
     name: 'HelloMessage',
-    props: {
-        message: String
-    },
-    emits: {
-        'update:message': (value: String) => true,
-    } as HelloMessageEmitsOptions,
+    props: helloMessagePropsOptions,
+    emits: helloMessageEmitsOptions,
     setup: (props, context) => {
         return helloMessageSetup(props, context);
     }

@@ -1,0 +1,47 @@
+<v-app-bar app flat outlined>
+    <v-img
+            alt="Logo"
+            class="mr-2"
+            contain
+            tile
+            src="/src/assets/kuyaR180x64.png"
+            transition="scale-transition"
+            max-width="180"
+            height="64"
+    />
+    <v-card flat tile height="26" class="pb-1 mb-0 mt-auto" min-width="540" v-show="authRequired" v-if="dataPrepared">
+        <template v-for="menu of menuData">
+            <LeafMenuItem :menu="menu" :root=true v-if="isLeafItem(menu)" />
+            <NodeMenuItem :menu="menu" :root=true v-else />
+            <v-divider
+                    color="white"
+                    class="mx-4"
+                    vertical
+            />
+        </template>
+    </v-card>
+    <v-spacer/>
+    <div class="pa-0" v-show="authRequired">
+        <v-menu open-on-hover offset-y min-width="120">
+            <template v-slot:activator="{ primary }">
+                <v-btn
+                        tile
+                        class="white--text mt-2 caption headmenu"
+                        depressed
+                        v-bind = "primary"
+                >{{ fAccountName }}</v-btn>
+            </template>
+            <v-list dense max-width="120">
+                <v-list-item>
+                    <v-btn
+                            height="50"
+                            depressed
+                            @click="onClickLogout"
+                            color="white"
+                            style="word-wrap: break-word; white-space: pre-wrap;"
+                            class="black--text align-center headmenu caption">{{ "labels.topMenuBar.logout" }}</v-btn>
+                </v-list-item>
+            </v-list>
+        </v-menu>
+    </div>
+</v-app-bar>

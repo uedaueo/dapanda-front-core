@@ -1,0 +1,18 @@
+<v-menu open-on-click bottom :offset-y="offsety" :offset-x="offsetx">
+    <template v-slot:activator = "{ props }" >
+        <v-btn
+                color="color"
+                v-bind="props"
+                class="klass">{{ menu.nameId }}</v-btn>
+    </template>
+    <v-list>
+        <v-list-item
+                v-for="(child, index) in menu.children"
+                :key="index"
+                @click=""
+        >
+            <LeafMenuItem :menu="child" v-if="isLeafItem(child)" />
+            <NodeMenuItem :menu="child" v-else />
+        </v-list-item>
+    </v-list>
+</v-menu>

@@ -99,7 +99,7 @@ npm install sass@latest
   * **main.ts, App.vue, HelloWorld.vue, vite.config.ts などが上書きされるので注意。**
   * tsconfig.json で "esModuleInterop": true を設定しているが、vite.config.ts で @vuetify/vite-plugin で default export が無いエラーになる（IntelliJ の不具合？）
     * 参考: https://numb86-tech.hatenablog.com/entry/2020/07/11/160159
-    * コマンドラインからはコンパイルできるので一旦無視しておく
+    * コマンドラインからはコンパイルできるので一旦無視しておく(@ts-ignoreを付与)
 * vite プロジェクトであっても、導入に vue-cli (5.0 later) が必要
 
 ```aidl

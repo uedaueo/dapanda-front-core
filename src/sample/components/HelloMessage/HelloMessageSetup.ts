@@ -5,7 +5,7 @@ export const helloMessageSetup = (props: any, context: SetupContext<HelloMessage
     const { message } = toRefs(props);
     const messageComputed = computed({
         get: () => message.value,
-        set: (value: String) => {
+        set: (value: string) => {
             context.emit('update:message', value);
         }
     });

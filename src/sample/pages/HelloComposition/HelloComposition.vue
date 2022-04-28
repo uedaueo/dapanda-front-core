@@ -1,4 +1,3 @@
-<!--<template src="@/sample/pages/HelloComposition/HelloComposition.html"/>-->
-<template src="./HelloComposition.html"/>
+<template src="@/sample/pages/HelloComposition/HelloComposition.html"/>
 <script lang="ts" src="./HelloComposition.ts"/>
-<!--<style lang="scss" src="@/sample/pages/HelloComposition/HelloComposition.scss"/>-->
+<style lang="scss" src="@/sample/pages/HelloComposition/HelloComposition.scss"/>
