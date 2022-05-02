@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import router from "@/router";
 import RootFrame from "@/components/framework/RootFrame/RootFrame";
+import pinia from "@/pinia";
 
 loadFonts()
 
@@ -14,5 +15,6 @@ const app = createApp({
 });
 app
   .use(vuetify)
+    .use(pinia)
     .use(router)
     .mount('#app')

@@ -80,6 +80,26 @@ npm run dev
 
 参考: https://github.com/vitejs/vite/issues/5814#issuecomment-1021556882
 
+### npm で導入するパッケージの確認
+
+開発開始時には vue 関連のパッケージは 3 未対応のものがある (vuetifyとか)ので、@latest でインス取るしていいかどうか確認する必要がある。
+
+```aidl
+$ npm view vuetify
+（中略）
+dist-tags:
+latest: 2.6.4       next: 3.0.0-beta.1  stable: 1.5.24
+
+```
+
+この場合は 
+
+```aidl
+npm install vuetify@next
+```
+
+とする必要がある。
+
 ### @types/node の導入
 
 ```aidl
@@ -145,6 +165,17 @@ npm install vue-router@latest
 
 ```
 
+### pinia の導入
+
+```aidl
+npm install pinia@latest
+```
+
+### vue-i18n の導入
+
+```aidl
+npm install vue-i18n@latest
+```
 
 ### library-mode
 
