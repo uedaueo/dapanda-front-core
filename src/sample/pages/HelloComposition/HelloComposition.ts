@@ -6,7 +6,10 @@ import HelloMessage from "@/sample/components/HelloMessage/HelloMessage.vue";
 export default defineComponent({
     name: "HelloComposition",
     props: {
-        msg: String
+        msg: {
+            type: String,
+            default: "Default!"
+        }
     },
     components: {
         HelloInput,

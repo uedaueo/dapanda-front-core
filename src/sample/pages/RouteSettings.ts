@@ -3,6 +3,7 @@ import HelloComposition from "@/sample/pages/HelloComposition/HelloComposition.v
 
 const routeSettings = () => {
     return [
+        { path: '/', component: HelloVuetify },
         { path: '/helloVuetify', component: HelloVuetify },
         { path: '/helloComposition', component: HelloComposition }
     ]

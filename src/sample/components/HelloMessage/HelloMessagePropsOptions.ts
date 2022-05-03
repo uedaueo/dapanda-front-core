@@ -1,12 +1,13 @@
 import {ComponentPropsOptions, PropType} from "vue";
 
 export interface HelloMessagePropsOptions {
-    message: string
+    message?: string
 }
 
 export const helloMessagePropsOptions: ComponentPropsOptions<HelloMessagePropsOptions> = {
     message: {
-        type: Object as PropType<string>,
-        required: true
+        // type: Object as PropType<string>,
+        required: true,
+        default: "Default Message!"
     }
 }

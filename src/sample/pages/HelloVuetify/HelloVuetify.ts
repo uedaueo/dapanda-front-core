@@ -5,6 +5,9 @@ import {helloVuetifySetup} from "@/sample/pages/HelloVuetify/HelloVuetifySetup";
 
 export default defineComponent({
     name: 'HelloVuetify',
+    setup: (props, context) => {
+        return helloVuetifySetup(props, context)
+    },
     data: () => {
         return helloVuetifyData();
     }

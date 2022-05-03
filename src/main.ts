@@ -1,10 +1,9 @@
 import {createApp, h} from 'vue'
-import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import router from "@/router";
-import RootFrame from "@/components/framework/RootFrame/RootFrame";
 import pinia from "@/pinia";
+import RootFrame from "@/components/framework/RootFrame/RootFrame.vue";
 
 loadFonts()
 

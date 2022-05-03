@@ -8,11 +8,9 @@ export interface NodeMenuItemPropsOptions {
 
 export const nodeMenuItemPropsOptions: ComponentPropsOptions<NodeMenuItemPropsOptions> = {
     menu: {
-        type: Object as PropType<MenuItem>,
         required: true
     },
     root: {
-        type: true,
         required: false,
         default: false
     }
