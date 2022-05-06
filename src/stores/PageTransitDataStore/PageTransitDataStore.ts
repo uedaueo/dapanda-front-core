@@ -1,30 +1,10 @@
-import {_GettersTree, defineStore, DefineStoreOptions, StateTree} from "pinia";
-import { pageTransitDataStoreOptions } from "@/stores/PageTransitDataStore/PageTransitDataStoreOptions";
+import {defineStore} from "pinia";
+import {pageTransitDataSoreState} from "@/stores/PageTransitDataStore/PageTransitDataSoreState";
+import {pageTransitDataStoreGetters} from "@/stores/PageTransitDataStore/PageTransitDataStoreGetters";
+import {pageTransitDataStoreActions} from "@/stores/PageTransitDataStore/PageTransitDataStoreActions";
 
-export interface PageTransitDataStoreState {
-    location: string
-}
-
-export const pageTrasitDataStoreState: PageTransitDataStoreState = {
-    location: "/"
-}
-
-export const usePageTransitDataStore = defineStore("pageTransitDataStore", pageTransitDataStoreOptions);
-
-// export const usePageTransitDataStore = defineStore("pageTransitDataStore",{
-//     state: () => pageTrasitDataStoreState,
-//     getters: {
-//         getDesc: (state: PageTransitDataStoreState) => {
-//             console.log("Getters! " + state.location);
-//             return (name: string) => {
-//                 return "Desc!" + name;
-//             };
-//         }
-//     },
-//     actions: {
-//         update(transitData: PageTransitDataStoreState) {
-//             console.log("pageTransitDataStoreOptions.actions.update to : " + transitData.location);
-//             this.location = transitData.location;
-//         }
-//     }
-// });
+export const usePageTransitDataStore = defineStore("pageTransitDataStore", {
+    state: () => pageTransitDataSoreState,
+    getters: pageTransitDataStoreGetters,
+    actions: pageTransitDataStoreActions
+});

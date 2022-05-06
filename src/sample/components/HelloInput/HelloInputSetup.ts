@@ -1,7 +1,7 @@
 import {ref, SetupContext} from "vue";
-import {HelloInputEmitsOptions} from "@/sample/components/HelloInput/HelloInputEmitsOptions";
+import {HelloInputEmits} from "@/sample/components/HelloInput/HelloInputEmits";
 
-export const helloInputSetup = (props: any, context: SetupContext<HelloInputEmitsOptions>) => {
+export const helloInputSetup = (props: any, context: SetupContext<HelloInputEmits>) => {
     const message = ref<string>("");
     const onSubmit = () => {
         context.emit('update', message.value);

@@ -1,7 +1,7 @@
 import {computed, ref, SetupContext, toRefs} from "vue";
-import {HelloMessageEmitsOptions} from "@/sample/components/HelloMessage/HelloMessageEmitsOptions";
+import {HelloMessageEmits} from "@/sample/components/HelloMessage/HelloMessageEmits";
 
-export const helloMessageSetup = (props: any, context: SetupContext<HelloMessageEmitsOptions>) => {
+export const helloMessageSetup = (props: any, context: SetupContext<HelloMessageEmits>) => {
     const { message } = toRefs(props);
     const messageComputed = computed({
         get: () => message.value,

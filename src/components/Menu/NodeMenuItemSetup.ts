@@ -1,7 +1,8 @@
 import {SetupContext, toRefs} from "vue";
 import {MenuItem} from "@/components/Menu/MenuItem";
+import {NodeMenuItemProps} from "@/components/Menu/NodeMenuItemProps";
 
-export const nodeMenuItemSetup = (props: any, context: SetupContext) => {
+export const nodeMenuItemSetup = (props: NodeMenuItemProps, context: SetupContext) => {
     const { root } = toRefs(props);
     const color = (): string => {
         let color2 = "white";

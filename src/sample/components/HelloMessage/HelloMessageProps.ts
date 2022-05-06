@@ -1,10 +1,10 @@
-import {ComponentPropsOptions, PropType} from "vue";
+import {ComponentPropsOptions} from "vue";
 
 export interface HelloMessagePropsOptions {
     message?: string
 }
 
-export const helloMessagePropsOptions: ComponentPropsOptions<HelloMessagePropsOptions> = {
+export const helloMessageProps: ComponentPropsOptions<HelloMessagePropsOptions> = {
     message: {
         // type: Object as PropType<string>,
         required: true,

@@ -1,5 +1,5 @@
 import {defineComponent} from "vue";
-import {nodeMenuItemPropsOptions} from "@/components/Menu/NodeMenuItemPropsOptions";
+import {NodeMenuItemProps, nodeMenuItemProps} from "@/components/Menu/NodeMenuItemProps";
 import LeafMenuItem from "@/components/Menu/LeafMenuItem.vue";
 import {nodeMenuItemSetup} from "@/components/Menu/NodeMenuItemSetup";
 
@@ -8,8 +8,8 @@ export default defineComponent({
     components: {
         LeafMenuItem
     },
-    props: nodeMenuItemPropsOptions,
+    props: nodeMenuItemProps,
     setup: (props, context) => {
-        return nodeMenuItemSetup(props, context)
+        return nodeMenuItemSetup(props as NodeMenuItemProps, context)
     }
 })

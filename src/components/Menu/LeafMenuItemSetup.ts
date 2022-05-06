@@ -1,11 +1,9 @@
 import {SetupContext, toRefs} from "vue";
 import {MenuItem} from "@/components/Menu/MenuItem";
-import {
-    PageTransitDataStoreState,
-    usePageTransitDataStore
-} from "../../stores/PageTransitDataStore/PageTransitDataStore";
+import {LeafMenuItemProps} from "@/components/Menu/LeafMenuItemProps";
+import {usePageTransitDataStore} from "@/stores/PageTransitDataStore/PageTransitDataStore";
 
-export const leafMenuItemSetup = (props: any, context: SetupContext) => {
+export const leafMenuItemSetup = (props: LeafMenuItemProps, context: SetupContext) => {
     const { root } = toRefs(props);
     const pageTransitDataStore = usePageTransitDataStore();
 
@@ -26,7 +24,6 @@ export const leafMenuItemSetup = (props: any, context: SetupContext) => {
     const onClickMenu = (menu: MenuItem) => {
         console.log("Clicked!");
         pageTransitDataStore.update({location: "" + menu.path});
-        console.log(pageTransitDataStore.getDesc("myname"));
     }
     return {
         color,
