@@ -1,9 +1,10 @@
-import {computed, onMounted, SetupContext, watch} from "vue";
+import {SetupContext, watch} from "vue";
 import {usePageTransitDataStore} from "@/stores/PageTransitDataStore/PageTransitDataStore";
 import {storeToRefs} from "pinia";
-import {RouteLocationRaw, useRouter} from "vue-router";
+import {useRouter} from "vue-router";
+import {PageTransitControllerProps} from "%/components/framework/PageTransitController/PageTransitControllerProps";
 
-export const pageTransitControllerSetup = (props: any, context: SetupContext) => {
+export const pageTransitControllerSetup = (props: PageTransitControllerProps, context: SetupContext) => {
     const pageTransitData = usePageTransitDataStore();
     const { location } = storeToRefs(pageTransitData);
     console.log("pageTransitControllerSetup: location = " + location.value);

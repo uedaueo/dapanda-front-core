@@ -14,10 +14,11 @@ version '0.0.0'
 apply plugin: 'application'
 
 repositories {
-    mavenCentral()
+    mavenLocal()
     maven {
         url 'https://raw.github.com/uedaueo/blancofw-maven2/gh-pages-poi4/'
     }
+    mavenCentral()
 }
 
 configurations {
@@ -32,7 +33,7 @@ dependencies {
     blancoFramework 'blanco.valueobject:blanco-valueobject:[2.0,3.0)'
     blancoFramework 'blanco.valueobjectts:blanco-valueobjectts:[0.0,1.0)'
     blancoFramework 'blanco.restgeneratorts:blanco-restgeneratorts:[0.0,1.0)'
-    blancoFramework 'blanco.vuecomponent:blanco-vuecomponent:[0.0,1.0)'
+    blancoFramework 'blanco.vuecomponent:blanco-vuecomponent:[1.0,2.0)'
     blancoFramework 'blanco.veevalidate:blanco-veevalidate:[0.0,1.0)'
     blancoFramework 'blanco.restgenerator:blanco-restgenerator:[0.0,1.0)'
     blancoFramework 'blanco.constants:blanco-constants:[2.0,3.0)'
@@ -53,12 +54,12 @@ task metaObjects {
                 classname: 'blanco.valueobjectts.task.BlancoValueObjectTsTask',
                 classpath: configurations.blancoFramework.asPath
         )
-        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/sample/objects",
+        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/objects",
                 tmpdir: "${buildDir}/tmpObjects",
                 targetdir: "${projectDir}/blanco",
                 targetStyle: "maven",
                 sheetType: 'php',
-                tabs: 2,
+                tabs: 4,
                 lineSeparator: 'LF',
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
@@ -78,22 +79,22 @@ task metaLabels {
                 classname: 'blanco.valueobjectts.task.BlancoValueObjectTsTask',
                 classpath: configurations.blancoFramework.asPath
         )
-        ant.blancovalueobjectts(metadir: "${projectDir}/meta/sample/labels/ja",
+        ant.blancovalueobjectts(metadir: "${projectDir}/meta/labels/ja",
                 tmpdir: "${buildDir}/tmpLabelsJa",
-                targetdir: "${projectDir}/blanco/main/vuecomponent",
+                targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',
-                tabs: 2,
+                tabs: 4,
                 lineSeparator: 'LF',
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
         )
-        ant.blancovalueobjectts(metadir: "${projectDir}/meta/sample/labels/en",
+        ant.blancovalueobjectts(metadir: "${projectDir}/meta/labels/en",
                 tmpdir: "${buildDir}/tmpLabelsEn",
-                targetdir: "${projectDir}/blanco/main/vuecomponent",
+                targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',
-                tabs: 2,
+                tabs: 4,
                 lineSeparator: 'LF',
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
@@ -113,22 +114,22 @@ task metaMessages {
                 classname: 'blanco.valueobjectts.task.BlancoValueObjectTsTask',
                 classpath: configurations.blancoFramework.asPath
         )
-        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/sample/messages/ja",
+        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/messages/ja",
                 tmpdir: "${buildDir}/tmpLabelsJa",
-                targetdir: "${projectDir}/blanco/main/vuecomponent",
+                targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',
-                tabs: 2,
+                tabs: 4,
                 lineSeparator: 'LF',
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
         )
-        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/sample/messages/en",
+        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/messages/en",
                 tmpdir: "${buildDir}/tmpLabelsEn",
-                targetdir: "${projectDir}/blanco/main/vuecomponent",
+                targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',
-                tabs: 2,
+                tabs: 4,
                 lineSeparator: 'LF',
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
@@ -149,14 +150,26 @@ task metaComponents {
                 classname: 'blanco.vuecomponent.task.BlancoVueComponentTask',
                 classpath: configurations.blancoFramework.asPath
         )
-        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/sample/components",
+        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/components",
                 tmpdir: "${buildDir}/tmpComponents",
-                targetdir: "${projectDir}/blanco/main/vuecomponent",
+                targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',
                 encoding: getProperty("blanco.encoding"),
                 verbose: "true",
-                tabs: 2,
+                tabs: 4,
+                searchTmpdir: "${buildDir}/tmpObjects",
+                lineSeparator: 'LF',
+                listClass: ""
+        )
+        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/samples/components",
+                tmpdir: "${buildDir}/tmpComponents",
+                targetdir: "${projectDir}/blanco/main/typescript",
+                targetStyle: "free",
+                sheetType: 'php',
+                encoding: getProperty("blanco.encoding"),
+                verbose: "true",
+                tabs: 4,
                 searchTmpdir: "${buildDir}/tmpObjects",
                 lineSeparator: 'LF',
                 listClass: ""
@@ -177,17 +190,29 @@ task metaPages {
                 classname: 'blanco.vuecomponent.task.BlancoVueComponentTask',
                 classpath: configurations.blancoFramework.asPath
         )
-        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/sample/pages",
+        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/pages",
                 tmpdir: "${buildDir}/tmpPages",
-                targetdir: "${projectDir}/blanco/main/vuecomponent",
+                targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',
                 encoding: getProperty("blanco.encoding"),
                 verbose: "true",
-                tabs: 2,
+                tabs: 4,
                 searchTmpdir: "${buildDir}/tmpComponents,${buildDir}/tmpObjects",
                 lineSeparator: 'LF',
-                listClass: ""
+                listClass: "sample.pages.RouteSettings"
+        )
+        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/samples/pages",
+                tmpdir: "${buildDir}/tmpPages",
+                targetdir: "${projectDir}/blanco/main/typescript",
+                targetStyle: "free",
+                sheetType: 'php',
+                encoding: getProperty("blanco.encoding"),
+                verbose: "true",
+                tabs: 4,
+                searchTmpdir: "${buildDir}/tmpComponents,${buildDir}/tmpObjects",
+                lineSeparator: 'LF',
+                listClass: "samples.pages.RouteSettings"
         )
     }
 }
@@ -196,4 +221,8 @@ task meta(dependsOn: [metaLabels, metaMessages, metaPages]) {
     logging.captureStandardOutput LogLevel.INFO
     group "blanco"
     description "Generate dapanda-front-core sources for typescript by blancoFramework"
+}
+
+clean.doFirst {
+    delete "${projectDir}/blanco/"
 }

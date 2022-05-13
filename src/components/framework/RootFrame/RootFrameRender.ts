@@ -1,6 +1,6 @@
 import {h} from "vue";
 import App from "@/App.vue";
-import PageTransitController from "@/components/framework/PageTransitController/PageTransitController.vue";
+import PageTransitController from "%/components/framework/PageTransitController/PageTransitController";
 
 export const rootFrameRender = () => {
     return h("div", { class: "root-frame-component" },

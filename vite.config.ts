@@ -19,7 +19,6 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, '/src'),
       '%': path.resolve(__dirname, '/blanco/main/typescript'),
-      '%%': path.resolve(__dirname, '/blanco/main/vuecomponent')
     }
   },
   server: {

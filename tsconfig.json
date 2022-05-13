@@ -16,7 +16,6 @@
     "paths": {
       "@/*": ["src/*"],
       "%/*": ["blanco/main/typescript/*"],
-      "%%/*": ["blanco/main/vuecomponent/*"]
     }
   },
   "include": [

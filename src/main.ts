@@ -3,7 +3,7 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import router from "@/router";
 import pinia from "@/pinia";
-import RootFrame from "@/components/framework/RootFrame/RootFrame.vue";
+import RootFrame from "%/components/framework/RootFrame/RootFrame";
 
 loadFonts()
 
