@@ -16,7 +16,7 @@ apply plugin: 'application'
 repositories {
     mavenLocal()
     maven {
-        url 'https://raw.github.com/uedaueo/blancofw-maven2/gh-pages-poi4/'
+        url 'https://raw.github.com/uedaueo/blancofw-maven2/gh-pages-poi5/'
     }
     mavenCentral()
 }
@@ -190,18 +190,18 @@ task metaPages {
                 classname: 'blanco.vuecomponent.task.BlancoVueComponentTask',
                 classpath: configurations.blancoFramework.asPath
         )
-        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/pages",
-                tmpdir: "${buildDir}/tmpPages",
-                targetdir: "${projectDir}/blanco/main/typescript",
-                targetStyle: "free",
-                sheetType: 'php',
-                encoding: getProperty("blanco.encoding"),
-                verbose: "true",
-                tabs: 4,
-                searchTmpdir: "${buildDir}/tmpComponents,${buildDir}/tmpObjects",
-                lineSeparator: 'LF',
-                listClass: "sample.pages.RouteSettings"
-        )
+//        ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/pages",
+//                tmpdir: "${buildDir}/tmpPages",
+//                targetdir: "${projectDir}/blanco/main/typescript",
+//                targetStyle: "free",
+//                sheetType: 'php',
+//                encoding: getProperty("blanco.encoding"),
+//                verbose: "true",
+//                tabs: 4,
+//                searchTmpdir: "${buildDir}/tmpComponents,${buildDir}/tmpObjects",
+//                lineSeparator: 'LF',
+//                listClass: "pages.RouteSettings"
+//        )
         ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/samples/pages",
                 tmpdir: "${buildDir}/tmpPages",
                 targetdir: "${projectDir}/blanco/main/typescript",
