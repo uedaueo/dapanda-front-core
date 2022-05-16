@@ -28,3 +28,4 @@ export function defineStoreActions<Id extends string, S extends StateTree, G = {
 ): A & ThisType<A & UnwrapRef<S> & Omit<_StoreWithState<Id, S, G, A>, 'id'> & _StoreWithGetters<G> & PiniaCustomProperties> {
     return actions;
 }
+

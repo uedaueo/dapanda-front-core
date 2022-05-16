@@ -2,6 +2,7 @@ import {SetupContext, toRefs} from "vue";
 import {usePageTransitDataStore} from "@/stores/PageTransitDataStore/PageTransitDataStore";
 import {LeafMenuItemProps} from "%/components/menu/LeafMenuItem/LeafMenuItemProps";
 import {MenuItem} from "%/components/menu/MenuItem";
+import {pageTransitDataSoreState} from "@/stores/PageTransitDataStore/PageTransitDataSoreState";
 
 export const leafMenuItemSetup = (props: LeafMenuItemProps, context: SetupContext) => {
     const { root } = toRefs(props);
@@ -22,7 +23,8 @@ export const leafMenuItemSetup = (props: LeafMenuItemProps, context: SetupContex
         return klass;
     };
     const onClickMenu = (menu: MenuItem) => {
-        console.log("Clicked!");
+        const dumm = pageTransitDataStore.getDesc(" tueda ");
+        console.log("Clicked!! " + dumm);
         pageTransitDataStore.update({location: "" + menu.path});
     }
     return {

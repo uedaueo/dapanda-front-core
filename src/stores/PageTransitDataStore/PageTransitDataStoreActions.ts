@@ -1,16 +1,17 @@
-import {defineStoreActions} from "@/stores/StoreUtils";
-import {
-    pageTransitDataSoreState,
-    PageTransitDataStoreState
-} from "@/stores/PageTransitDataStore/PageTransitDataSoreState";
-import {pageTransitDataStoreGetters} from "@/stores/PageTransitDataStore/PageTransitDataStoreGetters";
+import {PageTransitDataStoreState} from "@/stores/PageTransitDataStore/PageTransitDataSoreState";
+import {definePageTransitDataStoreActions} from "@/stores/PageTransitDataStore/DefinePageTransitDataStoreActions";
 
-export const pageTransitDataStoreActions = defineStoreActions(
-    pageTransitDataSoreState,
-    pageTransitDataStoreGetters,
+export const pageTransitDataStoreActions = definePageTransitDataStoreActions(
     {
-    update(transitData: PageTransitDataStoreState) {
-        console.log("pageTransitDataStoreOptions.actions.update to : " + transitData.location);
-        this.location = transitData.location;
+        update(transitData: PageTransitDataStoreState) {
+            console.log("current sotre.location is : " + this.location);
+            console.log("pageTransitDataStoreOptions.actions.update to : " + transitData.location);
+            this.location = transitData.location;
+        },
+        download(): string {
+            return "";
+        }
+        // ,
+        // hoge: 'date'
     }
-})
+);

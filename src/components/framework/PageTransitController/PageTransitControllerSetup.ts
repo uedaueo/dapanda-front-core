@@ -10,7 +10,7 @@ export const pageTransitControllerSetup = (props: PageTransitControllerProps, co
     console.log("pageTransitControllerSetup: location = " + location.value);
     const router = useRouter();
     watch(location, () => {
-        console.log("toLocation" + location.value);
+        console.log("toLocation " + location.value);
         router.push(location.value);
     });
 };
