@@ -3,7 +3,7 @@ import {PageTransitDataStoreState} from "@/stores/PageTransitDataStore/PageTrans
 
 export declare type _PageTransitDataStoreActionTree = {
     update(transitData: PageTransitDataStoreState): void;
-    download(): string;
+    download(): Promise<string>;
 }
 
 export function definePageTransitDataStoreActions(

@@ -1,18 +1,13 @@
 import {PageTransitDataStoreState} from "@/stores/PageTransitDataStore/PageTransitDataSoreState";
 import {StateTree} from "pinia";
 
-export declare type _PageTransitDataStoreGettersTree<S extends StateTree>  = {
+declare type _PageTransitDataStoreGettersTree<S extends StateTree>  = {
     /**
      *
-     * @param state
+     * @param name
+     * @return 文字列
      */
-    getDesc(state: S): {
-        /**
-         *
-         * @param name
-         */
-        (name: string): string
-    }
+    getDesc(state: S): { (name: string): string }
 }
 
 export function definePageTransitDataStoreGetters(

@@ -8,8 +8,9 @@ export const pageTransitDataStoreActions = definePageTransitDataStoreActions(
             console.log("pageTransitDataStoreOptions.actions.update to : " + transitData.location);
             this.location = transitData.location;
         },
-        download(): string {
-            return "";
+        async download(): Promise<string> {
+            const hoge: Array<string> = [];
+            return new Promise((resolve) => resolve(""));
         }
         // ,
         // hoge: 'date'
