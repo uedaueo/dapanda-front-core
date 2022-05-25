@@ -1,5 +1,6 @@
 import { helloVuetifyRouteRecord } from "%/samples/pages/HelloVuetify/HelloVuetifyRouteRecord";
 import { helloCompositionRouteRecord } from "%/samples/pages/HelloComposition/HelloCompositionRouteRecord";
+import {chartSampleRouteRecord} from "@/samples/pages/ChartSample/ChartSampleRouteRecord";
 
 /**
  * RouteRecordの配列を返します。
@@ -7,6 +8,7 @@ import { helloCompositionRouteRecord } from "%/samples/pages/HelloComposition/He
 export const routeSettings = () => {
     return [
         helloVuetifyRouteRecord,
-        helloCompositionRouteRecord
+        helloCompositionRouteRecord,
+        chartSampleRouteRecord
     ]
 };
