@@ -1,7 +1,3 @@
-<v-btn
-    flat
-    color="secondary"
-    v-on:click="updateSample">更新</v-btn>
 <v-card>test</v-card>
 <Bar
     :chart-options="chartOptions"
@@ -14,4 +10,10 @@
     :width="width"
     :height="height"
 />
+<v-row justify="center" class="pa-4 ma-4">
+    <v-btn
+        rounded
+        color="secondary"
+        v-on:click="updateSample">更新</v-btn>
+</v-row>
 <v-card>test2</v-card>
