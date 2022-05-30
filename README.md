@@ -28,6 +28,59 @@ npm run build
 npm run preview
 ```
 
+## blancoFramework
+
+コンポーネント、ストア、i18nのラベル定義、VeeValidation 定義は blancoFramework により自動生成されます。
+
+### Java 11 の導入
+
+blancoFramework を使用するために、Java 11 を導入しておく必要があります。OpenJDK で良いです。
+
+### コンポーネントの作成
+
+画面等のコンポーネントは以下の手順で作成します。
+
+1. コンポーネント定義書の作成
+2. ./gradlew meta を実行
+3. 手動作成するソースコードの作成
+
+* 自動生成されるソースコード（blanco/main/typescript 以下に生成）
+  * <ComponentId>.vue : コンポーネント定義
+  * <ComponentId>.ts : コンポーネント定義 (composition API)
+  * <ComponentId>Props.ts : プロパティ定義 (optional)
+  * <ComponentId>Emits.ts : Emits定義 (optional)
+* 手動生成するソースコード (src/ 以下に生成)
+  * <ComponentId>.html : テンプレート (optional)
+  * <ComponentId>Render.ts : render 関数 (optional, テンプレートを使用しない場合は必須)
+  * <ComponentId>.scss : スタイルシート (optional)
+  * <ComponentId>Setup.ts : setup 関数 (optional)
+  * <ComponentId>Data.ts : data 関数 (optional, 非推奨)
+
+### Store の作成
+
+ストアの定義は以下の手順で行います。
+
+1. ストア定義書の作成
+2. ./gradlew meta の実行
+3. 手動作成するソースコードの作成
+
+* 自動生成されるソースコード（blanco/main/typescript 以下に生成）
+  * <StoreId>.ts : store 定義
+  * Define<StoreId>Actions.ts : actions 定義
+  * Define<StoreId>Getters.ts : getters 定義
+  * <StreId>State.ts : state 定義
+* 手動生成するソースコード (src/ 以下に生成)
+  * <StoreId>Actions.ts : actions 実装
+  * <StoreId>Getters.ts : getters 実装
+
+### i18n ラベル定義
+
+作成中
+
+### VeeValidate バリデーション定義
+
+作成中
+
 ## プロジェクトの生成
 
 基本的には `git clone` して `npm install` すれば良いだけなので以下の情報は不要となるはずですが、今後のために記述しておきます。
