@@ -86,6 +86,7 @@ task metaLabels {
                 sheetType: 'php',
                 tabs: 4,
                 lineSeparator: 'LF',
+                listClass: "LabelsJa",
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
         )
@@ -96,6 +97,7 @@ task metaLabels {
                 sheetType: 'php',
                 tabs: 4,
                 lineSeparator: 'LF',
+                listClass: "LabelsEn",
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
         )
