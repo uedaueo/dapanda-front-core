@@ -33,6 +33,7 @@ dependencies {
     blancoFramework 'blanco.valueobject:blanco-valueobject:[2.0,3.0)'
     blancoFramework 'blanco.valueobjectts:blanco-valueobjectts:[0.0,1.0)'
     blancoFramework 'blanco.restgeneratorts:blanco-restgeneratorts:[0.0,1.0)'
+    blancoFramework 'blanco.pinia:blanco-pinia:[0.0,1.0)'
     blancoFramework 'blanco.vuecomponent:blanco-vuecomponent:[1.0,2.0)'
     blancoFramework 'blanco.veevalidate:blanco-veevalidate:[0.0,1.0)'
     blancoFramework 'blanco.restgenerator:blanco-restgenerator:[0.0,1.0)'
@@ -70,7 +71,7 @@ task metaObjects {
 task metaLabels {
     logging.captureStandardOutput LogLevel.INFO
     group "blanco"
-    description "Generate labes for typescript by blancoValueObjectTs"
+    description "Generate labels for typescript by blancoValueObjectTs"
     doFirst {
         println 'A task message which is logged at INFO level'
     }
@@ -98,6 +99,32 @@ task metaLabels {
                 tabs: 4,
                 lineSeparator: 'LF',
                 listClass: "LabelsEn",
+                verbose: true,
+                encoding: getProperty("blanco.encoding")
+        )
+    }
+}
+
+task metaStores {
+    dependsOn "metaObjects"
+    logging.captureStandardOutput LogLevel.INFO
+    group "blanco"
+    description "Generate stores for Pinia"
+    doFirst {
+        println 'A task message which is logged at INFO level'
+    }
+    doLast {
+        ant.taskdef(name: 'blancopinia',
+                classname: 'blanco.pinia.task.BlancoPiniaTask',
+                classpath: configurations.blancoFramework.asPath
+        )
+        ant.blancopinia(metadir: "${projectDir}/meta/stores",
+                tmpdir: "${buildDir}/tmpStores",
+                targetdir: "${projectDir}/blanco/main/typescript",
+                targetStyle: "free",
+                sheetType: 'php',
+                tabs: 4,
+                lineSeparator: 'LF',
                 verbose: true,
                 encoding: getProperty("blanco.encoding")
         )
@@ -140,7 +167,7 @@ task metaMessages {
 }
 
 task metaComponents {
-    dependsOn "metaObjects"
+    dependsOn "metaStores"
     logging.captureStandardOutput LogLevel.INFO
     group "blanco"
     description "Generate vue components for typescript by blancoVueComponent"

@@ -1,7 +1,7 @@
 import {SetupContext, toRefs} from "vue";
 import {storeToRefs} from "pinia";
-import {usePageTransitDataStore} from "@/stores/PageTransitDataStore/PageTransitDataStore";
 import {HelloVuetifyProps} from "%/samples/pages/HelloVuetify/HelloVuetifyProps";
+import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
 
 export const helloVuetifySetup = (props: HelloVuetifyProps, context: SetupContext) => {
     const transitPageData = usePageTransitDataStore();
