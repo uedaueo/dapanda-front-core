@@ -230,6 +230,14 @@ npm install pinia@latest
 npm install vue-i18n@latest
 ```
 
+### vee-validate の導入
+
+```aidl
+npm install vee-validate@latest
+npm install @vee-validate/rules@latest
+npm install @vee-validate/i18n@latest
+```
+
 ### library-mode
 
 * https://vitejs.dev/guide/build.html#library-mode
