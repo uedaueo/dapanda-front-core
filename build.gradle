@@ -144,7 +144,7 @@ task metaMessages {
                 classpath: configurations.blancoFramework.asPath
         )
         ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/messages/ja",
-                tmpdir: "${buildDir}/tmpLabelsJa",
+                tmpdir: "${buildDir}/tmpMessagesJa",
                 targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',
@@ -154,7 +154,7 @@ task metaMessages {
                 encoding: getProperty("blanco.encoding")
         )
         ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/messages/en",
-                tmpdir: "${buildDir}/tmpLabelsEn",
+                tmpdir: "${buildDir}/tmpMessagesEn",
                 targetdir: "${projectDir}/blanco/main/typescript",
                 targetStyle: "free",
                 sheetType: 'php',

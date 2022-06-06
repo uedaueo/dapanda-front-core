@@ -1,4 +1,4 @@
-import {LocaleLabels} from "@/i18n/LocaleLabels";;
+import {LocaleLabels} from "@/i18n/LocaleLabels";
 import { ChartSampleJa } from "./ChartSampleJa";
 
 /**
