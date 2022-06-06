@@ -1,8 +1,8 @@
-import { LocalSettingStoreState } from "./LocalSettingStoreState";
 import { UnwrapRef } from "vue";
+import { LocaleSettingStoreState } from "./LocaleSettingStoreState";
 
 /** actionsを定義します */
-export declare type LocalSettingStoreActionsTree = {
+export declare type LocaleSettingStoreActionsTree = {
     /**
      * 言語を変更する場合に呼び出します。
      *
@@ -20,6 +20,6 @@ export declare type LocalSettingStoreActionsTree = {
  * @param actions パラメータとしてActionsTree定義を渡して下さい。
  * @return 定義されたActionsTreeを返します。
  */
-export function defineLocalSettingStoreActions(actions: LocalSettingStoreActionsTree & ThisType<LocalSettingStoreActionsTree & UnwrapRef<LocalSettingStoreState>>): LocalSettingStoreActionsTree & ThisType<LocalSettingStoreActionsTree & UnwrapRef<LocalSettingStoreState>> {
+export function defineLocaleSettingStoreActions(actions: LocaleSettingStoreActionsTree & ThisType<LocaleSettingStoreActionsTree & UnwrapRef<LocaleSettingStoreState>>): LocaleSettingStoreActionsTree & ThisType<LocaleSettingStoreActionsTree & UnwrapRef<LocaleSettingStoreState>> {
     return actions;
 }

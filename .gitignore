@@ -36,3 +36,6 @@ build
 
 # blanco
 ~$*
+
+# java profiler
+*.hprof*

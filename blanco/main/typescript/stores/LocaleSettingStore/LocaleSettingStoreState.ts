@@ -1,7 +1,7 @@
 /**
  * stateを定義します
  */
-export interface LocalSettingStoreState {
+export interface LocaleSettingStoreState {
     /**
      * 言語の指定です。
      */
@@ -21,7 +21,7 @@ export interface LocalSettingStoreState {
 /**
  * stateを定義します
  */
-export const localSettingStoreState: LocalSettingStoreState = {
+export const localeSettingStoreState: LocaleSettingStoreState = {
     lang: "ja",
     tz: "Asia/Tokyo",
     country: "jpy"

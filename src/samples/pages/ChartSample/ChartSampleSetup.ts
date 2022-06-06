@@ -4,6 +4,7 @@ import {ChartSampleProps} from "%/samples/pages/ChartSample/ChartSampleProps";
 import {useI18n} from "vue-i18n";
 import {ChartSampleConst} from "@/samples/pages/ChartSample/ChartSampleConst";
 import {i18n} from "@/i18n";
+import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -33,6 +34,11 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
     const sLanguage = computed(() => t('labels.ChartSample.sLanguage'));
     const sItemLangJa = computed(() => t('labels.ChartSample.sItemLangJa'));
     const sItemLangEn = computed(() => t('labels.ChartSample.sItemLangEn'));
+
+    /**
+     * store から locale を取得
+     */
+    const localeSettingStore = useLocaleSettingStore();
 
     /**
      * BarChart のデータ
@@ -95,11 +101,13 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
         if (language.value.lValue === ChartSampleConst.languageJa) {
             console.log("ja original i18n.global.locale.value = " + i18n.global.locale.value);
             i18n.global.locale.value = "ja";
+            localeSettingStore.changeLang("ja");
             console.log("language = " + language.value.lValue);
             console.log("ja new i18n.global.locale.value = " + i18n.global.locale.value);
         } else if (language.value.lValue === ChartSampleConst.languageEn) {
             console.log("en original i18n.global.locale.value = " + i18n.global.locale.value);
             i18n.global.locale.value = "en";
+            localeSettingStore.changeLang("en");
             console.log("language = " + language.value.lValue);
             console.log("en new i18n.global.locale.value = " + i18n.global.locale.value);
         }
