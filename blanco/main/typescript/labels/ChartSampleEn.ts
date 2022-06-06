@@ -3,18 +3,18 @@ import { AbstractLocaleMessageObject } from "@/i18n/AbstractLocaleMessageObject"
 /**
  * サンプル図ページで使用するラベルを定義します。
  */
-export class ChartSampleJa extends AbstractLocaleMessageObject {
+export class ChartSampleEn extends AbstractLocaleMessageObject {
     /**
      * フィールド: [text]。
-     * デフォルト: [&quot;やる気、元気、猪木&quot;]。
+     * デフォルト: [&quot;sample&quot;]。
      */
-    private fText: string = "やる気、元気、猪木";
+    private fText: string = "sample";
 
     /**
      * フィールド: [sLanguage]。
-     * デフォルト: [&quot;言語&quot;]。
+     * デフォルト: [&quot;language&quot;]。
      */
-    private fSLanguage: string = "言語";
+    private fSLanguage: string = "language";
 
     /**
      * フィールド: [sItemLangJa]。
@@ -40,7 +40,7 @@ export class ChartSampleJa extends AbstractLocaleMessageObject {
     /**
      * フィールド [text] の値を取得します。
      *
-     * デフォルト: [&quot;やる気、元気、猪木&quot;]。
+     * デフォルト: [&quot;sample&quot;]。
      *
      * @return フィールド[text]から取得した値。
      */
@@ -60,7 +60,7 @@ export class ChartSampleJa extends AbstractLocaleMessageObject {
     /**
      * フィールド [sLanguage] の値を取得します。
      *
-     * デフォルト: [&quot;言語&quot;]。
+     * デフォルト: [&quot;language&quot;]。
      *
      * @return フィールド[sLanguage]から取得した値。
      */

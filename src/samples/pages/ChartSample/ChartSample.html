@@ -16,4 +16,21 @@
         color="secondary"
         v-on:click="updateSample">更新</v-btn>
 </v-row>
-<v-card>test2</v-card>
+<v-row>
+    <v-col
+            cols="12"
+            md="8"
+    >
+        <v-select
+                v-model="language"
+                :items="languageItems"
+                item-title="lLabel"
+                item-value="lValue"
+                return-object
+                :label="sLanguage"
+        ></v-select>
+    </v-col>
+</v-row>
+<v-card>変数として {{ msg }}</v-card>
+<v-card :text="msg2">プロパティとして</v-card>
+<v-card>ラベルを直書 {{ t("labels.ChartSample.text") }}</v-card>
