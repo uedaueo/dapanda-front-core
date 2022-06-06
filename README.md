@@ -42,7 +42,8 @@ blancoFramework を使用するために、Java 11 を導入しておく必要�
 
 1. コンポーネント定義書の作成
 2. ./gradlew meta を実行
-3. 手動作成するソースコードの作成
+3. ./gradlew metaLabels を実行(忘れると LabelsJa、LabelsEn が空になる)
+4. 手動作成するソースコードの作成
 
 * 自動生成されるソースコード（blanco/main/typescript 以下に生成）
   * <ComponentId>.vue : コンポーネント定義
