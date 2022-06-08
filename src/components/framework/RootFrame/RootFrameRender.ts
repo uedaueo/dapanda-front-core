@@ -1,6 +1,7 @@
 import {h} from "vue";
 import App from "@/App.vue";
 import PageTransitController from "%/components/framework/PageTransitController/PageTransitController";
+import LocaleController from "%/components/framework/LocaleController/LocaleController";
 
 export const rootFrameRender = () => {
     return h("div", { class: "root-frame-component" },
@@ -10,6 +11,7 @@ export const rootFrameRender = () => {
              * App は一番最後がよい。
              */
             h(PageTransitController),
+            h(LocaleController),
             h(App)
         ]);
 }

@@ -1,5 +1,6 @@
 import LeafMenuItem from "%/components/menu/LeafMenuItem/LeafMenuItem.vue";
 import NodeMenuItem from "%/components/menu/NodeMenuItem/NodeMenuItem.vue";
+import LocaleSelect from "%/components/LocaleSelect/LocaleSelect.vue";
 import { defineComponent } from "vue";
 import { MenuBarProps, menuBarProps } from "./MenuBarProps";
 import { menuBarSetup } from "@/components/menu/MenuBar/MenuBarSetup";
@@ -12,7 +13,8 @@ export default defineComponent({
     props: menuBarProps,
     components: {
         LeafMenuItem,
-        NodeMenuItem
+        NodeMenuItem,
+        LocaleSelect
     },
     setup: (props, context) => {
         return menuBarSetup(props as MenuBarProps, context);

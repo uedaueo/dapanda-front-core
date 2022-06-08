@@ -1,6 +1,7 @@
 import {helloVuetifyRouteRecord} from "%/samples/pages/HelloVuetify/HelloVuetifyRouteRecord";
 import {helloCompositionRouteRecord} from "%/samples/pages/HelloComposition/HelloCompositionRouteRecord";
 import {MenuItem} from "%/components/menu/MenuItem";
+import {chartSampleRouteRecord} from "%/samples/pages/ChartSample/ChartSampleRouteRecord";
 
 export const dummyMenuData: Array<MenuItem> = [
     {
@@ -20,6 +21,13 @@ export const dummyMenuData: Array<MenuItem> = [
                 description: 'Composition API Sample 01',
                 path: helloCompositionRouteRecord.path,
                 nameId: helloCompositionRouteRecord.name as string,
+                icon: "mdi-information-outline"
+            },
+            {
+                menuId: 'ChartSample',
+                description: 'Composition API Sample 01',
+                path: chartSampleRouteRecord.path,
+                nameId: chartSampleRouteRecord.name as string,
                 icon: "mdi-information-outline"
             }
         ]

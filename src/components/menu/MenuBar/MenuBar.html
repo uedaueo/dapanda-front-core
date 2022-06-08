@@ -21,6 +21,9 @@
         </template>
     </v-card>
     <v-spacer/>
+    <div class="pb-1 mb-0 mt-auto" min-width="540">
+        <LocaleSelect></LocaleSelect>
+    </div>
     <div class="pa-0" v-show="authRequired">
         <v-menu open-on-hover offset-y min-width="120">
             <template v-slot:activator="{ primary }">

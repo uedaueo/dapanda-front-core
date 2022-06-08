@@ -1,10 +1,11 @@
-import {computed, reactive, ref, SetupContext, watch, watchEffect, WritableComputedRef} from 'vue'
+import {computed, reactive, ref, SetupContext, toRefs, watch, watchEffect, WritableComputedRef} from 'vue'
 import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip} from 'chart.js'
 import {ChartSampleProps} from "%/samples/pages/ChartSample/ChartSampleProps";
 import {useI18n} from "vue-i18n";
 import {ChartSampleConst} from "@/samples/pages/ChartSample/ChartSampleConst";
 import {i18n} from "@/i18n";
 import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
+import {storeToRefs} from "pinia";
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -85,35 +86,40 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
     // const styles: Partial<CSSStyleDeclaration> = {};
     // const plugins = ref(props.plugins);
 
-    const languageItems = [
-        {lLabel: sItemLangJa.value, lValue: ChartSampleConst.languageJa},
-        {lLabel: sItemLangEn.value, lValue: ChartSampleConst.languageEn}
-    ];
+    // const languageItems = [
+    //     {lLabel: sItemLangJa.value, lValue: ChartSampleConst.languageJa},
+    //     {lLabel: sItemLangEn.value, lValue: ChartSampleConst.languageEn}
+    // ];
 
     const msg2 = msg;
 
-    let language = ref<{lLabel: string, lValue: string}>(languageItems[0]);
-    console.log("default language = " + language.value.lLabel);
+    // let language = ref<{lLabel: string, lValue: string}>(languageItems[0]);
+    // console.log("default language = " + language.value.lLabel);
 
-    watch(language, () => {
-        console.log("language = " + language.value.lValue);
-        console.log("msg.value = " + msg.value);
-        if (language.value.lValue === ChartSampleConst.languageJa) {
-            console.log("ja original i18n.global.locale.value = " + i18n.global.locale.value);
-            i18n.global.locale.value = "ja";
-            localeSettingStore.changeLang("ja");
-            console.log("language = " + language.value.lValue);
-            console.log("ja new i18n.global.locale.value = " + i18n.global.locale.value);
-        } else if (language.value.lValue === ChartSampleConst.languageEn) {
-            console.log("en original i18n.global.locale.value = " + i18n.global.locale.value);
-            i18n.global.locale.value = "en";
-            localeSettingStore.changeLang("en");
-            console.log("language = " + language.value.lValue);
-            console.log("en new i18n.global.locale.value = " + i18n.global.locale.value);
-        }
+    // watch(language, () => {
+    //     console.log("language = " + language.value.lValue);
+    //     console.log("msg.value = " + msg.value);
+    //     if (language.value.lValue === ChartSampleConst.languageJa) {
+    //         console.log("ja original i18n.global.locale.value = " + i18n.global.locale.value);
+    //         i18n.global.locale.value = "ja";
+    //         localeSettingStore.changeLang("ja");
+    //         console.log("language = " + language.value.lValue);
+    //         console.log("ja new i18n.global.locale.value = " + i18n.global.locale.value);
+    //     } else if (language.value.lValue === ChartSampleConst.languageEn) {
+    //         console.log("en original i18n.global.locale.value = " + i18n.global.locale.value);
+    //         i18n.global.locale.value = "en";
+    //         localeSettingStore.changeLang("en");
+    //         console.log("language = " + language.value.lValue);
+    //         console.log("en new i18n.global.locale.value = " + i18n.global.locale.value);
+    //     }
+    //     chartOptions.plugins.title.text = msg.value;
+    //     console.log("msg.value 2 = " + msg.value);
+    // });
+
+    const { lang } = storeToRefs(useLocaleSettingStore());
+    watch(lang, () => {
         chartOptions.plugins.title.text = msg.value;
-        console.log("msg.value 2 = " + msg.value);
-    });
+    })
 
     /**
      * BarChart のオプション設定
@@ -177,8 +183,8 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
         updateSample,
         t,
         msg,
-        language,
-        languageItems,
+        // language,
+        // languageItems,
         msg2,
         sLanguage
     };
