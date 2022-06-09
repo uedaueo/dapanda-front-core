@@ -1,6 +1,7 @@
 import {configure, defineRule} from "vee-validate";
-import {required} from "@vee-validate/rules";
+import {between, required} from "@vee-validate/rules";
 import {customDapandaRuleFunction} from "@/validate/CustomDapandaRuleFunction";
+import {validateConfig} from "@/validate/validateUtil";
 
 /**
  * VeeValidateを初期化するためのクラスです。
@@ -10,20 +11,14 @@ export class ValidateInitializer {
      * VeeValidateの初期化を実行します。
      */
     static init(): void {
-        configure(
-            {
-                generateMessage: (ctx) => {
-                    ctx.form
-                    ctx.rule
-                    return ""
-                }
-            }
-        );
+        configure(validateConfig);
 
         /* builtin rules */
         defineRule('required', required);
+        defineRule('between', between);
 
         /* custom rules */
-        defineRule('dapanda', customDapandaRuleFunction);
+        // defineRule('dapanda', customDapandaRuleFunction);
+
     }
 }

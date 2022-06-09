@@ -5,8 +5,12 @@ import router from "@/router";
 import pinia from "@/pinia";
 import RootFrame from "%/components/framework/RootFrame/RootFrame";
 import {i18n} from "@/i18n";
+import {ValidateInitializer} from "@/validate/ValidateInitializer";
 
 loadFonts()
+
+// VeeValidateを初期化します。
+ValidateInitializer.init();
 
 const app = createApp({
     render: () => {

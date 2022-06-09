@@ -1,4 +1,4 @@
-import {SimpleValidationRuleFunction} from "@/validate/validateUtil";
+import {SimpleValidationRuleFunction} from "@/validate/types";
 
 export const customDapandaValidator: SimpleValidationRuleFunction = (value, params) => {
     return true;

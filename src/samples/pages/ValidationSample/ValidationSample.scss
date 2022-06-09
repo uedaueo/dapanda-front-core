@@ -1,0 +1,39 @@
+#app {
+  //font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
+  max-width: 500px;
+}
+
+input {
+  display: block;
+  border: 1px solid black;
+}
+
+span {
+  display: block;
+  margin-bottom: 20px;
+}
+
+#name-label {
+  display: block;
+  margin-top: 20px;
+}
+
+#age-label {
+  display: block;
+  margin-top: 20px;
+}
+
+button {
+  display: block;
+  border: 1px solid black;
+}
+
+form {
+  padding: 20px;
+  border: 1px solid black;
+}
+
+form + form {
+  margin-top: 20px;
+}

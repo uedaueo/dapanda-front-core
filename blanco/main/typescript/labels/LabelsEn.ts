@@ -1,6 +1,7 @@
 import {LocaleLabels} from "@/i18n/LocaleLabels";
 import { ChartSampleEn } from "./ChartSampleEn";
 import { LocaleSelectEn } from "./LocaleSelectEn";
+import { ValidationSampleEn } from "./ValidationSampleEn";
 
 /**
  * Labels Class for i18n
@@ -21,6 +22,14 @@ export class LabelsEn extends LocaleLabels {
      * デフォルト: [new LocaleSelectEn()]。
      */
     private fLocaleSelect: LocaleSelectEn = new LocaleSelectEn();
+
+    /**
+     * Validationサンプルページで使用するラベルを定義します。
+     *
+     * フィールド: [validationSample]。
+     * デフォルト: [new ValidationSampleEn()]。
+     */
+    private fValidationSample: ValidationSampleEn = new ValidationSampleEn();
 
     /**
      * フィールド [ChartSample] の値を設定します。
@@ -66,5 +75,28 @@ export class LabelsEn extends LocaleLabels {
      */
     get LocaleSelect(): LocaleSelectEn {
         return this.fLocaleSelect;
+    }
+
+    /**
+     * フィールド [validationSample] の値を設定します。
+     *
+     * フィールドの説明: [Validationサンプルページで使用するラベルを定義します。]。
+     *
+     * @param argValidationSample フィールド[validationSample]に設定する値。
+     */
+    set validationSample(argValidationSample: ValidationSampleEn) {
+        this.fValidationSample = argValidationSample;
+    }
+
+    /**
+     * フィールド [validationSample] の値を取得します。
+     *
+     * フィールドの説明: [Validationサンプルページで使用するラベルを定義します。]。
+     * デフォルト: [new ValidationSampleEn()]。
+     *
+     * @return フィールド[validationSample]から取得した値。
+     */
+    get validationSample(): ValidationSampleEn {
+        return this.fValidationSample;
     }
 }

@@ -1,0 +1,17 @@
+<h1>{{ t(title) }}</h1>
+
+<Form @submit="onSubmit">
+    <div>
+        <div>
+            <label id="name-label" for="name">{{ t("labels.validationSample.name") }}</label>
+            <Field name="name" label="labels.validationSample.name" rules="required" />
+            <ErrorMessage name="name" />
+        </div>
+        <div>
+            <label id="age-label" for="age">{{ t('labels.validationSample.age') }}</label>
+            <Field name="age" label="labels.validationSample.age" rules="between:18,96" />
+            <ErrorMessage name="age" />
+        </div>
+        <button>{{ t('labels.validationSample.submit') }}</button>
+    </div>
+</Form>
