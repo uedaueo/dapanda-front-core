@@ -1,5 +1,5 @@
 import {i18n} from "@/i18n";
-import {ValidationMessageTemplate, VeeValidateConfig} from "@/validate/types";
+import {VeeValidateConfig} from "@/validate/types";
 import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
 
 /**

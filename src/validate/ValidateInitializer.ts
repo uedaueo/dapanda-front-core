@@ -1,6 +1,5 @@
 import {configure, defineRule} from "vee-validate";
 import {between, required} from "@vee-validate/rules";
-import {customDapandaRuleFunction} from "@/validate/CustomDapandaRuleFunction";
 import {validateConfig} from "@/validate/validateUtil";
 
 /**
