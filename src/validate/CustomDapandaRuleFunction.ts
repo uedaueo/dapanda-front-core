@@ -1,5 +1,5 @@
 import {customDapandaValidator} from "@/validate/CustomDapandaValidator";
-import {SimpleValidationRuleFunction} from "@/validate/types";
+import {SimpleValidationRuleFunction} from "@/validate/VeeValidateTypes";
 
 /**
  *

@@ -12,6 +12,11 @@
             <Field name="age" label="labels.validationSample.age" rules="between:18,96" />
             <ErrorMessage name="age" />
         </div>
+        <div>
+            <label id="dapanda-label" for="dapanda">{{ t('labels.validationSample.dapanda') }}</label>
+            <Field name="dapanda" label="labels.validationSample.dapanda" rules="dapanda:kankan" />
+            <ErrorMessage name="dapanda" />
+        </div>
         <button>{{ t('labels.validationSample.submit') }}</button>
     </div>
 </Form>

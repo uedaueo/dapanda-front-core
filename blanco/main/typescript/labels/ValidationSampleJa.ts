@@ -37,6 +37,14 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
     private fSubmit: string = "実行";
 
     /**
+     * 駄パンダ
+     *
+     * フィールド: [dapanda]。
+     * デフォルト: [&quot;駄パンダ&quot;]。
+     */
+    private fDapanda: string = "駄パンダ";
+
+    /**
      * フィールド [componentId] の値を設定します。
      *
      * フィールドの説明: [ページタイトルです]。
@@ -126,5 +134,28 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
      */
     get submit(): string {
         return this.fSubmit;
+    }
+
+    /**
+     * フィールド [dapanda] の値を設定します。
+     *
+     * フィールドの説明: [駄パンダ]。
+     *
+     * @param argDapanda フィールド[dapanda]に設定する値。
+     */
+    set dapanda(argDapanda: string) {
+        this.fDapanda = argDapanda;
+    }
+
+    /**
+     * フィールド [dapanda] の値を取得します。
+     *
+     * フィールドの説明: [駄パンダ]。
+     * デフォルト: [&quot;駄パンダ&quot;]。
+     *
+     * @return フィールド[dapanda]から取得した値。
+     */
+    get dapanda(): string {
+        return this.fDapanda;
     }
 }

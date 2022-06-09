@@ -1,7 +1,19 @@
 import {i18n} from "@/i18n";
-import {VeeValidateConfig} from "@/validate/types";
+import {VeeValidateConfig} from "@/validate/VeeValidateTypes";
 import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
 import {LocaleMessageDictionary} from "@intlify/core-base";
+
+export function isEmpty(value: unknown): boolean {
+    if (value === null || value === undefined || value === '') {
+        return true;
+    }
+
+    if (Array.isArray(value) && value.length === 0) {
+        return true;
+    }
+
+    return false;
+}
 
 /**
  * Replaces placeholder values in a string with their actual values
@@ -56,6 +68,12 @@ export const validateConfig: Partial<VeeValidateConfig> = {
             return field;
         }
         let message = (localeMessages.validations as LocaleMessageDictionary)[rule.name] as string;
+        console.log("rule = " + rule.name);
+        console.log("generateMessage: " + message);
+
+        if (message === undefined) {
+            message = (localeMessages.validations as LocaleMessageDictionary)["_default"] as string;
+        }
 
         return interpolate(message, {...form, field: fieldName, params: rule.params});
     }

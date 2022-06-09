@@ -2,6 +2,8 @@ import {helloVuetifyRouteRecord} from "%/samples/pages/HelloVuetify/HelloVuetify
 import {helloCompositionRouteRecord} from "%/samples/pages/HelloComposition/HelloCompositionRouteRecord";
 import {MenuItem} from "%/components/menu/MenuItem";
 import {chartSampleRouteRecord} from "%/samples/pages/ChartSample/ChartSampleRouteRecord";
+import validationSample from "%/samples/pages/ValidationSample/ValidationSample";
+import {validationSampleRouteRecord} from "%/samples/pages/ValidationSample/ValidationSampleRouteRecord";
 
 export const dummyMenuData: Array<MenuItem> = [
     {
@@ -49,6 +51,13 @@ export const dummyMenuData: Array<MenuItem> = [
                 description: 'Composition API Sample 02',
                 path: helloCompositionRouteRecord.path,
                 nameId: 'HelloComposition01',
+                icon: "mdi-information-outline"
+            },
+            {
+                menuId: 'Validation',
+                description: 'Validation',
+                path: validationSampleRouteRecord.path,
+                nameId: validationSampleRouteRecord.name as string,
                 icon: "mdi-information-outline"
             }
         ]
