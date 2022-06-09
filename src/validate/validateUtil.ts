@@ -1,6 +1,7 @@
 import {i18n} from "@/i18n";
 import {VeeValidateConfig} from "@/validate/types";
 import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
+import {LocaleMessageDictionary} from "@intlify/core-base";
 
 /**
  * Replaces placeholder values in a string with their actual values
@@ -29,35 +30,33 @@ export function interpolate(template: string, values: Record<string, any>): stri
     });
 }
 
+/**
+ * the reason why that returning field value on error is meaningless
+ * otherwise we can do any other can-do's for these errors.
+ */
 export const validateConfig: Partial<VeeValidateConfig> = {
     generateMessage: (ctx) => {
 
-        const { field, rule, form } = ctx;
+        const {field, rule, form} = ctx;
         const fieldName = i18n.global.t(field);
-
-        console.log("field = " + field);
-        console.log("fieldName = " + fieldName);
 
         if (rule === undefined) {
             return field;
         }
 
-        console.log("rule.name = " + rule.name);
-        if (Array.isArray(rule.params)) {
-            for (let i in rule.params) {
-                console.log("param = " + rule.params[i]);
-            }
-        }
-
-        // let message: ValidationMessageTemplate = i18n.global.t(`validations.${rule.name}`);
+        /**
+         * Because of t function translates placeholder into param values,
+         * we get raw messages from dictionary and pass it to interpolator
+         * to replace vue-i18n style placeholders to real values.
+         */
         const localeSettings = useLocaleSettingStore();
-        const localeMessages = i18n.global.getLocaleMessage(localeSettings.lang);
+        const localeMessages = i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;
         if (localeMessages === undefined) {
             console.log("Cannot get localeMessages for " + localeSettings.lang);
             return field;
         }
-        let message = localeMessages.validations[rule.name];
+        let message = (localeMessages.validations as LocaleMessageDictionary)[rule.name] as string;
 
-        return interpolate(message, { ...form, field: fieldName, params: rule.params });
+        return interpolate(message, {...form, field: fieldName, params: rule.params});
     }
 }
