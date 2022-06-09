@@ -1,7 +1,7 @@
 import {SimpleValidationRuleFunction} from "@/validate/VeeValidateTypes";
 import {isEmpty} from "@/validate/validateUtil";
 
-export const customDapandaValidator: SimpleValidationRuleFunction = (value, params) => {
+export const customDapandaValidator: SimpleValidationRuleFunction = (value: unknown, params) => {
     if (isEmpty(value) || isEmpty(params)) {
         return true;
     }

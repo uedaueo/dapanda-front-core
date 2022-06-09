@@ -1,7 +1,7 @@
 import {configure, defineRule} from "vee-validate";
 import {between, required} from "@vee-validate/rules";
 import {validateConfig} from "@/validate/validateUtil";
-import {customDapandaRuleFunction} from "@/validate/CustomDapandaRuleFunction";
+import {customDapandaValidator} from "@/validate/CustomDapandaValidator";
 
 /**
  * VeeValidateを初期化するためのクラスです。
@@ -18,7 +18,7 @@ export class ValidateInitializer {
         defineRule('between', between);
 
         /* custom rules */
-        defineRule('dapanda', customDapandaRuleFunction);
+        defineRule('dapanda', customDapandaValidator);
 
     }
 }
