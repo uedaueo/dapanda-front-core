@@ -104,18 +104,6 @@ export const validateConfig: Partial<VeeValidateConfig> = {
     }
 }
 
-export function isEmpty(value: unknown): boolean {
-    if (value === null || value === undefined || value === '') {
-        return true;
-    }
-
-    if (Array.isArray(value) && value.length === 0) {
-        return true;
-    }
-
-    return false;
-}
-
 /**
  * Replaces placeholder values in a string with their actual values
  *

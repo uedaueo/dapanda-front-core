@@ -1,4 +1,16 @@
-import {isEmpty, SimpleValidationRuleFunction} from "@/validate/ValidateInitializer";
+import {SimpleValidationRuleFunction} from "@/validate/ValidateInitializer";
+
+function isEmpty(value: unknown): boolean {
+    if (value === null || value === undefined || value === '') {
+        return true;
+    }
+
+    if (Array.isArray(value) && value.length === 0) {
+        return true;
+    }
+
+    return false;
+}
 
 export const customDapandaValidator: SimpleValidationRuleFunction = (value: unknown, params) => {
     if (isEmpty(value) || isEmpty(params)) {
