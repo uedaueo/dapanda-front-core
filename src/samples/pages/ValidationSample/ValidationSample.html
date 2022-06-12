@@ -14,8 +14,13 @@
         </div>
         <div>
             <label id="dapanda-label" for="dapanda">{{ t('labels.validationSample.dapanda') }}</label>
-            <Field name="dapanda" label="labels.validationSample.dapanda" rules="dapanda:kankan" />
+            <Field name="dapanda" label="labels.validationSample.dapanda" rules="required|dapanda:kankan" />
             <ErrorMessage name="dapanda" />
+        </div>
+        <div>
+            <label id="kopanda-label" for="kopanda">{{ t('labels.validationSample.kopanda') }}</label>
+            <Field name="kopanda" label="labels.validationSample.kopanda" rules="required|kopanda:@name,@age,kankan" />
+            <ErrorMessage name="kopanda" />
         </div>
         <button>{{ t('labels.validationSample.submit') }}</button>
     </div>

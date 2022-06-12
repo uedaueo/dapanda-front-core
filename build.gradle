@@ -35,7 +35,7 @@ dependencies {
     blancoFramework 'blanco.restgeneratorts:blanco-restgeneratorts:[0.0,1.0)'
     blancoFramework 'blanco.pinia:blanco-pinia:[0.0,1.0)'
     blancoFramework 'blanco.vuecomponent:blanco-vuecomponent:[1.0,2.0)'
-    blancoFramework 'blanco.veevalidate:blanco-veevalidate:[0.0,1.0)'
+    blancoFramework 'blanco.veevalidate:blanco-veevalidate:[1.0,2.0)'
     blancoFramework 'blanco.restgenerator:blanco-restgenerator:[0.0,1.0)'
     blancoFramework 'blanco.constants:blanco-constants:[2.0,3.0)'
     blancoFramework 'blanco.meta2xml:blanco-meta2xml:[2.0,3.0)'
@@ -246,7 +246,34 @@ task metaPages {
     }
 }
 
-task meta(dependsOn: [metaLabels, metaMessages, metaPages]) {
+task metaValidate {
+    dependsOn "metaPages"
+    logging.captureStandardOutput LogLevel.INFO
+    group "blanco"
+    description "Generate validator for typescript by blancoVeeValidate"
+    doFirst {
+        println 'A task message which is logged at INFO level'
+    }
+    doLast {
+        ant.taskdef(name: 'blancoveevalidate',
+                classname: 'blanco.veevalidate.task.BlancoVeeValidateTask',
+                classpath: configurations.blancoFramework.asPath
+        )
+        ant.blancoveevalidate(metadir: "${projectDir}" + "/meta/validators",
+                tmpdir: "${buildDir}/tmpValidate",
+                targetdir: "${projectDir}/blanco/main/typescript",
+                targetStyle: "free",
+                sheetType: 'php',
+                encoding: getProperty("blanco.encoding"),
+                verbose: "true",
+                tabs: 4,
+                searchTmpdir: "${buildDir}/tmpObjects",
+                lineSeparator: 'LF'
+        )
+    }
+}
+
+task meta(dependsOn: [metaLabels, metaMessages, metaValidate]) {
     logging.captureStandardOutput LogLevel.INFO
     group "blanco"
     description "Generate dapanda-front-core sources for typescript by blancoFramework"

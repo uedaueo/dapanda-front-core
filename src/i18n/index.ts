@@ -3,10 +3,10 @@ import {LabelsEn} from "%/labels/LabelsEn";
 import {createI18n, VueMessageType} from "vue-i18n";
 import validateJa from "@vee-validate/i18n/dist/locale/ja.json";
 import validateEn from "@vee-validate/i18n/dist/locale/en.json";
-import {ValidateMessageJa} from "@/validate/ValidateMessageJa";
-import {ValidateMessageEn} from "@/validate/ValidateMessageEn";
 import {LocaleMessages} from "@intlify/core-base";
 import {AbstractLocaleMessageObject} from "@/i18n/AbstractLocaleMessageObject";
+import {ValidateMessageJa} from "%/validators/ValidateMessageJa";
+import {ValidateMessageEn} from "%/validators/ValidateMessageEn";
 
 const builtInJa = validateJa.messages as AbstractLocaleMessageObject;
 const builtInEn = validateEn.messages as AbstractLocaleMessageObject;

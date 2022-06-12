@@ -1,4 +1,4 @@
-import {SimpleValidationRuleFunction} from "@/validate/ValidateInitializer";
+import {SimpleValidationRuleFunction} from "%/validators/ValidateConfig";
 
 function isEmpty(value: unknown): boolean {
     if (value === null || value === undefined || value === '') {
@@ -12,7 +12,7 @@ function isEmpty(value: unknown): boolean {
     return false;
 }
 
-export const customDapandaValidator: SimpleValidationRuleFunction = (value: unknown, params) => {
+export const dapandaValidator: SimpleValidationRuleFunction = (value: unknown, params) => {
     if (isEmpty(value) || isEmpty(params)) {
         return true;
     }
@@ -20,6 +20,8 @@ export const customDapandaValidator: SimpleValidationRuleFunction = (value: unkn
     const p = Array.isArray(params) ? params[0] as string : params;
     console.log("value = " + v);
     console.log("param = " + p);
+    const ps = params as Record<string, unknown>;
+    console.log("params.name = " + ps.name);
     if (v == p) {
         return true;
     }
