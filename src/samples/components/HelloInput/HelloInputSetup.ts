@@ -1,5 +1,5 @@
 import {ref, SetupContext} from "vue";
-import {HelloInputEmits} from "@/samples/components/HelloInput/HelloInputEmits";
+import {HelloInputEmits} from "%/samples/components/HelloInput/HelloInputEmits";
 import {HelloInputProps} from "%/samples/components/HelloInput/HelloInputProps";
 
 export const helloInputSetup = (props: HelloInputProps, context: SetupContext<HelloInputEmits>) => {
