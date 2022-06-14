@@ -4,7 +4,7 @@ import { ComponentPropsOptions } from "vue";
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
  */
-interface MenuBarInterface {
+export interface MenuBarInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */

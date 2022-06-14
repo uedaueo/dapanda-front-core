@@ -5,7 +5,7 @@ import { MenuItem } from "%/components/menu/MenuItem";
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
  */
-interface NodeMenuItemInterface {
+export interface NodeMenuItemInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */

@@ -4,7 +4,7 @@ import { ComponentPropsOptions } from "vue";
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
  */
-interface HelloVuetifyInterface {
+export interface HelloVuetifyInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */

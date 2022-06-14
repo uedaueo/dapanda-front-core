@@ -4,7 +4,7 @@ import { ComponentPropsOptions } from "vue";
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
  */
-interface ChartSampleInterface {
+export interface ChartSampleInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
