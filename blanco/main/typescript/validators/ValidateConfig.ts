@@ -3,7 +3,7 @@
  */
 import { configure, defineRule } from "vee-validate";
 import { LocaleMessageDictionary } from "@intlify/core-base";
-import { i18n } from "@/i18n";
+import { i18n } from "@/main";
 import { useLocaleSettingStore } from "%/stores/LocaleSettingStore/LocaleSettingStore";
 import { 
     between,

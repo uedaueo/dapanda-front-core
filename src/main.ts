@@ -3,12 +3,14 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import pinia from "@/pinia";
 import RootFrame from "%/components/framework/RootFrame/RootFrame";
-import {i18n} from "@/i18n";
+import {dapandaI18n} from "@/i18n";
 import {ValidateConfig} from "%/validators/ValidateConfig";
 import {appendRouteRecords, createAllRoute} from "@/router";
 
 loadFonts()
 
+// i18n を初期化します。
+export const i18n = dapandaI18n();
 // VeeValidateを初期化します。
 ValidateConfig.init();
 

@@ -2,7 +2,7 @@ import {LocaleControllerProps} from "%/components/framework/LocaleController/Loc
 import {SetupContext, watch} from "vue";
 import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
 import {storeToRefs} from "pinia";
-import {i18n} from "@/i18n";
+import {i18n} from "src/main";
 
 export const localeControllerSetup = (props: LocaleControllerProps, context: SetupContext) => {
     const localeSetting = useLocaleSettingStore();
