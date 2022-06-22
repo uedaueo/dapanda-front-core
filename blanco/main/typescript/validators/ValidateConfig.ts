@@ -2,8 +2,8 @@
  * This source code was created by blanco Framework.
  */
 import { configure, defineRule } from "vee-validate";
-import { LocaleMessageDictionary } from "@intlify/core-base";
-import { i18n } from "@/main";
+import { LocaleMessageDictionary, LocaleMessages } from "@intlify/core-base";
+import {I18n, VueMessageType} from "vue-i18n";
 import { useLocaleSettingStore } from "%/stores/LocaleSettingStore/LocaleSettingStore";
 import { 
     between,
@@ -85,6 +85,11 @@ export interface VeeValidateConfig {
  */
 export class ValidateConfig {
     /**
+     * vue-i18nのインスタンスを保持します。
+     */
+    static i18n?: I18n<LocaleMessages<VueMessageType>, unknown, unknown, false>;
+
+    /**
      * VeeValidateの初期化を実行します。
      */
     static init(): void {
@@ -115,7 +120,10 @@ export declare type ValidationMessageGenerator = (ctx: FieldValidationMetaInfo) 
 export const validateConfig: Partial<VeeValidateConfig> = {
     generateMessage: (ctx) => {
         const {field, rule, form} = ctx;
-        const fieldName = i18n.global.t(field);
+        if (!ValidateConfig.i18n) {
+            return field;
+        }
+        const fieldName = ValidateConfig.i18n.global.t(field);
         if (rule === undefined) {
             return field;
         }
@@ -124,7 +132,7 @@ export const validateConfig: Partial<VeeValidateConfig> = {
          * we get raw messages from dictionary and pass it to interpolator
          */
         const localeSettings = useLocaleSettingStore();
-        const localeMessages = i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;
+        const localeMessages = ValidateConfig.i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;
         if (localeMessages === undefined) {
             return field;
         }

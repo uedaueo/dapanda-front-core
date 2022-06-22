@@ -10,7 +10,7 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
      * フィールド: [componentId]。
      * デフォルト: [&quot;Validationサンプル&quot;]。
      */
-    private fComponentId: string = "Validationサンプル";
+    componentId: string = "Validationサンプル";
 
     /**
      * フォームの名前項目です
@@ -18,7 +18,7 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
      * フィールド: [name]。
      * デフォルト: [&quot;名前&quot;]。
      */
-    private fName: string = "名前";
+    name: string = "名前";
 
     /**
      * フォームの年齢項目です
@@ -26,7 +26,7 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
      * フィールド: [age]。
      * デフォルト: [&quot;年齢&quot;]。
      */
-    private fAge: string = "年齢";
+    age: string = "年齢";
 
     /**
      * フォームの実行ボタンラベルです
@@ -34,7 +34,7 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
      * フィールド: [submit]。
      * デフォルト: [&quot;実行&quot;]。
      */
-    private fSubmit: string = "実行";
+    submit: string = "実行";
 
     /**
      * 駄パンダ
@@ -42,7 +42,7 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
      * フィールド: [dapanda]。
      * デフォルト: [&quot;駄パンダ&quot;]。
      */
-    private fDapanda: string = "駄パンダ";
+    dapanda: string = "駄パンダ";
 
     /**
      * 子パンダ
@@ -50,143 +50,5 @@ export class ValidationSampleJa extends AbstractLocaleMessageObject {
      * フィールド: [kopanda]。
      * デフォルト: [&quot;子パンダ&quot;]。
      */
-    private fKopanda: string = "子パンダ";
-
-    /**
-     * フィールド [componentId] の値を設定します。
-     *
-     * フィールドの説明: [ページタイトルです]。
-     *
-     * @param argComponentId フィールド[componentId]に設定する値。
-     */
-    set componentId(argComponentId: string) {
-        this.fComponentId = argComponentId;
-    }
-
-    /**
-     * フィールド [componentId] の値を取得します。
-     *
-     * フィールドの説明: [ページタイトルです]。
-     * デフォルト: [&quot;Validationサンプル&quot;]。
-     *
-     * @return フィールド[componentId]から取得した値。
-     */
-    get componentId(): string {
-        return this.fComponentId;
-    }
-
-    /**
-     * フィールド [name] の値を設定します。
-     *
-     * フィールドの説明: [フォームの名前項目です]。
-     *
-     * @param argName フィールド[name]に設定する値。
-     */
-    set name(argName: string) {
-        this.fName = argName;
-    }
-
-    /**
-     * フィールド [name] の値を取得します。
-     *
-     * フィールドの説明: [フォームの名前項目です]。
-     * デフォルト: [&quot;名前&quot;]。
-     *
-     * @return フィールド[name]から取得した値。
-     */
-    get name(): string {
-        return this.fName;
-    }
-
-    /**
-     * フィールド [age] の値を設定します。
-     *
-     * フィールドの説明: [フォームの年齢項目です]。
-     *
-     * @param argAge フィールド[age]に設定する値。
-     */
-    set age(argAge: string) {
-        this.fAge = argAge;
-    }
-
-    /**
-     * フィールド [age] の値を取得します。
-     *
-     * フィールドの説明: [フォームの年齢項目です]。
-     * デフォルト: [&quot;年齢&quot;]。
-     *
-     * @return フィールド[age]から取得した値。
-     */
-    get age(): string {
-        return this.fAge;
-    }
-
-    /**
-     * フィールド [submit] の値を設定します。
-     *
-     * フィールドの説明: [フォームの実行ボタンラベルです]。
-     *
-     * @param argSubmit フィールド[submit]に設定する値。
-     */
-    set submit(argSubmit: string) {
-        this.fSubmit = argSubmit;
-    }
-
-    /**
-     * フィールド [submit] の値を取得します。
-     *
-     * フィールドの説明: [フォームの実行ボタンラベルです]。
-     * デフォルト: [&quot;実行&quot;]。
-     *
-     * @return フィールド[submit]から取得した値。
-     */
-    get submit(): string {
-        return this.fSubmit;
-    }
-
-    /**
-     * フィールド [dapanda] の値を設定します。
-     *
-     * フィールドの説明: [駄パンダ]。
-     *
-     * @param argDapanda フィールド[dapanda]に設定する値。
-     */
-    set dapanda(argDapanda: string) {
-        this.fDapanda = argDapanda;
-    }
-
-    /**
-     * フィールド [dapanda] の値を取得します。
-     *
-     * フィールドの説明: [駄パンダ]。
-     * デフォルト: [&quot;駄パンダ&quot;]。
-     *
-     * @return フィールド[dapanda]から取得した値。
-     */
-    get dapanda(): string {
-        return this.fDapanda;
-    }
-
-    /**
-     * フィールド [kopanda] の値を設定します。
-     *
-     * フィールドの説明: [子パンダ]。
-     *
-     * @param argKopanda フィールド[kopanda]に設定する値。
-     */
-    set kopanda(argKopanda: string) {
-        this.fKopanda = argKopanda;
-    }
-
-    /**
-     * フィールド [kopanda] の値を取得します。
-     *
-     * フィールドの説明: [子パンダ]。
-     * デフォルト: [&quot;子パンダ&quot;]。
-     *
-     * @return フィールド[kopanda]から取得した値。
-     */
-    get kopanda(): string {
-        return this.fKopanda;
-    }
+    kopanda: string = "子パンダ";
 }

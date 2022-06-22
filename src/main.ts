@@ -5,12 +5,12 @@ import pinia from "@/pinia";
 import RootFrame from "%/components/framework/RootFrame/RootFrame";
 import {dapandaI18n} from "@/i18n";
 import {ValidateConfig} from "%/validators/ValidateConfig";
-import {appendRouteRecords, createAllRoute} from "@/router";
+import {createAllRoute} from "@/router";
 
 loadFonts()
 
 // i18n を初期化します。
-export const i18n = dapandaI18n();
+ValidateConfig.i18n = dapandaI18n();
 // VeeValidateを初期化します。
 ValidateConfig.init();
 
@@ -24,7 +24,7 @@ const router = createAllRoute();
 
 app
   .use(vuetify)
-    .use(i18n)
+    .use(ValidateConfig.i18n)
     .use(pinia)
     .use(router)
     .mount('#app')
