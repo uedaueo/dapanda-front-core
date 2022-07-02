@@ -1,8 +1,8 @@
-import {ValidationSampleProps} from "%/samples/pages/ValidationSample/ValidationSampleProps";
 import {inject, ref, SetupContext} from "vue";
 import {useI18n} from "vue-i18n";
+import {LoginSampleProps} from "%/samples/pages/LoginSample/LoginSampleProps";
 
-export const validationSampleSetup = (props: ValidationSampleProps, context: SetupContext) => {
+export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext) => {
     const { t } = useI18n();
     const title = ref(props.subject);
 

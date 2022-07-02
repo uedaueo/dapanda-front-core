@@ -1,9 +1,7 @@
-import {computed, reactive, ref, SetupContext, toRefs, watch, watchEffect, WritableComputedRef} from 'vue'
+import {computed, reactive, ref, SetupContext, watch} from 'vue'
 import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip} from 'chart.js'
 import {ChartSampleProps} from "%/samples/pages/ChartSample/ChartSampleProps";
 import {useI18n} from "vue-i18n";
-import {ChartSampleConst} from "@/samples/pages/ChartSample/ChartSampleConst";
-import {i18n} from "@/i18n";
 import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
 import {storeToRefs} from "pinia";
 

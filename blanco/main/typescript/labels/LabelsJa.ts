@@ -2,11 +2,20 @@ import {LocaleLabels} from "@/i18n/LocaleLabels";
 import { LocaleSelectJa } from "./LocaleSelectJa";
 import { ValidationSampleJa } from "./ValidationSampleJa";
 import { ChartSampleJa } from "./ChartSampleJa";
+import { LoginSampleJa } from "./LoginSampleJa";
 
 /**
  * Labels Class for i18n
  */
 export class LabelsJa extends LocaleLabels {
+    /**
+     * Loginサンプルページで使用するラベルを定義します。
+     *
+     * フィールド: [loginSample]。
+     * デフォルト: [new LoginSampleJa()]。
+     */
+    loginSample: LoginSampleJa = new LoginSampleJa();
+
     /**
      * ロケール選択コンポーネントで使用するラベルを定義します。
      *

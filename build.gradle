@@ -30,13 +30,11 @@ dependencies {
     blancoFramework 'blanco.batchprocess:blanco-batchprocess:[2.0,3.0)'
     blancoFramework 'blanco.commons.io:blanco-commons:[2.0,3.0)'
     blancoFramework 'blanco.cg:blanco-cg:[2.0,3.0)'
-    blancoFramework 'blanco.valueobject:blanco-valueobject:[2.0,3.0)'
     blancoFramework 'blanco.valueobjectts:blanco-valueobjectts:[0.0,1.0)'
     blancoFramework 'blanco.restgeneratorts:blanco-restgeneratorts:[0.0,1.0)'
     blancoFramework 'blanco.pinia:blanco-pinia:[0.0,1.0)'
     blancoFramework 'blanco.vuecomponent:blanco-vuecomponent:[1.0,2.0)'
     blancoFramework 'blanco.veevalidate:blanco-veevalidate:[1.0,2.0)'
-    blancoFramework 'blanco.restgenerator:blanco-restgenerator:[0.0,1.0)'
     blancoFramework 'blanco.constants:blanco-constants:[2.0,3.0)'
     blancoFramework 'blanco.meta2xml:blanco-meta2xml:[2.0,3.0)'
     blancoFramework 'blanco.resourcebundle:blanco-resourcebundle:[2.0,3.0)'
@@ -68,7 +66,62 @@ task metaObjects {
     }
 }
 
+
+task metaTelegrams {
+    dependsOn "metaStores"
+    logging.captureStandardOutput LogLevel.INFO
+    group "blanco"
+    description "Generate API object source for typescript by blancoRestGeneratorTs"
+    doFirst {
+        println 'A task message which is logged at INFO level'
+    }
+    doLast {
+        ant.taskdef(name: 'blancovalueobjectts',
+                classname: 'blanco.valueobjectts.task.BlancoValueObjectTsTask',
+                classpath: configurations.blancoFramework.asPath
+        )
+        ant.taskdef(name: 'blancorestgeneratorts',
+                classname: 'blanco.restgeneratorts.task.BlancoRestGeneratorTsTask',
+                classpath: configurations.blancoFramework.asPath
+        )
+        /* telegrams */
+        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/telegrams",
+                tmpdir: "${buildDir}/tmpTelegrams",
+                targetdir: "${projectDir}/blanco",
+                targetStyle: "maven",
+                sheetType: 'php',
+                tabs: 4,
+                lineSeparator: 'LF',
+                verbose: true,
+                generateToJson: true,
+                encoding: getProperty("blanco.encoding")
+        )
+        /*
+         * API
+         * create empty dir tmpApiSamles/valueobjectts because blancoRestGeneratorTs is
+         * default search the directory for API parmaeter objects.
+         */
+        new File("${buildDir}/tmpApiSamples/valueobjectts").mkdirs();
+        ant.blancorestgeneratorts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/api",
+                tmpdir: "${buildDir}/tmpApiSamples",
+                targetdir: "${projectDir}/blanco",
+                targetStyle: "maven",
+                sheetType: 'php',
+                encoding: getProperty("blanco.encoding"),
+                verbose: "true",
+                generateToJson: true,
+                tabs: 4,
+                searchTmpdir: "${buildDir}/tmpObjects,${buildDir}/tmpTelegrams",
+                lineSeparator: 'LF',
+                processlist: "samples.SampleApiList",
+                processlistBase: "@",
+                client: "true"
+        )
+    }
+}
+
 task metaLabels {
+    dependsOn "metaObjects"
     logging.captureStandardOutput LogLevel.INFO
     group "blanco"
     description "Generate labels for typescript by blancoValueObjectTs"
@@ -167,7 +220,7 @@ task metaMessages {
 }
 
 task metaComponents {
-    dependsOn "metaStores"
+    dependsOn "metaTelegrams"
     logging.captureStandardOutput LogLevel.INFO
     group "blanco"
     description "Generate vue components for typescript by blancoVueComponent"

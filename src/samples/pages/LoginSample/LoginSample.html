@@ -1,0 +1,19 @@
+<h1>{{ t(title) }}</h1>
+
+<Form @submit="onSubmit">
+    <div>
+        <div>
+            <label id="id-label" for="name">{{ t("labels.loginSample.id") }}</label>
+            <Field name="id" label="labels.loginSample.id" rules="required" />
+            <ErrorMessage name="id" />
+        </div>
+        <div>
+            <label id="password-label" for="age">{{ t('labels.loginSample.password') }}</label>
+            <Field name="password" label="labels.loginSample.password" rules="required" />
+            <ErrorMessage name="password" />
+        </div>
+        <div>
+            <button>{{ t('labels.loginSample.submit') }}</button>
+        </div>
+    </div>
+</Form>

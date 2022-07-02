@@ -2,6 +2,7 @@ import {h} from "vue";
 import App from "@/App.vue";
 import PageTransitController from "%/components/framework/PageTransitController/PageTransitController";
 import LocaleController from "%/components/framework/LocaleController/LocaleController";
+import CommunicationController from "%/components/framework/CommunicationController/CommunicationController";
 
 export const rootFrameRender = () => {
     return h("div", { class: "root-frame-component" },
@@ -12,6 +13,7 @@ export const rootFrameRender = () => {
              */
             h(PageTransitController),
             h(LocaleController),
-            h(App)
+            /* App は CommunicationController の子コンポーネントとする */
+            h(CommunicationController)
         ]);
 }

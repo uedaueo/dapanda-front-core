@@ -22,6 +22,6 @@
             <Field name="kopanda" label="labels.validationSample.kopanda" rules="required|kopanda:@name,@age,kankan" />
             <ErrorMessage name="kopanda" />
         </div>
-        <button>{{ t('labels.validationSample.submit') }}</button>
+        <button @click="onSubmit">{{ t('labels.validationSample.submit') }}</button>
     </div>
 </Form>

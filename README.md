@@ -13,6 +13,34 @@ parrot:dapanda-front-core tueda$ npm -v
 8.6.0
 ```
 
+### nvm の導入
+
+便利そうなので nvm でも良いかも。node と npm のバージョンを合わせてくれるので便利。
+
+nvm を MacPorts で導入後、~/.bash_profile に
+
+```
+# nvm
+source /opt/local/share/nvm/init-nvm.sh
+```
+
+と追記。初回は手動でソース実行。
+
+最新 lts が v16.15.1 だったので（2022/06/29時点）、上田の手元では v17.9.1 と2バージョン入れてみました。
+
+```aidl
+parrot:dapanda-front-core tueda$ nvm ls
+       v16.15.1
+->      v17.9.1
+         system
+default -> v17.9.1
+iojs -> N/A (default)
+unstable -> N/A (default)
+node -> stable (-> v17.9.1) (default)
+stable -> 17.9 (-> v17.9.1) (default)
+lts/* -> lts/gallium (-> v16.15.1)
+```
+
 ## プレビュー
 
 デバグモードで実行
@@ -238,6 +266,14 @@ npm install vee-validate@latest
 npm install @vee-validate/rules@latest
 npm install @vee-validate/i18n@latest
 ```
+
+### axios の導入
+
+```aidl
+npm install axios
+```
+
+これで @latest が入った模様。0.27.1。
 
 ### library-mode
 
