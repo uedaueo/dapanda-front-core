@@ -6,8 +6,16 @@ import RootFrame from "%/components/framework/RootFrame/RootFrame";
 import {dapandaI18n} from "@/i18n";
 import {ValidateConfig} from "%/validators/ValidateConfig";
 import {createAllRoute} from "@/router";
+import {ApiConstructors, ApiConstructorsInterface} from "@/common/ApiConstructors";
+import {SampleApiList} from "%/samples/SampleApiList";
 
 loadFonts()
+
+// Initialize API constructors
+const defaultApiList: ApiConstructorsInterface = {
+    defaultApiList: SampleApiList
+}
+ApiConstructors.appendConstructor(defaultApiList);
 
 // i18n を初期化します。
 ValidateConfig.i18n = dapandaI18n();

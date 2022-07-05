@@ -1,7 +1,9 @@
 import {ApiTelegram} from "%/blanco/restgenerator/valueobject/ApiTelegram";
+import {CommonResponse} from "%/blanco/restgenerator/valueobject/CommonResponse";
+import {Store} from "pinia";
 
 /**
- * 通信のオプションを指定します。
+ * Options for communication
  */
 export interface CommunicationOptions {
     manualHandling?: boolean;
@@ -11,6 +13,25 @@ export interface CommunicationOptions {
 }
 
 /**
+ * CommonResponse を格納する ActionsTree が実装すべき型です。
+ */
+export declare type CommonResponseActionsTree = {
+    /**
+     * APIの戻り値をセットします
+     *
+     * @param respnse API の戻り値です
+     * @return void
+     */
+    setResponse(
+        respnse: CommonResponse
+    ): void;
+}
+
+/**
  * send関数の型を設定します。
  */
-export declare type SendFunction = (req: ApiTelegram, options?: CommunicationOptions) => void;
+export declare type SendFunction = (
+    request: ApiTelegram,
+    store: Store<string, any, any, CommonResponseActionsTree>,
+    options?: CommunicationOptions
+) => void;

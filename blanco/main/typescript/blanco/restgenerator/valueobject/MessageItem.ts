@@ -1,7 +1,7 @@
 /**
- * APIが返すエラーを定義します
+ * APIが返すメッセージ（エラー他）を定義します
  */
-export class ErrorItem {
+export class MessageItem {
     /**
      * エラーコード
      *

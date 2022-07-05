@@ -179,6 +179,7 @@ task metaStores {
                 tabs: 4,
                 lineSeparator: 'LF',
                 verbose: true,
+                searchTmpdir: "${buildDir}/tmpObjects",
                 encoding: getProperty("blanco.encoding")
         )
     }

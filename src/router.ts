@@ -4,7 +4,7 @@ import {routeSettings} from "%/samples/pages/RouteSettings";
 let allRoute: RouteRecordRaw[] = routeSettings();
 
 export function appendRouteRecords(routeRecords: RouteRecordRaw[]) {
-    allRoute = Object.assign(allRoute, routeRecords);
+    allRoute = allRoute.concat(routeRecords);
 }
 
 export const createAllRoute = (): Router => {

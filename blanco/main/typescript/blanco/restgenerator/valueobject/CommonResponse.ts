@@ -1,6 +1,6 @@
 import { ResponseHeader } from "%/blanco/restgenerator/valueobject/ResponseHeader";
 import { ApiTelegram } from "%/blanco/restgenerator/valueobject/ApiTelegram";
-import { ErrorItem } from "%/blanco/restgenerator/valueobject/ErrorItem";
+import { MessageItem } from "%/blanco/restgenerator/valueobject/MessageItem";
 
 /**
  * 共通レスポンスを表すオブジェクトです。
@@ -23,12 +23,12 @@ export class CommonResponse {
     private fTelegram?: ApiTelegram = new ApiTelegram();
 
     /**
-     * エラー情報
+     * メッセージ・エラー情報
      *
-     * フィールド: [errors]。
-     * デフォルト: [new Array&lt;ErrorItem&gt;()]。
+     * フィールド: [messages]。
+     * デフォルト: [new Array&lt;MessageItem&gt;()]。
      */
-    private fErrors?: Array<ErrorItem> = new Array<ErrorItem>();
+    private fMessages?: Array<MessageItem> = new Array<MessageItem>();
 
     /**
      * フィールド [info] の値を設定します。
@@ -77,26 +77,26 @@ export class CommonResponse {
     }
 
     /**
-     * フィールド [errors] の値を設定します。
+     * フィールド [messages] の値を設定します。
      *
-     * フィールドの説明: [エラー情報]。
+     * フィールドの説明: [メッセージ・エラー情報]。
      *
-     * @param argErrors フィールド[errors]に設定する値。
+     * @param argMessages フィールド[messages]に設定する値。
      */
-    set errors(argErrors: Array<ErrorItem> | undefined) {
-        this.fErrors = argErrors;
+    set messages(argMessages: Array<MessageItem> | undefined) {
+        this.fMessages = argMessages;
     }
 
     /**
-     * フィールド [errors] の値を取得します。
+     * フィールド [messages] の値を取得します。
      *
-     * フィールドの説明: [エラー情報]。
-     * デフォルト: [new Array&lt;ErrorItem&gt;()]。
+     * フィールドの説明: [メッセージ・エラー情報]。
+     * デフォルト: [new Array&lt;MessageItem&gt;()]。
      *
-     * @return フィールド[errors]から取得した値。
+     * @return フィールド[messages]から取得した値。
      */
-    get errors(): Array<ErrorItem> | undefined {
-        return this.fErrors;
+    get messages(): Array<MessageItem> | undefined {
+        return this.fMessages;
     }
 
     /**
@@ -108,7 +108,7 @@ export class CommonResponse {
         return {
             info: this.info,
             telegram: this.telegram,
-            errors: this.errors
+            messages: this.messages
         };
     }
 }

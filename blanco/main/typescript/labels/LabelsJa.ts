@@ -1,5 +1,6 @@
 import {LocaleLabels} from "@/i18n/LocaleLabels";
 import { LocaleSelectJa } from "./LocaleSelectJa";
+import { NoPageSampleJa } from "./NoPageSampleJa";
 import { ValidationSampleJa } from "./ValidationSampleJa";
 import { ChartSampleJa } from "./ChartSampleJa";
 import { LoginSampleJa } from "./LoginSampleJa";
@@ -8,6 +9,14 @@ import { LoginSampleJa } from "./LoginSampleJa";
  * Labels Class for i18n
  */
 export class LabelsJa extends LocaleLabels {
+    /**
+     * NoPgeサンプルページで使用するラベルを定義します。
+     *
+     * フィールド: [noPageSample]。
+     * デフォルト: [new NoPageSampleJa()]。
+     */
+    noPageSample: NoPageSampleJa = new NoPageSampleJa();
+
     /**
      * Loginサンプルページで使用するラベルを定義します。
      *

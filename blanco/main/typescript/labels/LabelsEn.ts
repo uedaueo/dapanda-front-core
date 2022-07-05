@@ -1,4 +1,5 @@
 import {LocaleLabels} from "@/i18n/LocaleLabels";
+import { NoPageSampleEn } from "./NoPageSampleEn";
 import { ChartSampleEn } from "./ChartSampleEn";
 import { LoginSampleEn } from "./LoginSampleEn";
 import { LocaleSelectEn } from "./LocaleSelectEn";
@@ -31,6 +32,14 @@ export class LabelsEn extends LocaleLabels {
      * デフォルト: [new LocaleSelectEn()]。
      */
     LocaleSelect: LocaleSelectEn = new LocaleSelectEn();
+
+    /**
+     * NoPageサンプルページで使用するラベルを定義します。
+     *
+     * フィールド: [noPageSample]。
+     * デフォルト: [new NoPageSampleEn()]。
+     */
+    noPageSample: NoPageSampleEn = new NoPageSampleEn();
 
     /**
      * Validationサンプルページで使用するラベルを定義します。

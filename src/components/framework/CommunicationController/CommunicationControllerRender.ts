@@ -9,6 +9,6 @@ export const communicationControllerRender = () => {
              * Because $on function is obsolete on composition API,
              * we provides communication function to application with provide/inject.
              */
-            h(App)
+            h(App, {nopagePath: "/nopageSample"})
         ]);
 };

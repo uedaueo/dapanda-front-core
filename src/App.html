@@ -3,6 +3,9 @@
     <v-main>
         <v-container fluid class="py-0">
             <router-view></router-view>
+            <v-overlay :value="overlay">
+                <v-progress-circular indeterminate="true" size="64"></v-progress-circular>
+            </v-overlay>
         </v-container>
     </v-main>
 </v-app>

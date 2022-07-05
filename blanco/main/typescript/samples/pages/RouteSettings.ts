@@ -1,6 +1,7 @@
 import { helloVuetifyRouteRecord } from "%/samples/pages/HelloVuetify/HelloVuetifyRouteRecord";
 import { loginSampleRouteRecord } from "%/samples/pages/LoginSample/LoginSampleRouteRecord";
 import { validationSampleRouteRecord } from "%/samples/pages/ValidationSample/ValidationSampleRouteRecord";
+import { noPageSampleRouteRecord } from "%/samples/pages/NoPageSample/NoPageSampleRouteRecord";
 import { chartSampleRouteRecord } from "%/samples/pages/ChartSample/ChartSampleRouteRecord";
 import { helloCompositionRouteRecord } from "%/samples/pages/HelloComposition/HelloCompositionRouteRecord";
 
@@ -12,6 +13,7 @@ export const routeSettings = () => {
         helloVuetifyRouteRecord,
         loginSampleRouteRecord,
         validationSampleRouteRecord,
+        noPageSampleRouteRecord,
         chartSampleRouteRecord,
         helloCompositionRouteRecord
     ]
