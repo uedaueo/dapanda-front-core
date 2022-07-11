@@ -21,6 +21,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     const responseStore = useLoginSampleResponseStore();
     const { response } = storeToRefs(responseStore);
     const authStore = useAuthenticationControllerStore();
+    const { preparedFlg } = storeToRefs(authStore);
     const onSubmit = (values: any) => {
         console.log("Submitted : " + values.id + ", " + values.password);
         const postRequest = factory.createLoginSamplePostRequest();
@@ -39,17 +40,24 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
                 loginInfo.environment = "development";
                 authStore.update(loginInfo);
                 // save loginInfo into LocalStorage
-                authStore.persist();
-                // Go to toppage
-                const pageStore = usePageTransitDataStore();
-                pageStore.update("/");
+                authStore.persist(); // preparedFlg will be down.
             } else {
                 // remove loginInfo
                 authStore.remove();
             }
         }
         /* Errors are processed in CommunicationController#send */
-    })
+    });
+    /* watch preparedFlg and goto next page, BE CARE THREAD CONFLICT. */
+    watch(preparedFlg, () => {
+        console.log("login watch(preparedFlg): preparedFlg = " + preparedFlg.value);
+        if (preparedFlg.value === true) {
+            // Go to toppage
+            const pageStore = usePageTransitDataStore();
+            // TODO it may be better to transit to next page.
+            pageStore.update("/");
+        }
+    });
     return {
         t,
         title,

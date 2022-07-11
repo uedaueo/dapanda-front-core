@@ -10,9 +10,15 @@ export const authenticationControllerStoreActions = defineAuthenticationControll
             this.loginInfo = loginInfo;
             this.preparedFlg = true;
         },
+        prepared() {
+            this.preparedFlg = true;
+        },
         async persist() {
+            console.log("Auth:persist! prepareFlg = " + this.preparedFlg + ", saveFlg = " + this.saveFlg);
             if (this.preparedFlg) {
                 this.saveFlg = !this.saveFlg;
+                this.preparedFlg = false;
+                console.log("Auth:persist! prepareFlg = " + this.preparedFlg + ", saveFlg = " + this.saveFlg);
             }
         },
         async restore(options: RestoreLoginDataOptions | undefined) {

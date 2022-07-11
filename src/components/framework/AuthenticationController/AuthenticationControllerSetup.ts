@@ -24,6 +24,7 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
             const jsonInfo = JSON.stringify(authStore.loginInfo);
             console.log("authenticationControllerSetup#watch(saveFlg) jsonInfo = " + jsonInfo);
             localStorage.setItem(DapandaConst.LocalStorageItemKey, jsonInfo);
+            authStore.prepared();
         } else {
             console.log("authenticationControllerSetup#watch(saveFlg) Clear");
             authStore.remove();
@@ -52,7 +53,7 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
             }
             pageTransitDataStore.update(loginSampleRouteRecord.path);
         } else {
-            authStore.update(restored);
+            authStore.update(restored); // update is not async.
             if (options) {
                 options.callback(restored);
             }
@@ -65,5 +66,6 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
     watch(removeFlg, () => {
         console.log("authenticationControllerSetup#watch(removeFlg) Start");
         localStorage.removeItem(DapandaConst.LocalStorageItemKey);
+        authStore.prepared();
     });
 };

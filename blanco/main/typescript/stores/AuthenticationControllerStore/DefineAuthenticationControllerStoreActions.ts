@@ -37,6 +37,13 @@ export declare type AuthenticationControllerStoreActionsTree = {
      */
     remove(
     ): Promise<void>;
+    /**
+     * preparedFlg を true にします。
+     *
+     * @return void
+     */
+    prepared(
+    ): void;
 }
 
 /**
