@@ -46,6 +46,8 @@ export default defineComponent({
         if (resolved.matched.length == 0) {
             // transit to nopage.
             pageTransitDataStore.update(props.nopagePath);
+        } else {
+            pageTransitDataStore.update(resolved.path)
         }
 
         /* Set Global guards */
