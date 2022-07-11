@@ -25,6 +25,7 @@ export namespace DapandaConst {
     export const VueAppDeployEnvironmentProduction = "production";
     export const EnvironmentNameProduction = "PRD";
     export const LocalStorageItemKey = "dapanda";
+    export const DapandaAccessTokenHeader = "X-Dapanda-AccessToken";
 
     /**
      * ApiBaseで取り扱うCommonResponseのresultの判定用

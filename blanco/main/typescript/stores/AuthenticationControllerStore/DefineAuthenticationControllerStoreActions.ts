@@ -1,3 +1,4 @@
+import {RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
 import { AuthenticationControllerStoreState } from "./AuthenticationControllerStoreState";
 import { UnwrapRef } from "vue";
 import { LoginInfo } from "%/common/LoginInfo";
@@ -23,9 +24,11 @@ export declare type AuthenticationControllerStoreActionsTree = {
     /**
      * 認証情報を LocalStorage からロードします。
      *
+     * @param options ログインデータをリストアする際のオプションです。
      * @return void
      */
     restore(
+            options: RestoreLoginDataOptions | undefined
     ): Promise<void>;
     /**
      * 認証情報を LocalStorage から削除します。

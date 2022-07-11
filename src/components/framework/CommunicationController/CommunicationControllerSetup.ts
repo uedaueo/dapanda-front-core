@@ -9,6 +9,7 @@ import {ApiBase} from "@/common/ApiBase";
 import {useCommonStatusStore} from "%/stores/CommonStatusStore/CommonStatusStore";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
 import {storeToRefs} from "pinia";
+import CommunicationController from "%/components/framework/CommunicationController/CommunicationController";
 
 export const communicationControllerSetup = (props: CommunicationControllerProps, context: SetupContext) => {
 
@@ -63,6 +64,9 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
                 httpMethod,
                 options
             );
+
+            console.log("CommunicationController : return response = " + JSON.stringify(commonResponse));
+            store.setResponse(commonResponse);
 
         } catch (exception) {
             /* TODO handle exception */

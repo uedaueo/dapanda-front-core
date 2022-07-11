@@ -9,6 +9,8 @@ import {LoginSamplePostResponse} from "%/samples/api/LoginSamplePostResponse";
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
 import {LoginInfo} from "%/common/LoginInfo";
+import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
+import {storeToRefs} from "pinia";
 
 export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext, factory: LoginSampleRequestFactory) => {
     const { t } = useI18n();
@@ -17,6 +19,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     const send = inject<SendFunction>('send')!;
 
     const responseStore = useLoginSampleResponseStore();
+    const { response } = storeToRefs(responseStore);
     const authStore = useAuthenticationControllerStore();
     const onSubmit = (values: any) => {
         console.log("Submitted : " + values.id + ", " + values.password);
@@ -25,17 +28,24 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
         postRequest.password = values.password;
         send(postRequest, responseStore)
     }
-    watch(responseStore.response, () => {
-        const header = responseStore.response.info;
+    watch(response, () => {
+        console.log("LoginSample#watch(responseStore : " + JSON.stringify(response));
+        const header = response.value.info;
         if (header) {
             if (header.result === DapandaConst.ResultSuccess) {
-                const telegram = responseStore.response.telegram as LoginSamplePostResponse;
+                const telegram = response.value.telegram as LoginSamplePostResponse;
                 const loginInfo = new LoginInfo();
                 loginInfo.loginToken = telegram.token;
                 loginInfo.environment = "development";
                 authStore.update(loginInfo);
                 // save loginInfo into LocalStorage
                 authStore.persist();
+                // Go to toppage
+                const pageStore = usePageTransitDataStore();
+                pageStore.update("/");
+            } else {
+                // remove loginInfo
+                authStore.remove();
             }
         }
         /* Errors are processed in CommunicationController#send */

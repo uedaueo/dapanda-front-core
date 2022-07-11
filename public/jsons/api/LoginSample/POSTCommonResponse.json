@@ -1,0 +1,14 @@
+{
+  "info": {
+    "locale": {
+      "lang": "ja",
+      "tz": "Asia/Tokyo",
+      "currency": "JPY"
+    },
+    "time": 100,
+    "result": "success"
+  },
+  "telegram": {
+    "token": "DummyToken"
+  }
+}

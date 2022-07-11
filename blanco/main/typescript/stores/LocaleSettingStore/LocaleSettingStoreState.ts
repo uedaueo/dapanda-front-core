@@ -13,7 +13,12 @@ export interface LocaleSettingStoreState {
     tz: string;
 
     /**
-     * 通過です。
+     * 通貨です。
+     */
+    currency: string;
+
+    /**
+     * 国コードです
      */
     country: string;
 }
@@ -24,5 +29,6 @@ export interface LocaleSettingStoreState {
 export const localeSettingStoreState: LocaleSettingStoreState = {
     lang: "ja",
     tz: "Asia/Tokyo",
-    country: "jpy"
+    currency: "JPY",
+    country: "JP"
 };

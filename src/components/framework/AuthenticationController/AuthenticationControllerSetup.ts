@@ -41,13 +41,21 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
             restored = JSON.parse(jsonInfo);
         }
         const currentToken = authStore.loginInfo.loginToken;
+        /* Be care, it's not thread safe. */
+        const options = authStore.restoreOptions;
         if (!(restored && restored.loginToken && restored.loginToken != "")
             || (currentToken != "" && currentToken != restored.loginToken))  {
             /* TODO Transit to Login */
             console.log("transit to login");
+            if (options) {
+                options.callback(undefined);
+            }
             pageTransitDataStore.update(loginSampleRouteRecord.path);
         } else {
             authStore.update(restored);
+            if (options) {
+                options.callback(restored);
+            }
         }
     });
 

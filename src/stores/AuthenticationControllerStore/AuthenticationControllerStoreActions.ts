@@ -2,6 +2,7 @@ import {
     defineAuthenticationControllerStoreActions
 } from "%/stores/AuthenticationControllerStore/DefineAuthenticationControllerStoreActions";
 import {LoginInfo} from "%/common/LoginInfo";
+import {RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
 
 export const authenticationControllerStoreActions = defineAuthenticationControllerStoreActions(
     {
@@ -14,9 +15,10 @@ export const authenticationControllerStoreActions = defineAuthenticationControll
                 this.saveFlg = !this.saveFlg;
             }
         },
-        async restore() {
+        async restore(options: RestoreLoginDataOptions | undefined) {
             this.preparedFlg = false;
             this.restoreFlg = !this.restoreFlg;
+            this.restoreOptions = options;
         },
         async remove() {
             this.preparedFlg = false;

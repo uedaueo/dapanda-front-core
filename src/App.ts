@@ -4,6 +4,7 @@ import {useRouter} from "vue-router";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
 import {useCommonStatusStore} from "%/stores/CommonStatusStore/CommonStatusStore";
 import {storeToRefs} from "pinia";
+import {RouterHooks} from "@/utils/RouterHooks";
 
 export default defineComponent({
     name: 'App',
@@ -33,7 +34,7 @@ export default defineComponent({
         }
         console.log("targetPath: " + targetPath);
 
-        /* Check page exist */
+        /* Check page exist on directly specified with GET method */
         const router = useRouter();
         let resolved = router.resolve({path: targetPath});
         console.log("matched: " + resolved.matched.length);
@@ -46,6 +47,12 @@ export default defineComponent({
             // transit to nopage.
             pageTransitDataStore.update(props.nopagePath);
         }
+
+        /* Set Global guards */
+        router.beforeResolve((to, from, next) => {
+            RouterHooks.beforeResolve(router, to, from, next, props.nopagePath);
+        });
+
         return {
             overlay
         }

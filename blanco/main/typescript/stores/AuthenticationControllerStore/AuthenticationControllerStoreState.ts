@@ -1,3 +1,4 @@
+import {RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
 import { LoginInfo } from "%/common/LoginInfo";
 
 /**
@@ -28,6 +29,11 @@ export interface AuthenticationControllerStoreState {
      * loginInfor LocalStorage から削除し、store には空の LoginInfo をセットします。
      */
     removeFlg: boolean;
+
+    /**
+     * リストアの際に参照するオプション値
+     */
+    restoreOptions: RestoreLoginDataOptions | undefined;
 }
 
 /**
@@ -38,5 +44,6 @@ export const authenticationControllerStoreState: AuthenticationControllerStoreSt
     saveFlg: false,
     restoreFlg: false,
     preparedFlg: false,
-    removeFlg: false
+    removeFlg: false,
+    restoreOptions: undefined
 };
