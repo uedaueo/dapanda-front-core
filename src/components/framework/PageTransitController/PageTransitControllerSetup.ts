@@ -3,14 +3,35 @@ import {storeToRefs} from "pinia";
 import {useRouter} from "vue-router";
 import {PageTransitControllerProps} from "%/components/framework/PageTransitController/PageTransitControllerProps";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
+import {DapandaConst} from "@/common/DapandaGlobals";
+import {pageTransitDataStoreState} from "%/stores/PageTransitDataStore/PageTransitDataStoreState";
+import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOptions";
 
 export const pageTransitControllerSetup = (props: PageTransitControllerProps, context: SetupContext) => {
     const pageTransitData = usePageTransitDataStore();
-    const { location } = storeToRefs(pageTransitData);
+    const { location, restoreFlg } = storeToRefs(pageTransitData);
     console.log("pageTransitControllerSetup: location = " + location.value);
     const router = useRouter();
     watch(location, () => {
         console.log("toLocation " + location.value);
         router.push(location.value);
+    });
+    watch(restoreFlg, () => {
+        console.log("pageTransitionControllerSetup: restoreFlg = " + restoreFlg.value);
+        if (restoreFlg.value === true) {
+            const restored = sessionStorage.getItem(DapandaConst.SessionStorageItemKey);
+            const options: RestorePageTransitDataOptions | undefined = pageTransitData.dataRestoreOptions;
+            if (restored && restored.length > 0) {
+                const pageData = JSON.parse(restored);
+                if (pageData) {
+                    pageTransitData.updateData(pageData);
+                }
+            }
+            if (options) {
+                /* restore done. */
+                options.callback(true);
+            }
+            pageTransitData.restore(false);
+        }
     });
 };

@@ -1,8 +1,9 @@
-import {computed, ref, SetupContext} from "vue";
+import {computed, onMounted, ref, SetupContext, toRefs} from "vue";
 import {HelloCompositionProps} from "%/samples/pages/HelloComposition/HelloCompositionProps";
 
 export const helloCompositionSetup = (props: HelloCompositionProps, context: SetupContext) => {
     const count = ref(0);
+    const { subject } = toRefs(props);
     const headline = ref(props.msg);
 
     const onMessageChanged = (evt: String) => {
@@ -14,7 +15,11 @@ export const helloCompositionSetup = (props: HelloCompositionProps, context: Set
         set: (value) => {
             headline.value = value;
         }
-    })
+    });
+    console.log("subject = " + subject.value);
+    onMounted(() => {
+        console.log("HelloComposition is mounted!");
+    });
     return {
         count,
         headline,

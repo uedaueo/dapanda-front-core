@@ -1,3 +1,4 @@
+import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOptions";
 import { PageTransitDataStoreState } from "./PageTransitDataStoreState";
 import { UnwrapRef } from "vue";
 
@@ -10,9 +11,29 @@ export declare type PageTransitDataStoreActionsTree = {
      * @param data null
      * @return void
      */
-    update(
+    updateLocation(
             location: string,
             data?: any
+    ): void;
+    /**
+     * ページリロード時にリストアを試みます
+     *
+     * @param flag trueでリストア指示
+     * @param options ページ間データのロード時のオプションです
+     * @return void
+     */
+    restore(
+            flag: boolean,
+            options?: RestorePageTransitDataOptions | undefined
+    ): void;
+    /**
+     * データの更新を試みます
+     *
+     * @param data 更新データ
+     * @return void
+     */
+    updateData(
+            data: any
     ): void;
 }
 

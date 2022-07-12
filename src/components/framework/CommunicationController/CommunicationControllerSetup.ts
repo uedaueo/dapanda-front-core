@@ -66,6 +66,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
             );
 
             console.log("CommunicationController : return response = " + JSON.stringify(commonResponse));
+
             store.setResponse(commonResponse);
 
         } catch (exception) {

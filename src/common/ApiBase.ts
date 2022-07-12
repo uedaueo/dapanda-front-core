@@ -13,6 +13,7 @@ import {Locale} from "%/blanco/restgenerator/valueobject/Locale";
 import {RestoreLoginDataCallbackType, RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
 import {log} from "util";
+import {ResponseHeader} from "%/blanco/restgenerator/valueobject/ResponseHeader";
 
 /**
  * API 電文処理のベースクラスです。
@@ -73,21 +74,37 @@ export abstract class ApiBase {
         body = JSON.stringify(commonRequest);
         console.log("ApiBase#send: json = " + body);
 
+        /* prepare accessToken for X-Dapanda-AccessToken header */
+        let authError = false;
+        let loginToken = "";
+        if (this.isAuthenticationRequired()) {
+            const loginInfo = await this.prepareLoginInfo();
+            if (loginInfo) {
+                loginToken = loginInfo.loginToken;
+            } else {
+                /* TODO Error handling */
+                authError = true;
+            }
+        }
+
         var uri: string;
         let res;
-        if (!("VUE_APP_API_ENDPOINT" in process.env)) {
+        if (authError) {
+            this._commonResponse = new CommonResponse();
+            const info = new ResponseHeader();
+            // TODO set locale etc.
+            info.result = DapandaConst.ResultError;
+            const message = new MessageItem();
+            message.messages = "Auth Error";
+            message.code = "";
+            this._commonResponse.messages = [message];
+        } else if (!("VUE_APP_API_ENDPOINT" in process.env)) {
             /* GET JSON FILE */
             uri = this.getJsonFileName(request, processName, method, options);
             res = await axios.get<CommonResponse>(uri);
             this._commonResponse = res.data;
         } else {
             uri = process.env.VUE_APP_API_ENDPOINT + this.locationURL;
-            /* Set accessToken to X-Dapanda-AccessToken header */
-            let loginToken = "";
-            if (this.isAuthenticationRequired()) {
-                const loginInfo = await this.prepareLoginInfo();
-                loginToken = loginInfo.loginToken;
-            }
             const headers: { [key: string]: string } = {};
             headers["content-type"] = "application/json";
             if (loginToken && loginToken != "") {

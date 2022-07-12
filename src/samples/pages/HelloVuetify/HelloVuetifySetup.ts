@@ -1,4 +1,4 @@
-import {SetupContext, toRefs} from "vue";
+import {onMounted, SetupContext, toRefs} from "vue";
 import {storeToRefs} from "pinia";
 import {HelloVuetifyProps} from "%/samples/pages/HelloVuetify/HelloVuetifyProps";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
@@ -11,7 +11,10 @@ export const helloVuetifySetup = (props: HelloVuetifyProps, context: SetupContex
     if (!dumm) {
         dummval = "OK!";
     }
-    console.log('subject = ' + subject);
+    console.log('subject = ' + subject.value);
+    onMounted(() => {
+        console.log("HelloVuetify is mounted!");
+    });
     return {
         location,
         subject,

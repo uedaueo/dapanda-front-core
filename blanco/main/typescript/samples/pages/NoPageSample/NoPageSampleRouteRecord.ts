@@ -8,7 +8,7 @@ export const noPageSampleRouteRecord: RouteRecordRaw = {
     name: "nopgeSample",
     component: () => import("%/samples/pages/NoPageSample/NoPageSample.vue"),
     meta: {
-        reload: false,
+        reload: true,
         authRequired: false
     }
 };

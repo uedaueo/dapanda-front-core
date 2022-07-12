@@ -55,7 +55,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
             // Go to toppage
             const pageStore = usePageTransitDataStore();
             // TODO it may be better to transit to next page.
-            pageStore.update("/");
+            pageStore.updateLocation("/");
         }
     });
     return {

@@ -1,4 +1,5 @@
 import {NavigationGuardNext, RouteLocationNormalized, Router} from "vue-router";
+import {LoginInfo} from "%/common/LoginInfo";
 
 /**
  * VueRouter の共通 hook はここに実装します。
@@ -26,10 +27,10 @@ export class RouterHooks {
         console.log("guard name: " + (resolved.name as string));
         console.log("guard href: " + resolved.href);
 
+        /*
+         * route が登録済み。
+         */
         if (resolved.matched.length > 0) {
-            /*
-             * route が登録済み。
-             */
             next();
             return;
         }
@@ -46,19 +47,35 @@ export class RouterHooks {
      * @param to 遷移先routeのインスタンスです
      * @param from 現在のrouteのインスタンスです
      * @param next 遷移を実行するために呼び出す関数です
-     * @param forceReload この引数がtrueの場合は遷移先画面は強制reloadされます
+     * @param loginInfo
+     * @param preparedFlg
      */
     static async beforeRouteLeave(
         router: Router,
         to: RouteLocationNormalized,
         from: RouteLocationNormalized,
         next: NavigationGuardNext,
-        forceReload: boolean = false
+        loginInfo: LoginInfo,
+        preparedFlg: boolean,
+        noAuthPath: string | undefined
     ) {
         console.log(
             "RouterHooks#beforeRouteLeave: from " + from.path + " to " + to.path
         );
         console.log(" to.matched = " + JSON.stringify(to.matched));
+
+        /*
+         * Login check
+         */
+        if (to.matched.some(record => record.meta.authRequired)) {
+            if (!(preparedFlg && loginInfo.loginToken !== undefined && loginInfo.loginToken.length > 0)) {
+                // Auth Error.
+                console.log("!!! authRequired but not authenticated yet !!!" );
+                // if (noAuthPath) {
+                //     next({path: noAuthPath});
+                // }
+            }
+        }
 
         /*
          * ここではページのリロードを行うかどうかのみチェックする。
