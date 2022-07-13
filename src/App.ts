@@ -60,15 +60,24 @@ export default defineComponent({
         console.log("name: " + (resolved.name as string));
         console.log("href: " + resolved.href);
 
+        /*
+         * TODO どうせ CALLBACK 地獄になるなら、各部を関数化して、
+         *  watch から呼べば良い？
+         *  provide する事で、各コンポーネントからも呼べる？
+         */
+
         /* Restore Authentication Info. */
         const authStore = useAuthenticationControllerStore();
         const pageTransitDataStore = usePageTransitDataStore();
-        let restoreLoginDataCallback: RestoreLoginDataCallbackType = (
-            loginInfo: LoginInfo | undefined
+        const restoreLoginDataCallback: RestoreLoginDataCallbackType = (
+            loginInfo: LoginInfo | undefined,
+            authRequired: boolean,
+            restoreTransitData: boolean,
+            transitTo: string
         ): void => {
-            console.log("restored callback: loginInfo = " + loginInfo);
+            console.log("Auth Restore callback: loginInfo = " + loginInfo + ", authRequired = " + authRequired);
             let noAuth = false;
-            if (resolved.meta.authRequired) {
+            if (authRequired) {
                 if (!loginInfo || loginInfo.loginToken.length === 0) {
                     /* Not Authenticated */
                     console.log("authRequired but authenticated");
@@ -77,15 +86,10 @@ export default defineComponent({
                 }
             }
             /* Restore PageTransitData...Fall into Callback HELL!  */
-            if (!noAuth) {
+            if (!noAuth && restoreTransitData) {
                 let pageDataRestoreCallback: RestorePageTransitDataCallbackType = (resutl): void => {
                     console.log("page data restore done with " + resutl);
-                    if (resolved.matched.length == 0) {
-                        // transit to nopage.
-                        pageTransitDataStore.updateLocation(props.nopagePath);
-                    } else {
-                        pageTransitDataStore.updateLocation(resolved.path)
-                    }
+                    pageTransitDataStore.updateLocation(transitTo);
                 }
                 const pageDataOptions: RestorePageTransitDataOptions = {
                     callback: pageDataRestoreCallback
@@ -94,7 +98,10 @@ export default defineComponent({
             }
         };
         const options: RestoreLoginDataOptions = {
-            callback: restoreLoginDataCallback
+            callback: restoreLoginDataCallback,
+            authRequired: resolved.meta.authRequired as boolean,
+            restoreTransitData: true,
+            transitTo: resolved.matched.length == 0 ? props.nopagePath : resolved.path
         };
         /* async */
         authStore.restore(options);

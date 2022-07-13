@@ -26,14 +26,10 @@ export default defineComponent({
                 return new LoginSamplePostRequest();
             }
         };
-        /* Check it only in first time. */
-        const authStore = useAuthenticationControllerStore();
-        const loginInfo = authStore.loginInfo as LoginInfo;
-        const preparedFlg = authStore.preparedFlg;
         const noAuthPath = inject<string>('noAuthPath');
 
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, loginInfo, preparedFlg, noAuthPath);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
         });
         return loginSampleSetup(props as LoginSampleProps, context, factory);
     }

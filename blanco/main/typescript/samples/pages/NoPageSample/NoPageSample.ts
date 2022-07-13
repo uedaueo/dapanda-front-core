@@ -13,14 +13,10 @@ export default defineComponent({
     name: "NoPageSample",
     props: noPageSampleProps,
     setup: (props, context) => {
-        /* Check it only in first time. */
-        const authStore = useAuthenticationControllerStore();
-        const loginInfo = authStore.loginInfo as LoginInfo;
-        const preparedFlg = authStore.preparedFlg;
         const noAuthPath = inject<string>('noAuthPath');
 
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, loginInfo, preparedFlg, noAuthPath);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
         });
         return noPageSampleSetup(props as NoPageSampleProps, context);
     }

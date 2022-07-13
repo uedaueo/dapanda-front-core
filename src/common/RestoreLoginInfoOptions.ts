@@ -1,7 +1,10 @@
 import {LoginInfo} from "%/common/LoginInfo";
 
+/**
+ * LoginInfo を restore した後に呼ばれる callback の型定義
+ */
 export interface RestoreLoginDataCallbackType {
-    (loginInfo: LoginInfo | undefined): void;
+    (loginInfo: LoginInfo | undefined, authRequired: boolean, restoreTransitData: boolean, transitTo: string): void;
 }
 
 /**
@@ -9,5 +12,8 @@ export interface RestoreLoginDataCallbackType {
  * @param callback データが準備出来た際のコールバック
  */
 export interface RestoreLoginDataOptions {
-    callback: RestoreLoginDataCallbackType;
+    callback: RestoreLoginDataCallbackType,
+    authRequired: boolean,
+    restoreTransitData: boolean,
+    transitTo: string
 }

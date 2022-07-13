@@ -1,5 +1,15 @@
 import {NavigationGuardNext, RouteLocationNormalized, Router} from "vue-router";
 import {LoginInfo} from "%/common/LoginInfo";
+import {Component, ComponentInternalInstance} from "vue";
+import {_GettersTree, mapStores, Store} from "pinia";
+import {RestoreLoginDataCallbackType, RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
+import {
+    AuthenticationControllerStoreState
+} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStoreState";
+import {
+    AuthenticationControllerStoreActionsTree
+} from "%/stores/AuthenticationControllerStore/DefineAuthenticationControllerStoreActions";
+import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
 
 /**
  * VueRouter の共通 hook はここに実装します。
@@ -47,45 +57,63 @@ export class RouterHooks {
      * @param to 遷移先routeのインスタンスです
      * @param from 現在のrouteのインスタンスです
      * @param next 遷移を実行するために呼び出す関数です
-     * @param loginInfo
-     * @param preparedFlg
+     * @param noAuthPath
      */
     static async beforeRouteLeave(
         router: Router,
         to: RouteLocationNormalized,
         from: RouteLocationNormalized,
         next: NavigationGuardNext,
-        loginInfo: LoginInfo,
-        preparedFlg: boolean,
-        noAuthPath: string | undefined
+        noAuthPath: string
     ) {
         console.log(
             "RouterHooks#beforeRouteLeave: from " + from.path + " to " + to.path
         );
         console.log(" to.matched = " + JSON.stringify(to.matched));
 
-        /*
-         * Login check
-         */
-        if (to.matched.some(record => record.meta.authRequired)) {
-            if (!(preparedFlg && loginInfo.loginToken !== undefined && loginInfo.loginToken.length > 0)) {
-                // Auth Error.
-                console.log("!!! authRequired but not authenticated yet !!!" );
-                // if (noAuthPath) {
-                //     next({path: noAuthPath});
-                // }
+        const isReload = to.matched.some(record => record.meta.reload);
+        const goToNext = () => {
+            /*
+             * ここではページのリロードを行うかどうかのみチェックする。
+             */
+            if (isReload) {
+                console.log(" reload!");
+                window.location.href = to.path;
+            } else {
+                console.log(" next!");
+                next();
             }
         }
-
         /*
-         * ここではページのリロードを行うかどうかのみチェックする。
+         * Login check and Transit
          */
-        if (to.matched.some(record => record.meta.reload)) {
-            console.log(" reload!");
-            window.location.href = to.path;
+        if (to.matched.some(record => record.meta.authRequired)) {
+            const authStore = useAuthenticationControllerStore();
+            const restoreLoginDataCallback: RestoreLoginDataCallbackType = (
+                loginInfo: LoginInfo | undefined,
+                authRequired: boolean,
+                restoreTransitData: boolean,
+                transitTo: string
+            ): void => {
+                console.log("RouterHooks: Auth Restore callback: loginInfo = " + loginInfo + ", authRequired = " + authRequired);
+                if (authRequired) {
+                    if (!loginInfo || loginInfo.loginToken.length === 0) {
+                        /* Not Authenticated */
+                        console.log("RouterHooks: authRequired but authenticated");
+                        window.location.href = noAuthPath;
+                    }
+                }
+                goToNext();
+            }
+            const options: RestoreLoginDataOptions = {
+                callback: restoreLoginDataCallback,
+                authRequired: true,
+                restoreTransitData: false,
+                transitTo: ""
+            }
+            authStore.restore(options);
         } else {
-            console.log(" next!");
-            next();
+            goToNext();
         }
     }
 }

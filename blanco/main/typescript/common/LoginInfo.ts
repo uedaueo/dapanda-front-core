@@ -63,4 +63,16 @@ export class LoginInfo {
     get environment(): string {
         return this.fEnvironment;
     }
+
+    /**
+     * Gets the properties to be written to JSON from this value object.
+     *
+     * @return An object returned by toJSON
+     */
+    toJSON(): any {
+        return {
+            loginToken: this.loginToken,
+            environment: this.environment
+        };
+    }
 }

@@ -165,7 +165,10 @@ export abstract class ApiBase {
         return new Promise<LoginInfo>((resolve, reject) => {
             console.log("### prepareLoginInfo start");
             let restoreLoginDataCallback: RestoreLoginDataCallbackType = function (
-                loginInfo: LoginInfo | undefined
+                loginInfo: LoginInfo | undefined,
+                authRequired: boolean,
+                restoreTransitData: boolean,
+                transitTo: string
             ): void {
                 if (loginInfo) {
                     // console.log("### prepareLoginInfo resolve", loginInfo.loginToken);
@@ -176,7 +179,10 @@ export abstract class ApiBase {
                 }
             };
             const options: RestoreLoginDataOptions = {
-                callback: restoreLoginDataCallback
+                callback: restoreLoginDataCallback,
+                authRequired: false,
+                restoreTransitData: false,
+                transitTo: ""
             };
 
             /* It may work */

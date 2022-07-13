@@ -1,12 +1,18 @@
-import { Bar } from 'vue-chartjs';
-import { RouterHooks } from "@/utils/RouterHooks";
-import { ChartSampleProps, chartSampleProps } from "./ChartSampleProps";
+import {Bar} from 'vue-chartjs';
+import {RouterHooks} from "@/utils/RouterHooks";
+import {ChartSampleProps, chartSampleProps} from "./ChartSampleProps";
 import {defineComponent, inject} from "vue";
-import { chartSampleSetup } from "@/samples/pages/ChartSample/ChartSampleSetup";
-import { onBeforeRouteLeave, useRouter } from "vue-router";
-import {storeToRefs} from "pinia";
+import {chartSampleSetup} from "@/samples/pages/ChartSample/ChartSampleSetup";
+import {onBeforeRouteLeave, useRouter} from "vue-router";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
-import {LoginInfo} from "%/common/LoginInfo";
+import {RestoreLoginDataCallbackType} from "@/common/RestoreLoginInfoOptions";
+import {_GettersTree, Store} from "pinia";
+import {
+    AuthenticationControllerStoreState
+} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStoreState";
+import {
+    AuthenticationControllerStoreActionsTree
+} from "%/stores/AuthenticationControllerStore/DefineAuthenticationControllerStoreActions";
 
 /**
  * サンプル図のコンポーネントです。
@@ -19,14 +25,10 @@ export default defineComponent({
     },
     setup: (props, context) => {
 
-        /* Check it only in first time. */
-        const authStore = useAuthenticationControllerStore();
-        const loginInfo = authStore.loginInfo as LoginInfo;
-        const preparedFlg = authStore.preparedFlg;
         const noAuthPath = inject<string>('noAuthPath');
 
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, loginInfo, preparedFlg, noAuthPath);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
         });
         return chartSampleSetup(props as ChartSampleProps, context);
     }

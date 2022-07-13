@@ -61,6 +61,7 @@ task metaObjects {
                 tabs: 4,
                 lineSeparator: 'LF',
                 verbose: true,
+                generateToJson: true,
                 encoding: getProperty("blanco.encoding")
         )
     }

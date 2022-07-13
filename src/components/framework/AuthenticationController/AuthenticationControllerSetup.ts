@@ -37,6 +37,7 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
     watch(restoreFlg, () => {
         console.log("authenticationControllerSetup#watch(restoreFlg) Start");
         const jsonInfo = localStorage.getItem(DapandaConst.LocalStorageItemKey);
+        console.log("jsonInfo = " + jsonInfo);
         let restored: LoginInfo = new LoginInfo();
         if (jsonInfo && jsonInfo.length > 0) {
             restored = JSON.parse(jsonInfo);
@@ -49,13 +50,13 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
             /* TODO Transit to Login */
             console.log("transit to login");
             if (options) {
-                options.callback(undefined);
+                options.callback(undefined, options.authRequired);
             }
             // pageTransitDataStore.update(loginSampleRouteRecord.path);
         } else {
             authStore.update(restored); // update is not async.
             if (options) {
-                options.callback(restored);
+                options.callback(restored, options.authRequired);
             }
         }
     });
