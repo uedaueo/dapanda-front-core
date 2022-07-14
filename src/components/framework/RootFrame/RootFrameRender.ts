@@ -1,9 +1,9 @@
 import {h} from "vue";
-import App from "@/App.vue";
 import PageTransitController from "%/components/framework/PageTransitController/PageTransitController";
 import LocaleController from "%/components/framework/LocaleController/LocaleController";
 import CommunicationController from "%/components/framework/CommunicationController/CommunicationController";
 import AuthenticationController from "%/components/framework/AuthenticationController/AuthenticationController";
+import App from "@/App.vue";
 
 export const rootFrameRender = () => {
     return h("div", { class: "root-frame-component" },
@@ -16,6 +16,6 @@ export const rootFrameRender = () => {
             h(LocaleController),
             h(AuthenticationController),
             /* App は CommunicationController の子コンポーネントとする */
-            h(CommunicationController)
+            h(CommunicationController, {appComponent: App, nopagePath: "/nopageSample", noAuthPath: "/login"})
         ]);
 }

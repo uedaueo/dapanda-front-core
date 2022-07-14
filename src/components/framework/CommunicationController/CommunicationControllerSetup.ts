@@ -1,15 +1,12 @@
 import {
     CommunicationControllerProps
 } from "%/components/framework/CommunicationController/CommunicationControllerProps";
-import {provide, ref, SetupContext, watch, watchEffect} from "vue";
+import {provide, SetupContext} from "vue";
 import {SendFunction} from "@/components/framework/CommunicationController/CommunicatoinTypes";
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {ApiConstructors} from "@/common/ApiConstructors";
 import {ApiBase} from "@/common/ApiBase";
 import {useCommonStatusStore} from "%/stores/CommonStatusStore/CommonStatusStore";
-import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
-import {storeToRefs} from "pinia";
-import CommunicationController from "%/components/framework/CommunicationController/CommunicationController";
 
 export const communicationControllerSetup = (props: CommunicationControllerProps, context: SetupContext) => {
 
