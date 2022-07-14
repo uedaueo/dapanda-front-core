@@ -10,6 +10,7 @@ import {
     AuthenticationControllerStoreActionsTree
 } from "%/stores/AuthenticationControllerStore/DefineAuthenticationControllerStoreActions";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
+import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
 
 /**
  * VueRouter の共通 hook はここに実装します。
@@ -41,7 +42,20 @@ export class RouterHooks {
          * route が登録済み。
          */
         if (resolved.matched.length > 0) {
-            next();
+            /*
+             * PageTransitData store の状態をチェック
+             */
+            const pageStore = usePageTransitDataStore();
+            console.log("matched!  current location = " + pageStore.location);
+            if (resolved.path == pageStore.location) {
+                next();
+            } else {
+                if (pageStore.data) {
+                    pageStore.updateLocation(resolved.path, pageStore.data);
+                } else {
+                    pageStore.updateLocation(resolved.path);
+                }
+            }
             return;
         }
 

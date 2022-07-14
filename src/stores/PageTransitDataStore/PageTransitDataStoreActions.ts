@@ -4,7 +4,7 @@ import {DapandaConst} from "@/common/DapandaGlobals";
 export const pageTransitDataStoreActions = definePageTransitDataStoreActions(
     {
         updateLocation(location: string, data?: any) {
-            console.log("current sotre.location is : " + this.location);
+            console.log("current store.location is : " + this.location);
             console.log("pageTransitDataStoreOptions.actions.update to : " + location);
             this.location = location;
             if (data) {
