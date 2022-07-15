@@ -11,24 +11,15 @@ export interface AuthenticationControllerStoreState {
     loginInfo: LoginInfo;
 
     /**
-     * toggleすることでtore 上の loginInfo を LocalStorage に保管します。
+     * ログイン状態です。&lt;br&gt;
+     *
+     * * valid : ログインが完了している状態です。<br>
+     * * invlid : 未ログイン状態です。<br>
+     * * restoring : localStorageに保管されたログイン情報をロード中です<br>
+     * * saving : ログイン情報をlocalStorageに保管中です<br>
+     * * removing : localStorage からログイン情報を削除します<br>
      */
-    saveFlg: boolean;
-
-    /**
-     * toggleすることで loginInfo を LocalStorage から store にロードします。
-     */
-    restoreFlg: boolean;
-
-    /**
-     * loginInfo が有効である事を示します。
-     */
-    preparedFlg: boolean;
-
-    /**
-     * loginInfor LocalStorage から削除し、store には空の LoginInfo をセットします。
-     */
-    removeFlg: boolean;
+    status: string;
 
     /**
      * リストアの際に参照するオプション値
@@ -41,9 +32,6 @@ export interface AuthenticationControllerStoreState {
  */
 export const authenticationControllerStoreState: AuthenticationControllerStoreState = {
     loginInfo: new LoginInfo(),
-    saveFlg: false,
-    restoreFlg: false,
-    preparedFlg: false,
-    removeFlg: false,
+    status: "invalid",
     restoreOptions: undefined
 };

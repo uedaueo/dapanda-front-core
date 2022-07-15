@@ -4,7 +4,6 @@ import {LoginSampleProps} from "%/samples/pages/LoginSample/LoginSampleProps";
 import {useLoginSampleResponseStore} from "%/stores/LoginSampleResponseStore/LoginSampleResponseStore";
 import {SendFunction} from "@/components/framework/CommunicationController/CommunicatoinTypes";
 import {LoginSampleRequestFactory} from "%/samples/pages/LoginSample/LoginSampleRequestFactory";
-import {RequestHeader} from "%/blanco/restgenerator/valueobject/RequestHeader";
 import {LoginSamplePostResponse} from "%/samples/api/LoginSamplePostResponse";
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
@@ -17,17 +16,18 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     const title = ref(props.subject);
 
     const send = inject<SendFunction>('send')!;
+    const postRequest = factory.createLoginSamplePostRequest();
 
     const responseStore = useLoginSampleResponseStore();
     const { response } = storeToRefs(responseStore);
     const authStore = useAuthenticationControllerStore();
-    const { preparedFlg } = storeToRefs(authStore);
+    const { status } = storeToRefs(authStore);
     const onSubmit = (values: any) => {
         console.log("Submitted : " + values.id + ", " + values.password);
-        const postRequest = factory.createLoginSamplePostRequest();
         postRequest.id = values.id;
         postRequest.password = values.password;
-        send(postRequest, responseStore)
+        /* remove loginInfo from store and localStorage */
+        authStore.remove(); // wait removed
     }
     watch(response, () => {
         console.log("LoginSample#watch(responseStore : " + JSON.stringify(response));
@@ -49,13 +49,17 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
         /* Errors are processed in CommunicationController#send */
     });
     /* watch preparedFlg and goto next page, BE CARE THREAD CONFLICT. */
-    watch(preparedFlg, () => {
-        console.log("login watch(preparedFlg): preparedFlg = " + preparedFlg.value);
-        if (preparedFlg.value === true) {
+    watch(status, () => {
+        console.log("login watch status = " + status.value);
+        if (status.value === DapandaConst.AuthenticationStatusSaved) {
+            authStore.setStatus(DapandaConst.AuthenticationStatusValid);
             // Go to toppage
             const pageStore = usePageTransitDataStore();
             // TODO it may be better to transit to next page.
             pageStore.updateLocation("/");
+        } else if (status.value === DapandaConst.AuthenticationStatusRemoved) {
+            authStore.setStatus(DapandaConst.AuthenticationStatusValid);
+            send(postRequest, responseStore);
         }
     });
     return {

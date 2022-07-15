@@ -1,16 +1,9 @@
 import {NavigationGuardNext, RouteLocationNormalized, Router} from "vue-router";
 import {LoginInfo} from "%/common/LoginInfo";
-import {Component, ComponentInternalInstance} from "vue";
-import {_GettersTree, mapStores, Store} from "pinia";
 import {RestoreLoginDataCallbackType, RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
-import {
-    AuthenticationControllerStoreState
-} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStoreState";
-import {
-    AuthenticationControllerStoreActionsTree
-} from "%/stores/AuthenticationControllerStore/DefineAuthenticationControllerStoreActions";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
+import {DapandaConst} from "@/common/DapandaGlobals";
 
 /**
  * VueRouter の共通 hook はここに実装します。
@@ -110,14 +103,17 @@ export class RouterHooks {
                 transitTo: string
             ): void => {
                 console.log("RouterHooks: Auth Restore callback: loginInfo = " + loginInfo + ", authRequired = " + authRequired);
-                if (authRequired) {
-                    if (!loginInfo || loginInfo.loginToken.length === 0) {
-                        /* Not Authenticated */
+                if (!loginInfo || loginInfo.loginToken.length === 0) {
+                    /* Not Authenticated. authStatus is already invalidated. */
+                    if (authRequired) {
                         console.log("RouterHooks: authRequired but authenticated");
                         window.location.href = noAuthPath;
                     }
+                } else {
+                    /* Authenticated. authStatus change to valid. */
+                    authStore.setStatus(DapandaConst.AuthenticationStatusValid);
+                    goToNext();
                 }
-                goToNext();
             }
             const options: RestoreLoginDataOptions = {
                 callback: restoreLoginDataCallback,

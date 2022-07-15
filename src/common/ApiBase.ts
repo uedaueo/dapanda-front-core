@@ -12,7 +12,6 @@ import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingSt
 import {Locale} from "%/blanco/restgenerator/valueobject/Locale";
 import {RestoreLoginDataCallbackType, RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
-import {log} from "util";
 import {ResponseHeader} from "%/blanco/restgenerator/valueobject/ResponseHeader";
 
 /**
@@ -171,10 +170,11 @@ export abstract class ApiBase {
                 transitTo: string
             ): void {
                 if (loginInfo) {
-                    // console.log("### prepareLoginInfo resolve", loginInfo.loginToken);
+                    /* Authenticated. Change authStatus to valid. */
+                    authStore.setStatus(DapandaConst.AuthenticationStatusValid);
                     resolve(loginInfo);
                 } else {
-                    // console.log("### prepareLoginInfo reject");
+                    /* Not Authenticated. authStatus is already invalidated. */
                     reject(undefined);
                 }
             };

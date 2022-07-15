@@ -3,33 +3,37 @@ import {
 } from "%/stores/AuthenticationControllerStore/DefineAuthenticationControllerStoreActions";
 import {LoginInfo} from "%/common/LoginInfo";
 import {RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
+import {DapandaConst} from "@/common/DapandaGlobals";
 
 export const authenticationControllerStoreActions = defineAuthenticationControllerStoreActions(
     {
         update(loginInfo: LoginInfo) {
             this.loginInfo = loginInfo;
-            this.preparedFlg = true;
+            this.status = DapandaConst.AuthenticationStatusUpdated;
         },
-        prepared() {
-            this.preparedFlg = true;
+        setStatus(status: string) {
+            console.log("AuthenticationControllerStoreActions#status: current status = " + this.status + ", change to " + status);
+             this.status = status;
         },
         async persist() {
-            console.log("Auth:persist! prepareFlg = " + this.preparedFlg + ", saveFlg = " + this.saveFlg);
-            if (this.preparedFlg) {
-                this.saveFlg = !this.saveFlg;
-                this.preparedFlg = false;
-                console.log("Auth:persist! prepareFlg = " + this.preparedFlg + ", saveFlg = " + this.saveFlg);
+            console.log("AuthenticationControllerStoreActions#request: current status = " + this.status);
+            if (this.status === DapandaConst.AuthenticationStatusValid || this.status === DapandaConst.AuthenticationStatusUpdated) {
+                this.status = DapandaConst.AuthenticationStatusSaving;
+                console.log(" status changed to " + this.status);
             }
         },
         async restore(options: RestoreLoginDataOptions | undefined) {
-            this.preparedFlg = false;
-            this.restoreFlg = !this.restoreFlg;
-            this.restoreOptions = options;
+            console.log("AuthenticationControllerStoreActions#restore: current status = " + this.status);
+            if (this.status === DapandaConst.AuthenticationStatusInvalid || this.status === DapandaConst.AuthenticationStatusValid) {
+                this.status = DapandaConst.AuthenticationStatusRestoring;
+                this.restoreOptions = options;
+            }
         },
         async remove() {
-            this.preparedFlg = false;
+            console.log("AuthenticationControllerStoreActions#restore: current status = " + this.status);
+            this.status = DapandaConst.AuthenticationStatusRemoving;
             this.loginInfo = new LoginInfo();
-            this.removeFlg = !this.removeFlg;
+            /* localStorage will be removed in AuthenticationController. */
         }
     }
 )

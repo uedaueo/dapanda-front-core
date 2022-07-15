@@ -6,67 +6,54 @@ import {useAuthenticationControllerStore} from "%/stores/AuthenticationControlle
 import {storeToRefs} from "pinia";
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {LoginInfo} from "%/common/LoginInfo";
-import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
-import {loginSampleRouteRecord} from "%/samples/pages/LoginSample/LoginSampleRouteRecord";
 
 export const authenticationControllerSetup = (props: AuthenticationControllerProps, context: SetupContext) => {
 
     const authStore = useAuthenticationControllerStore();
-    const { saveFlg, restoreFlg, removeFlg } = storeToRefs(authStore);
-    const pageTransitDataStore = usePageTransitDataStore();
+    const { status } = storeToRefs(authStore);
 
-    /**
-     * Save LoginInfo into LocalStorage
-     */
-    watch(saveFlg, () => {
-        console.log("authenticationControllerSetup#watch(saveFlg) Start");
-        if (authStore.loginInfo && authStore.loginInfo.loginToken != "") {
-            const jsonInfo = JSON.stringify(authStore.loginInfo);
-            console.log("authenticationControllerSetup#watch(saveFlg) jsonInfo = " + jsonInfo);
-            localStorage.setItem(DapandaConst.LocalStorageItemKey, jsonInfo);
-            authStore.prepared();
-        } else {
-            console.log("authenticationControllerSetup#watch(saveFlg) Clear");
-            authStore.remove();
-        }
-    });
-
-    /**
-     * Restore LoginInfo from localStorage
-     */
-    watch(restoreFlg, () => {
-        console.log("authenticationControllerSetup#watch(restoreFlg) Start");
-        const jsonInfo = localStorage.getItem(DapandaConst.LocalStorageItemKey);
-        console.log("jsonInfo = " + jsonInfo);
-        let restored: LoginInfo = new LoginInfo();
-        if (jsonInfo && jsonInfo.length > 0) {
-            restored = JSON.parse(jsonInfo);
-        }
-        const currentToken = authStore.loginInfo.loginToken;
-        /* Be care, it's not thread safe. */
-        const options = authStore.restoreOptions;
-        if (!(restored && restored.loginToken && restored.loginToken != "")
-            || (currentToken != "" && currentToken != restored.loginToken))  {
-            /* TODO Transit to Login */
-            console.log("transit to login");
-            if (options) {
-                options.callback(undefined, options.authRequired);
+    watch(status, () => {
+        console.log("AuthenticationControllerSetup#watch status = " + status.value);
+        if (status.value === DapandaConst.AuthenticationStatusSaving) {
+            /* Save */
+            if (authStore.loginInfo && authStore.loginInfo.loginToken != "") {
+                const jsonInfo = JSON.stringify(authStore.loginInfo);
+                console.log("authenticationControllerSetup#watch(saveFlg) jsonInfo = " + jsonInfo);
+                localStorage.setItem(DapandaConst.LocalStorageItemKey, jsonInfo);
+                authStore.setStatus(DapandaConst.AuthenticationStatusSaved);
+            } else {
+                console.log("authenticationControllerSetup#watch(saveFlg) Clear");
+                authStore.remove();
             }
-            // pageTransitDataStore.update(loginSampleRouteRecord.path);
-        } else {
-            authStore.update(restored); // update is not async.
-            if (options) {
-                options.callback(restored, options.authRequired);
+        } else if (status.value === DapandaConst.AuthenticationStatusRestoring) {
+            /* Restore */
+            const jsonInfo = localStorage.getItem(DapandaConst.LocalStorageItemKey);
+            console.log("jsonInfo = " + jsonInfo);
+            let restored: LoginInfo = new LoginInfo();
+            if (jsonInfo && jsonInfo.length > 0) {
+                restored = JSON.parse(jsonInfo);
             }
+            const currentToken = authStore.loginInfo.loginToken;
+            /* Be care, it's not thread safe. */
+            const options = authStore.restoreOptions;
+            if (!(restored && restored.loginToken && restored.loginToken != "")
+                || (currentToken != "" && currentToken != restored.loginToken))  {
+                /* TODO Transit to Login */
+                console.log("transit to login");
+                if (options) {
+                    options.callback(undefined, options.authRequired, false, "");
+                }
+                authStore.setStatus(DapandaConst.AuthenticationStatusInvalid);
+            } else {
+                authStore.update(restored); // status changed to updated.
+                if (options) {
+                    options.callback(restored, options.authRequired, options.restoreTransitData, options.transitTo);
+                }
+            }
+        } else if (status.value === DapandaConst.AuthenticationStatusRemoving) {
+            /* Remove */
+            localStorage.removeItem(DapandaConst.LocalStorageItemKey);
+            authStore.setStatus(DapandaConst.AuthenticationStatusRemoved);
         }
-    });
-
-    /**
-     * Remove LoginInfo from LocalStorage
-     */
-    watch(removeFlg, () => {
-        console.log("authenticationControllerSetup#watch(removeFlg) Start");
-        localStorage.removeItem(DapandaConst.LocalStorageItemKey);
-        authStore.prepared();
     });
 };

@@ -38,11 +38,13 @@ export declare type AuthenticationControllerStoreActionsTree = {
     remove(
     ): Promise<void>;
     /**
-     * preparedFlg を true にします。
+     * statusの値を変更します。
      *
+     * @param status ログイン状態
      * @return void
      */
-    prepared(
+    setStatus(
+            status: string
     ): void;
 }
 

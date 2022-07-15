@@ -41,6 +41,30 @@ export namespace DapandaConst {
     export const CommunicatorContextStatusError = ApiBaseResultError;
     export const CommunicatorContextStatusExecuting = "executing";
     export const CommunicatorContextStatusInitial = "initial";
+
+    /*
+     * 認証状態の定義
+     */
+    /** 認証完了 */
+    export const AuthenticationStatusValid = "valid";
+    /** 未認証 */
+    export const AuthenticationStatusInvalid = "invalid";
+    /** 認証情報の更新中 */
+    export const AuthenticationStatusUpdating = "updating";
+    /** 認証情報の更新完了 */
+    export const AuthenticationStatusUpdated = "updated";
+    /** 認証情報の永続化中 */
+    export const AuthenticationStatusSaving = "saving";
+    /** 認証情報の永続化完了 */
+    export const AuthenticationStatusSaved = "saved";
+    /** 認証情報のロード中 */
+    export const AuthenticationStatusRestoring = "restoring";
+    /** 認証情報のロード完了 */
+    export const AuthenticationStatusRestored = "restored";
+    /** 認証情報の削除中 */
+    export const AuthenticationStatusRemoving = "removing";
+    /** 認証情報の削除完了 */
+    export const AuthenticationStatusRemoved = "removed";
 }
 
 /**

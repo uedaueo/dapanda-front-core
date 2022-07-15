@@ -12,6 +12,7 @@ import {
     RestorePageTransitDataCallbackType,
     RestorePageTransitDataOptions
 } from "@/common/RestorePageTransitDataOptions";
+import {DapandaConst} from "@/common/DapandaGlobals";
 
 export default defineComponent({
     name: 'App',
@@ -77,13 +78,16 @@ export default defineComponent({
         ): void => {
             console.log("Auth Restore callback: loginInfo = " + loginInfo + ", authRequired = " + authRequired);
             let noAuth = false;
-            if (authRequired) {
-                if (!loginInfo || loginInfo.loginToken.length === 0) {
-                    /* Not Authenticated */
+            if (!loginInfo || loginInfo.loginToken.length === 0) {
+                /* Not Authenticated. authStatus is already invalidated. */
+                if (authRequired) {
                     console.log("authRequired but authenticated");
                     pageTransitDataStore.updateLocation(props.noAuthPath);
                     noAuth = true;
                 }
+            } else {
+                /* Authenticated. change authStatus to valid */
+                authStore.setStatus(DapandaConst.AuthenticationStatusValid);
             }
             /* Restore PageTransitData...Fall into Callback HELL!  */
             if (!noAuth && restoreTransitData) {
