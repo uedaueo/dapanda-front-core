@@ -1,6 +1,7 @@
 import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOptions";
 import { PageTransitDataStoreState } from "./PageTransitDataStoreState";
 import { UnwrapRef } from "vue";
+import { PageTransitData } from "%/common/PageTransitData";
 
 /** actionsを定義します */
 export declare type PageTransitDataStoreActionsTree = {
@@ -13,19 +14,17 @@ export declare type PageTransitDataStoreActionsTree = {
      */
     updateLocation(
             location: string,
-            data?: any
+            data?: PageTransitData
     ): void;
     /**
      * ページリロード時にリストアを試みます
      *
-     * @param flag trueでリストア指示
-     * @param options ページ間データのロード時のオプションです
+     * @param options データをリストアする際のオプションです。
      * @return void
      */
     restore(
-            flag: boolean,
-            options?: RestorePageTransitDataOptions | undefined
-    ): void;
+            options: RestorePageTransitDataOptions | undefined
+    ): Promise<void>;
     /**
      * データの更新を試みます
      *
@@ -33,7 +32,23 @@ export declare type PageTransitDataStoreActionsTree = {
      * @return void
      */
     updateData(
-            data: any
+            data?: PageTransitData
+    ): void;
+    /**
+     * データの削除を試みます
+     *
+     * @return void
+     */
+    remove(
+    ): Promise<void>;
+    /**
+     * データ状態の更新を試みます。
+     *
+     * @param dataStatus データ状態です。
+     * @return void
+     */
+    setDataStatus(
+            dataStatus: string
     ): void;
 }
 

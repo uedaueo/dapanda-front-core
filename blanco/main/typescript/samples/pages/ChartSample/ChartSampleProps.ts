@@ -37,6 +37,14 @@ export interface ChartSampleInterface {
     /**
      */
     styles: Partial<CSSStyleDeclaration>;
+
+    /**
+     */
+    datasetIdKey: string;
+
+    /**
+     */
+    plugins: any;
 }
 
 /** propsの型を定義します */
@@ -66,5 +74,11 @@ export const chartSampleProps: ComponentPropsOptions<ChartSampleInterface> = {
     },
     styles: {
         default: {color: "red"}
+    },
+    datasetIdKey: {
+        default: "label"
+    },
+    plugins: {
+        default: () => {}
     }
 };

@@ -22,6 +22,11 @@
             <Field name="kopanda" label="labels.validationSample.kopanda" rules="required|kopanda:@name,@age,kankan" />
             <ErrorMessage name="kopanda" />
         </div>
+        <div>
+            <label id="chartnum-label" for="chartnum">{{ t('labels.validationSample.chartnum') }}</label>
+            <Field name="chartnum" label="labels.validationSample.chartnum" rules="required|between:1,2" />
+            <ErrorMessage name="chartnum" />
+        </div>
         <button @click="onSubmit">{{ t('labels.validationSample.submit') }}</button>
     </div>
 </Form>

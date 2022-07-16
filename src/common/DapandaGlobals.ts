@@ -65,6 +65,25 @@ export namespace DapandaConst {
     export const AuthenticationStatusRemoving = "removing";
     /** 認証情報の削除完了 */
     export const AuthenticationStatusRemoved = "removed";
+
+    /* ページ遷移データの状態定義 */
+    /** 有効 */
+    export const PageTransitDataStatusValid = "valid";
+    /** 無効 */
+    export const PageTransitDataStatusInvalid = "invalid";
+    /** 更新完了 */
+    export const PageTransitDataStatusUpdated = "updated";
+    /** 更新中 */
+    export const PageTransitDataStatusSaving = "saving";
+    /** 更新完了 */
+    export const PageTransitDataStatusSaved = "saved";
+    /** リストア中 */
+    export const PageTransitDataStatusRestoring = "restoring";
+    /** 削除中 */
+    export const PageTransitDataStatusRemoving = "removing";
+    /** 削除完了 */
+    export const PageTransitDataStatusRemoved = "removed";
+
 }
 
 /**

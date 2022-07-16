@@ -1,4 +1,4 @@
-import {defineComponent, provide} from "vue";
+import {defineComponent, provide, watch} from "vue";
 import MenuBar from "%/components/menu/MenuBar/MenuBar.vue";
 import {useRouter} from "vue-router";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
@@ -93,12 +93,15 @@ export default defineComponent({
             if (!noAuth && restoreTransitData) {
                 let pageDataRestoreCallback: RestorePageTransitDataCallbackType = (resutl): void => {
                     console.log("page data restore done with " + resutl);
+                    if (pageTransitDataStore.dataStatus === DapandaConst.PageTransitDataStatusUpdated) {
+                        pageTransitDataStore.setDataStatus(DapandaConst.PageTransitDataStatusValid);
+                    }
                     pageTransitDataStore.updateLocation(transitTo);
                 }
                 const pageDataOptions: RestorePageTransitDataOptions = {
                     callback: pageDataRestoreCallback
                 }
-                pageTransitDataStore.restore(true, pageDataOptions);
+                pageTransitDataStore.restore(pageDataOptions);
             }
         };
         const options: RestoreLoginDataOptions = {

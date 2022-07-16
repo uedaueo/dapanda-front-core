@@ -1,9 +1,13 @@
-import {computed, reactive, ref, SetupContext, watch} from 'vue'
+import {computed, onMounted, reactive, ref, SetupContext, watch} from 'vue'
 import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip} from 'chart.js'
 import {ChartSampleProps} from "%/samples/pages/ChartSample/ChartSampleProps";
 import {useI18n} from "vue-i18n";
 import {useLocaleSettingStore} from "%/stores/LocaleSettingStore/LocaleSettingStore";
 import {storeToRefs} from "pinia";
+import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
+import {DapandaConst} from "@/common/DapandaGlobals";
+import {ChartSampleInitData} from "%/samples/pages/ChartSample/ChartSampleInitData";
+import {PageTransitData} from "%/common/PageTransitData";
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -15,6 +19,8 @@ interface BarDataSet {
         backgroundColor?: string
     }>
 }
+
+let toggleCounter = 0;
 
 export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext) => {
 
@@ -62,16 +68,22 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
     //     datasets: [ { label: 'B', data: [100, 10, 50] } ]
     // };
 
-    var chartData = ref<BarDataSet>(chartData1);
+    const chartDataList = [
+        chartData1,
+        chartData2
+    ];
+
+    let chartData = ref<BarDataSet>(chartData1);
 
     /**
      * 更新ボタン押下後、データを更新
      */
     const updateSample = () => {
+        toggleCounter++;
         console.log("!!! updateSample !!!");
         console.log("original chartData = " + JSON.stringify(chartData));
         console.log("chartData2 = " + JSON.stringify(chartData2));
-        chartData.value = chartData2;
+        chartData.value = chartDataList[toggleCounter % 2];
         console.log("update chartData = " + JSON.stringify(chartData));
     };
 
@@ -113,11 +125,6 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
     //     chartOptions.plugins.title.text = msg.value;
     //     console.log("msg.value 2 = " + msg.value);
     // });
-
-    const { lang } = storeToRefs(useLocaleSettingStore());
-    watch(lang, () => {
-        chartOptions.plugins.title.text = msg.value;
-    })
 
     /**
      * BarChart のオプション設定
@@ -169,6 +176,25 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
         }
     });
 
+    const pageStore = usePageTransitDataStore();
+    onMounted(() => {
+        console.log("ChartSample#onMounted: dataStatus = " + pageStore.dataStatus);
+        if (pageStore.dataStatus === DapandaConst.PageTransitDataStatusSaved || pageStore.dataStatus === DapandaConst.PageTransitDataStatusValid) {
+            const data = pageStore.data as PageTransitData;
+            console.log("ChartSample MOUNTED data = " + JSON.stringify(data));
+            if (data && data.type === "ChartSampleInitData") {
+                const chartInit = data.data as ChartSampleInitData;
+                chartData.value = chartDataList[chartInit.dataSet];
+            } else {
+                console.log("ChartSample#onMounted: data type mismatch : " + data.type);
+            }
+        }
+    });
+
+    const { lang } = storeToRefs(useLocaleSettingStore());
+    watch(lang, () => {
+        chartOptions.plugins.title.text = msg.value;
+    });
     return {
         chartData,
         chartOptions,
@@ -186,4 +212,4 @@ export const chartSampleSetup = (props: ChartSampleProps, context: SetupContext)
         msg2,
         sLanguage
     };
-};
+}

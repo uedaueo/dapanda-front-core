@@ -51,4 +51,12 @@ export class ValidationSampleEn extends AbstractLocaleMessageObject {
      * デフォルト: [&quot;kopanda!&quot;]。
      */
     kopanda: string = "kopanda!";
+
+    /**
+     * チャート番号
+     *
+     * フィールド: [chartnum]。
+     * デフォルト: [&quot;Select Chart (1 or 2)&quot;]。
+     */
+    chartnum: string = "Select Chart (1 or 2)";
 }
