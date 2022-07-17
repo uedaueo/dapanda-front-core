@@ -10,45 +10,64 @@ export declare type PageTransitDataStoreActionsTree = {
      *
      * @param location null
      * @param data null
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     updateLocation(
             location: string,
-            data?: PageTransitData
+            data?: PageTransitData,
+            issuer?: string
     ): void;
     /**
      * ページリロード時にリストアを試みます
      *
      * @param options データをリストアする際のオプションです。
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     restore(
-            options: RestorePageTransitDataOptions | undefined
+            options: RestorePageTransitDataOptions | undefined,
+            issuer: string
     ): Promise<void>;
     /**
      * データの更新を試みます
      *
      * @param data 更新データ
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     updateData(
-            data?: PageTransitData
+            data?: PageTransitData,
+            issuer?: string
     ): void;
     /**
      * データの削除を試みます
      *
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     remove(
+            issuer: string
     ): Promise<void>;
     /**
      * データ状態の更新を試みます。
      *
      * @param dataStatus データ状態です。
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     setDataStatus(
-            dataStatus: string
+            dataStatus: string,
+            issuer: string
+    ): void;
+    /**
+     * issuerの値を変更します。
+     *
+     * @param issuer 更新を発行したコンポーネントです
+     * @return void
+     */
+    setIssuer(
+            issuer: string
     ): void;
 }
 

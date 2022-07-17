@@ -10,7 +10,8 @@ export default defineComponent({
     name: "PageTransitController",
     props: pageTransitControllerProps,
     setup: (props, context) => {
-        return pageTransitControllerSetup(props as PageTransitControllerProps, context);
+        const myProps = props as PageTransitControllerProps;
+        return pageTransitControllerSetup(myProps, context);
     },
     render: () => {
         return pageTransitControllerRender();

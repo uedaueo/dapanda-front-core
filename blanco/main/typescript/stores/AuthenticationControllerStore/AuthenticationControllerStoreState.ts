@@ -28,6 +28,11 @@ export interface AuthenticationControllerStoreState {
      * リストアの際に参照するオプション値
      */
     restoreOptions: RestoreLoginDataOptions | undefined;
+
+    /**
+     * restore, saveなどの更新操作を行ったコンポーネントのId
+     */
+    issuer: string;
 }
 
 /**
@@ -36,5 +41,6 @@ export interface AuthenticationControllerStoreState {
 export const authenticationControllerStoreState: AuthenticationControllerStoreState = {
     loginInfo: new LoginInfo(),
     status: "invalid",
-    restoreOptions: undefined
+    restoreOptions: undefined,
+    issuer: "default"
 };

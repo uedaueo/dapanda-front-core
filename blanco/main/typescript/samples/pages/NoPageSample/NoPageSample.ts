@@ -11,10 +11,11 @@ export default defineComponent({
     name: "NoPageSample",
     props: noPageSampleProps,
     setup: (props, context) => {
+        const myProps = props as NoPageSampleProps;
         const noAuthPath = inject<string>('noAuthPath');
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, myProps.componentId, noAuthPath!);
         });
-        return noPageSampleSetup(props as NoPageSampleProps, context);
+        return noPageSampleSetup(myProps, context);
     }
 });

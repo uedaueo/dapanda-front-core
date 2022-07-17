@@ -11,6 +11,7 @@ export default defineComponent({
     props: helloInputProps,
     emits: helloInputEmits,
     setup: (props, context) => {
-        return helloInputSetup(props as HelloInputProps, context);
+        const myProps = props as HelloInputProps;
+        return helloInputSetup(myProps, context);
     }
 });

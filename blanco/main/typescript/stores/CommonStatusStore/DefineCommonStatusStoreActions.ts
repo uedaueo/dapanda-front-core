@@ -4,13 +4,22 @@ import { UnwrapRef } from "vue";
 /** actionsを定義します */
 export declare type CommonStatusStoreActionsTree = {
     /**
-     * isOverlay stateを更新します
+     * processing stateを更新します
      *
-     * @param showOverlay true で App 全体にoverlayを表示します。
+     * @param showProcessing true で App 全体にoverlayを表示します。
      * @return void
      */
-    changeOverlay(
-            showOverlay: boolean
+    changeProcessing(
+            showProcessing: boolean
+    ): void;
+    /**
+     * logout overley を更新します。
+     *
+     * @param show true で App 全体にlogoutOverleyを表示します。
+     * @return void
+     */
+    changeLogout(
+            show: boolean
     ): void;
 }
 

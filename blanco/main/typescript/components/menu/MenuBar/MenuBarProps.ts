@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface MenuBarInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type MenuBarProps = Readonly<LooseRequired<MenuBarInterface>>;
  * propsの定義です
  */
 export const menuBarProps: ComponentPropsOptions<MenuBarInterface> = {
+    componentId: {
+        default: "MenuBar"
+    },
     subject: {
         default: "メニューバーコンポーネント"
     },

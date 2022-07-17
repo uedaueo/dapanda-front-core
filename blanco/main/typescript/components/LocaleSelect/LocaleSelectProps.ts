@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface LocaleSelectInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type LocaleSelectProps = Readonly<LooseRequired<LocaleSelectInter
  * propsの定義です
  */
 export const localeSelectProps: ComponentPropsOptions<LocaleSelectInterface> = {
+    componentId: {
+        default: "LocaleSelect"
+    },
     subject: {
         default: "ロケール選択コンポーネント"
     },

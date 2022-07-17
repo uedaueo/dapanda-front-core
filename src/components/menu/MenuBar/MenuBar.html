@@ -32,19 +32,9 @@
                         class="white--text mt-2 caption headmenu"
                         depressed
                         v-bind = "primary"
+                        @click="onLogout"
                 >{{ fAccountName }}</v-btn>
             </template>
-            <v-list dense max-width="120">
-                <v-list-item>
-                    <v-btn
-                            height="50"
-                            depressed
-                            @click="onClickLogout"
-                            color="white"
-                            style="word-wrap: break-word; white-space: pre-wrap;"
-                            class="black--text align-center headmenu caption">{{ "labels.topMenuBar.logout" }}</v-btn>
-                </v-list-item>
-            </v-list>
         </v-menu>
     </div>
 </v-app-bar>

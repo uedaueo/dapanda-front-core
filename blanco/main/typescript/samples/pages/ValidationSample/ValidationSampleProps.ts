@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface ValidationSampleInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type ValidationSampleProps = Readonly<LooseRequired<ValidationSam
  * propsの定義です
  */
 export const validationSampleProps: ComponentPropsOptions<ValidationSampleInterface> = {
+    componentId: {
+        default: "ValidationSample"
+    },
     subject: {
         default: "labels.validationSample.componentId"
     },

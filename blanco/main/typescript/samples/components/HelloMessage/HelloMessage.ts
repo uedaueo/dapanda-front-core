@@ -11,6 +11,7 @@ export default defineComponent({
     props: helloMessageProps,
     emits: helloMessageEmits,
     setup: (props, context) => {
-        return helloMessageSetup(props as HelloMessageProps, context);
+        const myProps = props as HelloMessageProps;
+        return helloMessageSetup(myProps, context);
     }
 });

@@ -1,10 +1,21 @@
 <v-app>
-    <MenuBar />
     <v-main>
         <v-container fluid class="py-0">
+            <MenuBar />
             <router-view></router-view>
-            <v-overlay :value="overlay">
+            <v-overlay v-model="showProcessing" class="align-center justify-center">
                 <v-progress-circular indeterminate="true" size="64"></v-progress-circular>
+            </v-overlay>
+            <v-overlay v-model="logoutFlg" class="align-center justify-center" @click:outside="onLogoutCancel">
+                <v-card width="400">
+                    <template v-slot:title>
+                        {{t("labels.DapandaCommon.logoutMessage")}}
+                    </template>
+                    <v-row align-content="center" justify="center">
+                        <v-btn @click="onLogout" min-width="100">{{t("labels.DapandaCommon.yes")}}</v-btn>
+                        <v-btn @click="onLogoutCancel" min-width="100">{{t("labels.DapandaCommon.no")}}</v-btn>
+                    </v-row>
+                </v-card>
             </v-overlay>
         </v-container>
     </v-main>

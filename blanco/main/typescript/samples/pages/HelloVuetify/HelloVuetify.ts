@@ -14,11 +14,12 @@ export default defineComponent({
     name: "HelloVuetify",
     props: helloVuetifyProps,
     setup: (props, context) => {
+        const myProps = props as HelloVuetifyProps;
         const noAuthPath = inject<string>('noAuthPath');
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, myProps.componentId, noAuthPath!);
         });
-        return helloVuetifySetup(props as HelloVuetifyProps, context);
+        return helloVuetifySetup(myProps, context);
     },
     data: () => {
         return helloVuetifyData();

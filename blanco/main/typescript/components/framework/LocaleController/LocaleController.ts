@@ -10,7 +10,8 @@ export default defineComponent({
     name: "LocaleController",
     props: localeControllerProps,
     setup: (props, context) => {
-        return localeControllerSetup(props as LocaleControllerProps, context);
+        const myProps = props as LocaleControllerProps;
+        return localeControllerSetup(myProps, context);
     },
     render: () => {
         return localeControllerRender();

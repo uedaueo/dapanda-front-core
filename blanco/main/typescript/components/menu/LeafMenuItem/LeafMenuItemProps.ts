@@ -7,6 +7,11 @@ import { MenuItem } from "%/components/menu/MenuItem";
  */
 export interface LeafMenuItemInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -34,6 +39,9 @@ export declare type LeafMenuItemProps = Readonly<LooseRequired<LeafMenuItemInter
  * propsの定義です
  */
 export const leafMenuItemProps: ComponentPropsOptions<LeafMenuItemInterface> = {
+    componentId: {
+        default: "LeafMenuItem"
+    },
     subject: {
         default: "リーフメニューコンポーネント"
     },

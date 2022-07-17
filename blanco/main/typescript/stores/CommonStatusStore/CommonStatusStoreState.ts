@@ -5,12 +5,18 @@ export interface CommonStatusStoreState {
     /**
      * 通信中などに画面にoverlayを重ねるかどうかを制御します。
      */
-    overlay: boolean;
+    processing: boolean;
+
+    /**
+     * ログアウトオーバーレイコンポーネントを表示します。
+     */
+    logout: boolean;
 }
 
 /**
  * stateを定義します
  */
 export const commonStatusStoreState: CommonStatusStoreState = {
-    overlay: false
+    processing: false,
+    logout: false
 };

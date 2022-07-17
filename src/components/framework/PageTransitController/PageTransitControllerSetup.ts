@@ -52,8 +52,8 @@ export const pageTransitControllerSetup = (props: PageTransitControllerProps, co
             const jsonData = sessionStorage.getItem(DapandaConst.SessionStorageItemKey);
             if (jsonData && jsonData.length > 0) {
                 sessionStorage.removeItem(DapandaConst.SessionStorageItemKey);
-                pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusRemoved);
             }
+            pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusRemoved);
         }
     });
 };

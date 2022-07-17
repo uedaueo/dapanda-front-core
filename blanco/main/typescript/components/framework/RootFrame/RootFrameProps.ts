@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface RootFrameInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type RootFrameProps = Readonly<LooseRequired<RootFrameInterface>>
  * propsの定義です
  */
 export const rootFrameProps: ComponentPropsOptions<RootFrameInterface> = {
+    componentId: {
+        default: "RootFrame"
+    },
     subject: {
         default: "ルートフレーム"
     },

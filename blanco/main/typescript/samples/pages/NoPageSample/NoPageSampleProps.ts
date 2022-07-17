@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface NoPageSampleInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type NoPageSampleProps = Readonly<LooseRequired<NoPageSampleInter
  * propsの定義です
  */
 export const noPageSampleProps: ComponentPropsOptions<NoPageSampleInterface> = {
+    componentId: {
+        default: "NoPageSample"
+    },
     subject: {
         default: "labels.noPageSample.componentId"
     },

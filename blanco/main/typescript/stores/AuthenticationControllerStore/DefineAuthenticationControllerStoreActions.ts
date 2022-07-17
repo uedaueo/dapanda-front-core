@@ -9,42 +9,61 @@ export declare type AuthenticationControllerStoreActionsTree = {
      * LoginInfoをLocalStorageに保存します。
      *
      * @param loginInfo 認証情報です。
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     update(
-            loginInfo: LoginInfo
+            loginInfo: LoginInfo,
+            issuer: string
     ): void;
     /**
      * 認証情報を LocalStorage に保存します。
      *
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     persist(
+            issuer: string
     ): Promise<void>;
     /**
      * 認証情報を LocalStorage からロードします。
      *
      * @param options ログインデータをリストアする際のオプションです。
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     restore(
-            options: RestoreLoginDataOptions | undefined
+            options: RestoreLoginDataOptions | undefined,
+            issuer: string
     ): Promise<void>;
     /**
      * 認証情報を LocalStorage から削除します。
      *
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     remove(
+            issuer: string
     ): Promise<void>;
     /**
      * statusの値を変更します。
      *
      * @param status ログイン状態
+     * @param issuer 更新を発行したコンポーネントです
      * @return void
      */
     setStatus(
-            status: string
+            status: string,
+            issuer: string
+    ): void;
+    /**
+     * issuerの値を変更します。
+     *
+     * @param issuer 更新を発行したコンポーネントです
+     * @return void
+     */
+    setIssuer(
+            issuer: string
     ): void;
 }
 

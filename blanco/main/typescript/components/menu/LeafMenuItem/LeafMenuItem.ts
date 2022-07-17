@@ -9,6 +9,7 @@ export default defineComponent({
     name: "LeafMenuItem",
     props: leafMenuItemProps,
     setup: (props, context) => {
-        return leafMenuItemSetup(props as LeafMenuItemProps, context);
+        const myProps = props as LeafMenuItemProps;
+        return leafMenuItemSetup(myProps, context);
     }
 });

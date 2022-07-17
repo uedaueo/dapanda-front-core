@@ -10,7 +10,8 @@ export default defineComponent({
     name: "CommunicationController",
     props: communicationControllerProps,
     setup: (props, context) => {
-        return communicationControllerSetup(props as CommunicationControllerProps, context);
+        const myProps = props as CommunicationControllerProps;
+        return communicationControllerSetup(myProps, context);
     },
     render: () => {
         return communicationControllerRender();

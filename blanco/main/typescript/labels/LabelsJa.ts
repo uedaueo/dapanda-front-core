@@ -1,5 +1,6 @@
 import {LocaleLabels} from "@/i18n/LocaleLabels";
 import { LocaleSelectJa } from "./LocaleSelectJa";
+import { DapandaCommonJa } from "./DapandaCommonJa";
 import { NoPageSampleJa } from "./NoPageSampleJa";
 import { ValidationSampleJa } from "./ValidationSampleJa";
 import { ChartSampleJa } from "./ChartSampleJa";
@@ -9,6 +10,14 @@ import { LoginSampleJa } from "./LoginSampleJa";
  * Labels Class for i18n
  */
 export class LabelsJa extends LocaleLabels {
+    /**
+     * dapanda framework 全体で共通に使用するラベルを定義します。
+     *
+     * フィールド: [DapandaCommon]。
+     * デフォルト: [new DapandaCommonJa()]。
+     */
+    DapandaCommon: DapandaCommonJa = new DapandaCommonJa();
+
     /**
      * NoPgeサンプルページで使用するラベルを定義します。
      *

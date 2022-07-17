@@ -7,6 +7,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface CommunicationControllerInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -39,6 +44,9 @@ export declare type CommunicationControllerProps = Readonly<LooseRequired<Commun
  * propsの定義です
  */
 export const communicationControllerProps: ComponentPropsOptions<CommunicationControllerInterface> = {
+    componentId: {
+        default: "CommunicationController"
+    },
     subject: {
         default: "通信制御コンポーネント"
     },

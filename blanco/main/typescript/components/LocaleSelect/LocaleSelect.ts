@@ -9,6 +9,7 @@ export default defineComponent({
     name: "LocaleSelect",
     props: localeSelectProps,
     setup: (props, context) => {
-        return localeSelectSetup(props as LocaleSelectProps, context);
+        const myProps = props as LocaleSelectProps;
+        return localeSelectSetup(myProps, context);
     }
 });

@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface HelloMessageInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -28,6 +33,9 @@ export declare type HelloMessageProps = Readonly<LooseRequired<HelloMessageInter
  * propsの定義です
  */
 export const helloMessageProps: ComponentPropsOptions<HelloMessageInterface> = {
+    componentId: {
+        default: "HelloMessage"
+    },
     subject: {
         default: "サンプルメッセージコンポーネント"
     },

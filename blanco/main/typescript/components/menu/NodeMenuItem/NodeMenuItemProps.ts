@@ -7,6 +7,11 @@ import { MenuItem } from "%/components/menu/MenuItem";
  */
 export interface NodeMenuItemInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -34,6 +39,9 @@ export declare type NodeMenuItemProps = Readonly<LooseRequired<NodeMenuItemInter
  * propsの定義です
  */
 export const nodeMenuItemProps: ComponentPropsOptions<NodeMenuItemInterface> = {
+    componentId: {
+        default: "NodeMenuItem"
+    },
     subject: {
         default: "ノードメニューコンポーネント"
     },

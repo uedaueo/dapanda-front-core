@@ -1,4 +1,4 @@
-import {defineComponent, provide, watch} from "vue";
+import {defineComponent, provide, ref, watch} from "vue";
 import MenuBar from "%/components/menu/MenuBar/MenuBar.vue";
 import {useRouter} from "vue-router";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
@@ -13,6 +13,9 @@ import {
     RestorePageTransitDataOptions
 } from "@/common/RestorePageTransitDataOptions";
 import {DapandaConst} from "@/common/DapandaGlobals";
+import {useI18n} from "vue-i18n";
+
+let logoutProcessCount = 0;
 
 export default defineComponent({
     name: 'App',
@@ -20,6 +23,10 @@ export default defineComponent({
         MenuBar,
     },
     props: {
+        componentId: {
+            type: String,
+            default: 'App',
+        },
         nopagePath: {
             type: String,
             default: "/nopageSample",
@@ -35,9 +42,12 @@ export default defineComponent({
         console.log("process.env.VUE_APP_DEPLOY_ENVIRONMENT is", process.env.VUE_APP_DEPLOY_ENVIRONMENT
         );
 
-        /* Get OverlayStatus */
+        /* i18n */
+        const { t } = useI18n();
+
+        /* Get processing status */
         const commonStatusStore = useCommonStatusStore();
-        const { overlay } = storeToRefs(commonStatusStore);
+        const { showProcessing, logout } = storeToRefs(commonStatusStore);
 
         /* remove baseUrl from current pathname */
         const baseUrl = process.env.BASE_URL;
@@ -61,15 +71,13 @@ export default defineComponent({
         console.log("name: " + (resolved.name as string));
         console.log("href: " + resolved.href);
 
-        /*
-         * TODO どうせ CALLBACK 地獄になるなら、各部を関数化して、
-         *  watch から呼べば良い？
-         *  provide する事で、各コンポーネントからも呼べる？
-         */
-
         /* Restore Authentication Info. */
         const authStore = useAuthenticationControllerStore();
+        const { status } = storeToRefs(authStore);
         const pageTransitDataStore = usePageTransitDataStore();
+        const { dataStatus } = storeToRefs(pageTransitDataStore);
+
+        /* Callback for restore authentication info. */
         const restoreLoginDataCallback: RestoreLoginDataCallbackType = (
             loginInfo: LoginInfo | undefined,
             authRequired: boolean,
@@ -87,21 +95,21 @@ export default defineComponent({
                 }
             } else {
                 /* Authenticated. change authStatus to valid */
-                authStore.setStatus(DapandaConst.AuthenticationStatusValid);
+                authStore.setStatus(DapandaConst.AuthenticationStatusValid, props.componentId);
             }
             /* Restore PageTransitData...Fall into Callback HELL!  */
             if (!noAuth && restoreTransitData) {
                 let pageDataRestoreCallback: RestorePageTransitDataCallbackType = (resutl): void => {
                     console.log("page data restore done with " + resutl);
                     if (pageTransitDataStore.dataStatus === DapandaConst.PageTransitDataStatusUpdated) {
-                        pageTransitDataStore.setDataStatus(DapandaConst.PageTransitDataStatusValid);
+                        pageTransitDataStore.setDataStatus(DapandaConst.PageTransitDataStatusValid, props.componentId);
                     }
                     pageTransitDataStore.updateLocation(transitTo);
                 }
                 const pageDataOptions: RestorePageTransitDataOptions = {
                     callback: pageDataRestoreCallback
                 }
-                pageTransitDataStore.restore(pageDataOptions);
+                pageTransitDataStore.restore(pageDataOptions, props.componentId);
             }
         };
         const options: RestoreLoginDataOptions = {
@@ -111,13 +119,69 @@ export default defineComponent({
             transitTo: resolved.matched.length == 0 ? props.nopagePath : resolved.path
         };
         /* async */
-        authStore.restore(options);
+        authStore.restore(options, props.componentId);
+
+        /*
+         * Logout handler
+         */
+        let logoutFlg = ref(false);
+        const onLogout = () => {
+            console.log("AppSetup#onLogout START");
+            if (authStore.status === DapandaConst.AuthenticationStatusValid) {
+                authStore.remove(props.componentId);
+            }
+            if (pageTransitDataStore.dataStatus === DapandaConst.PageTransitDataStatusValid || DapandaConst.PageTransitDataStatusSaved) {
+                pageTransitDataStore.remove(props.componentId);
+            }
+        }
+        const onLogoutCancel = () => {
+            console.log("AppSetup#onLogoutCancel START");
+            commonStatusStore.changeLogout(false);
+        }
+
+        /*
+         * watch logout.
+         */
+        watch(logout, () => {
+            console.log("AppSetup#watch logout = " + logout.value);
+            logoutFlg.value = logout.value;
+        })
+
+        /*
+         * watch remove status
+         */
+        watch([status, dataStatus], () => {
+            const isIssuer = authStore.issuer === props.componentId;
+            const isDataIssuer = pageTransitDataStore.dataIssuer === props.componentId;
+            console.log("AppSetup#watch status. status = " + status.value + "(" + isIssuer + "), dataStatus = " + dataStatus.value + "(" + isDataIssuer + "), logoutProcessCOunt = " + logoutProcessCount);
+            if ((isIssuer || isDataIssuer) && logoutProcessCount > 1) {
+                logoutProcessCount = 0;
+                commonStatusStore.changeLogout(false);
+                pageTransitDataStore.updateLocation(props.noAuthPath);
+                return;
+            }
+            if (isDataIssuer && DapandaConst.PageTransitDataStatusInvalid) {
+                logoutProcessCount++;
+            }
+            if (isIssuer && status.value === DapandaConst.AuthenticationStatusRemoved) {
+                logoutProcessCount++;
+                authStore.setStatus(DapandaConst.AuthenticationStatusInvalid, props.componentId);
+            }
+            if (isDataIssuer && dataStatus.value === DapandaConst.PageTransitDataStatusRemoved) {
+                logoutProcessCount++;
+                pageTransitDataStore.setDataStatus(DapandaConst.PageTransitDataStatusInvalid, props.componentId);
+            }
+        });
 
         /* Provide next page on authentication failure */
         provide<string>('noAuthPath', props.noAuthPath);
 
         return {
-            overlay
+            t,
+            showProcessing,
+            onLogout,
+            onLogoutCancel,
+            logoutFlg
         }
     }
 });

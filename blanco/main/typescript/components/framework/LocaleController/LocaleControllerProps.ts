@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface LocaleControllerInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type LocaleControllerProps = Readonly<LooseRequired<LocaleControl
  * propsの定義です
  */
 export const localeControllerProps: ComponentPropsOptions<LocaleControllerInterface> = {
+    componentId: {
+        default: "LocaleController"
+    },
     subject: {
         default: "ロケール制御コンポーネント"
     },

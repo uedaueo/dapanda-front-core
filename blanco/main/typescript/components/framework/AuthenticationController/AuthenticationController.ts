@@ -10,7 +10,8 @@ export default defineComponent({
     name: "AuthenticationController",
     props: authenticationControllerProps,
     setup: (props, context) => {
-        return authenticationControllerSetup(props as AuthenticationControllerProps, context);
+        const myProps = props as AuthenticationControllerProps;
+        return authenticationControllerSetup(myProps, context);
     },
     render: () => {
         return authenticationControllerRender();

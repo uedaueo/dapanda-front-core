@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface LoginSampleInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type LoginSampleProps = Readonly<LooseRequired<LoginSampleInterfa
  * propsの定義です
  */
 export const loginSampleProps: ComponentPropsOptions<LoginSampleInterface> = {
+    componentId: {
+        default: "LoginSample"
+    },
     subject: {
         default: "labels.loginSample.componentId"
     },

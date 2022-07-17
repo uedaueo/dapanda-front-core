@@ -19,6 +19,7 @@ export default defineComponent({
         ErrorMessage
     },
     setup: (props, context) => {
+        const myProps = props as LoginSampleProps;
         const factory: LoginSampleRequestFactory = {
             createLoginSamplePostRequest(): LoginSamplePostRequest {
                 return new LoginSamplePostRequest();
@@ -26,8 +27,8 @@ export default defineComponent({
         };
         const noAuthPath = inject<string>('noAuthPath');
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, myProps.componentId, noAuthPath!);
         });
-        return loginSampleSetup(props as LoginSampleProps, context, factory);
+        return loginSampleSetup(myProps, context, factory);
     }
 });

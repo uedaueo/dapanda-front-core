@@ -27,7 +27,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
         postRequest.id = values.id;
         postRequest.password = values.password;
         /* remove loginInfo from store and localStorage */
-        authStore.remove(); // wait removed
+        authStore.remove(props.componentId); // wait removed
     }
     watch(response, () => {
         console.log("LoginSample#watch(responseStore : " + JSON.stringify(response));
@@ -38,12 +38,12 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
                 const loginInfo = new LoginInfo();
                 loginInfo.loginToken = telegram.token;
                 loginInfo.environment = "development";
-                authStore.update(loginInfo);
+                authStore.update(loginInfo, props.componentId);
                 // save loginInfo into LocalStorage
-                authStore.persist(); // preparedFlg will be down.
+                authStore.persist(props.componentId); // preparedFlg will be down.
             } else {
                 // remove loginInfo
-                authStore.remove();
+                authStore.remove(props.componentId);
             }
         }
         /* Errors are processed in CommunicationController#send */
@@ -52,13 +52,13 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     watch(status, () => {
         console.log("login watch status = " + status.value);
         if (status.value === DapandaConst.AuthenticationStatusSaved) {
-            authStore.setStatus(DapandaConst.AuthenticationStatusValid);
+            authStore.setStatus(DapandaConst.AuthenticationStatusValid, props.componentId);
             // Go to toppage
             const pageStore = usePageTransitDataStore();
             // TODO it may be better to transit to next page.
             pageStore.updateLocation("/");
         } else if (status.value === DapandaConst.AuthenticationStatusRemoved) {
-            authStore.setStatus(DapandaConst.AuthenticationStatusValid);
+            authStore.setStatus(DapandaConst.AuthenticationStatusValid, props.componentId);
             send(postRequest, responseStore);
         }
     });

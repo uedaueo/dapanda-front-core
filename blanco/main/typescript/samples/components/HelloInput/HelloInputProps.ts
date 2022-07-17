@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface HelloInputInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type HelloInputProps = Readonly<LooseRequired<HelloInputInterface
  * propsの定義です
  */
 export const helloInputProps: ComponentPropsOptions<HelloInputInterface> = {
+    componentId: {
+        default: "HelloInput"
+    },
     subject: {
         default: "サンプルインプットコンポーネント"
     },

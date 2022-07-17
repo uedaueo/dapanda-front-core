@@ -17,10 +17,11 @@ export default defineComponent({
         ErrorMessage
     },
     setup: (props, context) => {
+        const myProps = props as ValidationSampleProps;
         const noAuthPath = inject<string>('noAuthPath');
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, myProps.componentId, noAuthPath!);
         });
-        return validationSampleSetup(props as ValidationSampleProps, context);
+        return validationSampleSetup(myProps, context);
     }
 });

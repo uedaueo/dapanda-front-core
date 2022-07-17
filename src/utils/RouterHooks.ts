@@ -4,6 +4,7 @@ import {RestoreLoginDataCallbackType, RestoreLoginDataOptions} from "@/common/Re
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
 import {DapandaConst} from "@/common/DapandaGlobals";
+import {PageTransitData} from "%/common/PageTransitData";
 
 /**
  * VueRouter の共通 hook はここに実装します。
@@ -40,11 +41,11 @@ export class RouterHooks {
              */
             const pageStore = usePageTransitDataStore();
             console.log("matched!  current location = " + pageStore.location);
-            if (resolved.path == pageStore.location) {
+            if (resolved.path === pageStore.location) {
                 next();
             } else {
                 if (pageStore.data) {
-                    pageStore.updateLocation(resolved.path, pageStore.data);
+                    pageStore.updateLocation(resolved.path, pageStore.data as PageTransitData);
                 } else {
                     pageStore.updateLocation(resolved.path);
                 }
@@ -71,6 +72,7 @@ export class RouterHooks {
         to: RouteLocationNormalized,
         from: RouteLocationNormalized,
         next: NavigationGuardNext,
+        componentId: string,
         noAuthPath: string
     ) {
         console.log(
@@ -111,7 +113,7 @@ export class RouterHooks {
                     }
                 } else {
                     /* Authenticated. authStatus change to valid. */
-                    authStore.setStatus(DapandaConst.AuthenticationStatusValid);
+                    authStore.setStatus(DapandaConst.AuthenticationStatusValid, componentId);
                     goToNext();
                 }
             }
@@ -121,7 +123,7 @@ export class RouterHooks {
                 restoreTransitData: false,
                 transitTo: ""
             }
-            authStore.restore(options);
+            authStore.restore(options, componentId);
         } else {
             goToNext();
         }

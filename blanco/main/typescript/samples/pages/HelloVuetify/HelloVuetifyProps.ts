@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface HelloVuetifyInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -28,6 +33,9 @@ export declare type HelloVuetifyProps = Readonly<LooseRequired<HelloVuetifyInter
  * propsの定義です
  */
 export const helloVuetifyProps: ComponentPropsOptions<HelloVuetifyInterface> = {
+    componentId: {
+        default: "HelloVuetify"
+    },
     subject: {
         default: "トップページサンプル"
     },

@@ -15,10 +15,11 @@ export default defineComponent({
         Bar
     },
     setup: (props, context) => {
+        const myProps = props as ChartSampleProps;
         const noAuthPath = inject<string>('noAuthPath');
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, myProps.componentId, noAuthPath!);
         });
-        return chartSampleSetup(props as ChartSampleProps, context);
+        return chartSampleSetup(myProps, context);
     }
 });

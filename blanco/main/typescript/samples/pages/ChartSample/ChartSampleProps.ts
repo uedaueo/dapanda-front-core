@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface ChartSampleInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -54,6 +59,9 @@ export declare type ChartSampleProps = Readonly<LooseRequired<ChartSampleInterfa
  * propsの定義です
  */
 export const chartSampleProps: ComponentPropsOptions<ChartSampleInterface> = {
+    componentId: {
+        default: "ChartSample"
+    },
     subject: {
         default: "サンプル図コンポーネント"
     },

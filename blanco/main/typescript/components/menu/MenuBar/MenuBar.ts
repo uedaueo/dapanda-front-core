@@ -17,6 +17,7 @@ export default defineComponent({
         LocaleSelect
     },
     setup: (props, context) => {
-        return menuBarSetup(props as MenuBarProps, context);
+        const myProps = props as MenuBarProps;
+        return menuBarSetup(myProps, context);
     }
 });

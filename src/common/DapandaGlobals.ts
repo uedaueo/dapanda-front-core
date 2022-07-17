@@ -65,6 +65,8 @@ export namespace DapandaConst {
     export const AuthenticationStatusRemoving = "removing";
     /** 認証情報の削除完了 */
     export const AuthenticationStatusRemoved = "removed";
+    /** 認証情報更新者のデフォルト値 */
+    export const AuthenticationStatusIssuerDefault = "default";
 
     /* ページ遷移データの状態定義 */
     /** 有効 */
@@ -83,6 +85,8 @@ export namespace DapandaConst {
     export const PageTransitDataStatusRemoving = "removing";
     /** 削除完了 */
     export const PageTransitDataStatusRemoved = "removed";
+    /** ページ遷移データ更新者のデフォルト値 */
+    export const PageTransitDataStatusIssuerDefault = "default";
 
 }
 

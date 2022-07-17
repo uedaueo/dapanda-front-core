@@ -17,10 +17,11 @@ export default defineComponent({
         HelloMessage
     },
     setup: (props, context) => {
+        const myProps = props as HelloCompositionProps;
         const noAuthPath = inject<string>('noAuthPath');
         onBeforeRouteLeave((to, from, next) => {
-            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, noAuthPath!);
+            RouterHooks.beforeRouteLeave(useRouter(), to, from, next, myProps.componentId, noAuthPath!);
         });
-        return helloCompositionSetup(props as HelloCompositionProps, context);
+        return helloCompositionSetup(myProps, context);
     }
 });

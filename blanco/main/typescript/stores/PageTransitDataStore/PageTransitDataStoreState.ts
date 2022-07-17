@@ -33,6 +33,11 @@ export interface PageTransitDataStoreState {
      * リストアの際に参照するオプション値
      */
     dataRestoreOptions: RestorePageTransitDataOptions | undefined;
+
+    /**
+     * restore, saveなどの更新操作を行ったコンポーネントのId
+     */
+    dataIssuer: string;
 }
 
 /**
@@ -41,5 +46,6 @@ export interface PageTransitDataStoreState {
 export const pageTransitDataStoreState: PageTransitDataStoreState = {
     location: "/",
     dataStatus: "invalid",
-    dataRestoreOptions: undefined
+    dataRestoreOptions: undefined,
+    dataIssuer: "default"
 };

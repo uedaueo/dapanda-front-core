@@ -52,7 +52,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
 
             if (options) {
                 if (options.showOverlay === true) {
-                    commonStatusStore.changeOverlay(true);
+                    commonStatusStore.changeProcessing(true);
                 }
             }
             const commonResponse = await process.send(
@@ -71,7 +71,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
         } finally {
             if (options) {
                 if (options.showOverlay === true) {
-                    commonStatusStore.changeOverlay(false);
+                    commonStatusStore.changeProcessing(false);
                 }
             }
         }

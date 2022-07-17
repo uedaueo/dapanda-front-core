@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface HelloCompositionInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -28,6 +33,9 @@ export declare type HelloCompositionProps = Readonly<LooseRequired<HelloComposit
  * propsの定義です
  */
 export const helloCompositionProps: ComponentPropsOptions<HelloCompositionInterface> = {
+    componentId: {
+        default: "HelloComposition"
+    },
     subject: {
         default: "Composition APIサンプル"
     },

@@ -6,6 +6,11 @@ import { ComponentPropsOptions } from "vue";
  */
 export interface PageTransitControllerInterface {
     /**
+     * コンポーネントのcomponentIdプロパティです
+     */
+    componentId: string;
+
+    /**
      * コンポーネントのsubjectプロパティです
      */
     subject?: string;
@@ -23,6 +28,9 @@ export declare type PageTransitControllerProps = Readonly<LooseRequired<PageTran
  * propsの定義です
  */
 export const pageTransitControllerProps: ComponentPropsOptions<PageTransitControllerInterface> = {
+    componentId: {
+        default: "PageTransitController"
+    },
     subject: {
         default: "ページ遷移制御コンポーネント"
     },
