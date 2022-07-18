@@ -10,7 +10,7 @@ export const dapandaI18n = (argMessages?:LocaleMessages<VueMessageType>) => {
 
     let integratedMessages: LocaleMessages<VueMessageType> = defaultMessages;
     if (argMessages != undefined && Object.keys(argMessages).length != 0) {
-        console.log("dapandaI18n: " + JSON.stringify(argMessages, null, 2))
+        // console.log("dapandaI18n: " + JSON.stringify(argMessages, null, 2))
         integratedMessages = argMessages;
     }
     return createI18n({
