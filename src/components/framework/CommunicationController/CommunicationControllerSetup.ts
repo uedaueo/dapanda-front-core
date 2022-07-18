@@ -16,7 +16,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
      * @param store
      * @param options
      */
-    const send: SendFunction = async (request, store, options?) => {
+    const send: SendFunction = async (request, store, issuer, options?) => {
         console.log('send called: ' + request);
 
         const commonStatusStore = useCommonStatusStore();
@@ -55,12 +55,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
                     commonStatusStore.changeProcessing(true);
                 }
             }
-            const commonResponse = await process.send(
-                request,
-                processName,
-                httpMethod,
-                options
-            );
+            const commonResponse = await process.send(request, processName, httpMethod, issuer, options);
 
             console.log("CommunicationController : return response = " + JSON.stringify(commonResponse));
 

@@ -21,7 +21,7 @@ export const menuBarSetup = (props: MenuBarProps, context: SetupContext) => {
     const commonStatusStore = useCommonStatusStore();
     const authStore = useAuthenticationControllerStore();
     const onLogout = () => {
-        console.log("MenuBar#onLogout START");
+        console.log("MenuBar#onLogout START authStore.status = " + authStore.status);
         if (authStore.status === DapandaConst.AuthenticationStatusValid) {
             commonStatusStore.changeLogout(true);
         }

@@ -34,7 +34,7 @@ export const authenticationControllerStoreActions = defineAuthenticationControll
             }
         },
         async remove(issuer: string) {
-            console.log("AuthenticationControllerStoreActions#restore: current status = " + this.status);
+            console.log("AuthenticationControllerStoreActions#remove: current status = " + this.status + ", issuer = " + issuer);
             this.status = DapandaConst.AuthenticationStatusRemoving;
             this.issuer = issuer;
             this.loginInfo = new LoginInfo();

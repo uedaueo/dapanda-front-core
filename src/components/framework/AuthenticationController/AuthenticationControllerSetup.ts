@@ -13,17 +13,17 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
     const { status } = storeToRefs(authStore);
 
     watch(status, () => {
-        console.log("AuthenticationControllerSetup#watch status = " + status.value);
+        console.log("AuthenticationControllerSetup#watch status = " + status.value + ", issuer = " + authStore.issuer);
         if (status.value === DapandaConst.AuthenticationStatusSaving) {
             /* Save */
             if (authStore.loginInfo && authStore.loginInfo.loginToken != "") {
                 const jsonInfo = JSON.stringify(authStore.loginInfo);
                 console.log("authenticationControllerSetup#watch(saveFlg) jsonInfo = " + jsonInfo);
                 localStorage.setItem(DapandaConst.LocalStorageItemKey, jsonInfo);
-                authStore.setStatus(DapandaConst.AuthenticationStatusSaved);
+                authStore.setStatus(DapandaConst.AuthenticationStatusSaved, authStore.issuer);
             } else {
                 console.log("authenticationControllerSetup#watch(saveFlg) Clear");
-                authStore.remove();
+                authStore.remove(authStore.issuer);
             }
         } else if (status.value === DapandaConst.AuthenticationStatusRestoring) {
             /* Restore */
@@ -43,9 +43,9 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
                 if (options) {
                     options.callback(undefined, options.authRequired, false, "");
                 }
-                authStore.setStatus(DapandaConst.AuthenticationStatusInvalid);
+                authStore.setStatus(DapandaConst.AuthenticationStatusInvalid, authStore.issuer);
             } else {
-                authStore.update(restored); // status changed to updated.
+                authStore.update(restored, authStore.issuer); // status changed to updated.
                 if (options) {
                     options.callback(restored, options.authRequired, options.restoreTransitData, options.transitTo);
                 }
@@ -53,7 +53,7 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
         } else if (status.value === DapandaConst.AuthenticationStatusRemoving) {
             /* Remove */
             localStorage.removeItem(DapandaConst.LocalStorageItemKey);
-            authStore.setStatus(DapandaConst.AuthenticationStatusRemoved);
+            authStore.setStatus(DapandaConst.AuthenticationStatusRemoved, authStore.issuer);
         }
     });
 };

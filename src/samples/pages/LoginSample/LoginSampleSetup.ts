@@ -59,7 +59,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
             pageStore.updateLocation("/");
         } else if (status.value === DapandaConst.AuthenticationStatusRemoved) {
             authStore.setStatus(DapandaConst.AuthenticationStatusValid, props.componentId);
-            send(postRequest, responseStore);
+            send(postRequest, responseStore, props.componentId);
         }
     });
     return {

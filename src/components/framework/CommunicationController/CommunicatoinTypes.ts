@@ -33,5 +33,6 @@ export declare type CommonResponseActionsTree = {
 export declare type SendFunction = (
     request: ApiTelegram,
     store: Store<string, any, any, CommonResponseActionsTree>,
+    issuer: string,
     options?: CommunicationOptions
 ) => void;

@@ -126,7 +126,7 @@ export default defineComponent({
          */
         let logoutFlg = ref(false);
         const onLogout = () => {
-            console.log("AppSetup#onLogout START");
+            console.log("AppSetup#onLogout START " + props.componentId);
             if (authStore.status === DapandaConst.AuthenticationStatusValid) {
                 authStore.remove(props.componentId);
             }
@@ -153,7 +153,7 @@ export default defineComponent({
         watch([status, dataStatus], () => {
             const isIssuer = authStore.issuer === props.componentId;
             const isDataIssuer = pageTransitDataStore.dataIssuer === props.componentId;
-            console.log("AppSetup#watch status. status = " + status.value + "(" + isIssuer + "), dataStatus = " + dataStatus.value + "(" + isDataIssuer + "), logoutProcessCOunt = " + logoutProcessCount);
+            console.log("AppSetup#watch status. status = " + status.value + "(" + authStore.issuer + "), dataStatus = " + dataStatus.value + "(" + pageTransitDataStore.dataIssuer + "), logoutProcessCOunt = " + logoutProcessCount);
             if ((isIssuer || isDataIssuer) && logoutProcessCount > 1) {
                 logoutProcessCount = 0;
                 commonStatusStore.changeLogout(false);

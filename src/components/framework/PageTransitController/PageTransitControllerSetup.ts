@@ -17,17 +17,17 @@ export const pageTransitControllerSetup = (props: PageTransitControllerProps, co
         router.push(location.value);
     });
     watch(dataStatus, () => {
-        console.log("pageTransitionControllerSetup: dataStatus = " + dataStatus.value);
+        console.log("pageTransitionControllerSetup: dataStatus = " + dataStatus.value + ", dataIssuer = " + pageTransitData.dataIssuer);
         if (dataStatus.value === DapandaConst.PageTransitDataStatusRestoring) {
             const restored = sessionStorage.getItem(DapandaConst.SessionStorageItemKey);
             const options: RestorePageTransitDataOptions | undefined = pageTransitData.dataRestoreOptions;
-            pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusInvalid);
+            pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusInvalid, pageTransitData.dataIssuer);
             if (restored && restored.length > 0) {
                 const pageData = JSON.parse(restored);
                 if (pageData) {
                     pageTransitData.updateData(pageData);
                     /* force to change status to updated because data is restored. */
-                    pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusUpdated);
+                    pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusUpdated, pageTransitData.dataIssuer);
                 } else {
                     console.log("pageTransitionControllerSetup#watch(dataStatus) pageData invalid.");
                     pageTransitData.updateData(undefined);
@@ -44,7 +44,7 @@ export const pageTransitControllerSetup = (props: PageTransitControllerProps, co
                 const jsonData = JSON.stringify(data);
                 console.log(" watch saving: data = " + jsonData);
                 sessionStorage.setItem(DapandaConst.SessionStorageItemKey, jsonData);
-                pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusSaved);
+                pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusSaved, pageTransitData.dataIssuer);
             } else {
                 console.log(" watch saving: data is empty");
             }
@@ -53,7 +53,7 @@ export const pageTransitControllerSetup = (props: PageTransitControllerProps, co
             if (jsonData && jsonData.length > 0) {
                 sessionStorage.removeItem(DapandaConst.SessionStorageItemKey);
             }
-            pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusRemoved);
+            pageTransitData.setDataStatus(DapandaConst.PageTransitDataStatusRemoved, pageTransitData.dataIssuer);
         }
     });
 };

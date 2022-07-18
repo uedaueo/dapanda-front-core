@@ -16,6 +16,6 @@ export const rootFrameRender = () => {
             h(LocaleController),
             h(AuthenticationController),
             /* App は CommunicationController の子コンポーネントとする */
-            h(CommunicationController, {appComponent: App, nopagePath: "/nopageSample", noAuthPath: "/login"})
+            h(CommunicationController, {appComponent: App, nopagePath: "/nopageSample", noAuthPath: "/loginSample"})
         ]);
 }

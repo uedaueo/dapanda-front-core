@@ -58,15 +58,15 @@ export abstract class ApiBase {
      * @param request
      * @param processName
      * @param method
-     * @param options
+     * @param options?
      *
      */
     async send(
         request: ApiTelegram,
         processName: string,
         method: string,
-        options?: CommunicationOptions | undefined
-    ): Promise<CommonResponse | undefined> {
+        issuer: string,
+        options?: CommunicationOptions | undefined): Promise<CommonResponse | undefined> {
         let body: string = "";
 
         const commonRequest = this.makeCommonRequest(request);
@@ -77,7 +77,7 @@ export abstract class ApiBase {
         let authError = false;
         let loginToken = "";
         if (this.isAuthenticationRequired()) {
-            const loginInfo = await this.prepareLoginInfo();
+            const loginInfo = await this.prepareLoginInfo(issuer);
             if (loginInfo) {
                 loginToken = loginInfo.loginToken;
             } else {
@@ -160,7 +160,7 @@ export abstract class ApiBase {
      * LoginInfo準備用
      * @param component emitを実施するコンポーネント
      */
-    async prepareLoginInfo(): Promise<LoginInfo> {
+    async prepareLoginInfo(issuer: string): Promise<LoginInfo> {
         return new Promise<LoginInfo>((resolve, reject) => {
             console.log("### prepareLoginInfo start");
             let restoreLoginDataCallback: RestoreLoginDataCallbackType = function (
@@ -171,7 +171,7 @@ export abstract class ApiBase {
             ): void {
                 if (loginInfo) {
                     /* Authenticated. Change authStatus to valid. */
-                    authStore.setStatus(DapandaConst.AuthenticationStatusValid);
+                    authStore.setStatus(DapandaConst.AuthenticationStatusValid, issuer);
                     resolve(loginInfo);
                 } else {
                     /* Not Authenticated. authStatus is already invalidated. */
@@ -188,7 +188,7 @@ export abstract class ApiBase {
             /* It may work */
             const authStore = useAuthenticationControllerStore();
             /* async */
-            authStore.restore(options);
+            authStore.restore(options, issuer);
             console.log("### prepareLoginInfo end");
         });
     }
