@@ -44,6 +44,18 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
                     length - DapandaConst.PutRequestSuffix.length
                 );
                 httpMethod = DapandaConst.HttpMethodPut;
+            } else if (requestObjClassName.endsWith(DapandaConst.GetRequestSuffix)) {
+                processName = requestObjClassName.substring(
+                    0,
+                    length - DapandaConst.GetRequestSuffix.length
+                );
+                httpMethod = DapandaConst.HttpMethodGet;
+            } else if (requestObjClassName.endsWith(DapandaConst.DeleteRequestSuffix)) {
+                processName = requestObjClassName.substring(
+                    0,
+                    length - DapandaConst.DeleteRequestSuffix.length
+                );
+                httpMethod = DapandaConst.HttpMethodDelete;
             } else {
                 throw new Error("Unexpected value. " + requestObjClassName);
             }
@@ -63,6 +75,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
 
         } catch (exception) {
             /* TODO handle exception */
+            console.log("CommunicationController#Exception = " + JSON.stringify(exception));
         } finally {
             if (options) {
                 if (options.showOverlay === true) {
