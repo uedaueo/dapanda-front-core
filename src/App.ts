@@ -160,7 +160,7 @@ export default defineComponent({
                 pageTransitDataStore.updateLocation(props.noAuthPath);
                 return;
             }
-            if (isDataIssuer && DapandaConst.PageTransitDataStatusInvalid) {
+            if (isDataIssuer && dataStatus.value === DapandaConst.PageTransitDataStatusInvalid) {
                 logoutProcessCount++;
             }
             if (isIssuer && status.value === DapandaConst.AuthenticationStatusRemoved) {

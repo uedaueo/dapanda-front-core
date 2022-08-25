@@ -1,7 +1,7 @@
 <v-app>
+    <MenuBar />
     <v-main>
         <v-container fluid class="py-0">
-            <MenuBar />
             <router-view></router-view>
             <v-overlay v-model="showProcessing" class="align-center justify-center">
                 <v-progress-circular indeterminate="true" size="64"></v-progress-circular>
