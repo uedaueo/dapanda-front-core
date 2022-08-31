@@ -12,10 +12,7 @@ import {SampleApiList} from "%/samples/SampleApiList";
 loadFonts()
 
 // Initialize API constructors
-const defaultApiList: ApiConstructorsInterface = {
-    defaultApiList: SampleApiList
-}
-ApiConstructors.appendConstructor(defaultApiList);
+ApiConstructors.appendConstructor(SampleApiList.constructors);
 
 // i18n を初期化します。
 ValidateConfig.i18n = dapandaI18n();

@@ -59,8 +59,11 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
             } else {
                 throw new Error("Unexpected value. " + requestObjClassName);
             }
-
-            const process: ApiBase = new ApiConstructors.apiConstructors["defaultApiList"].constructors[processName]();
+            const myConstructor = ApiConstructors.apiConstructors[processName];
+            if (!myConstructor) {
+                throw new Error("No such API [" + processName + "]");
+            }
+            const process: ApiBase = new ApiConstructors.apiConstructors[processName]();
 
             if (options) {
                 if (options.showOverlay === true) {
