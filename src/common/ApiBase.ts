@@ -97,13 +97,13 @@ export abstract class ApiBase {
             message.messages = "Auth Error";
             message.code = "";
             this._commonResponse.messages = [message];
-        } else if (!("VUE_APP_API_ENDPOINT" in process.env)) {
+        } else if (!("VITE_APP_API_ENDPOINT" in import.meta.env)) {
             /* GET JSON FILE */
             uri = this.getJsonFileName(request, processName, method, options);
             res = await axios.get<CommonResponse>(uri);
             this._commonResponse = res.data;
         } else {
-            uri = process.env.VUE_APP_API_ENDPOINT + this.locationURL;
+            uri = import.meta.env.VITE_APP_API_ENDPOINT + this.locationURL;
             const headers: { [key: string]: string } = {};
             headers["content-type"] = "application/json";
             if (loginToken && loginToken != "") {
