@@ -109,7 +109,7 @@ export abstract class ApiBase {
             let headers: { [key: string]: string } = {};
             headers["content-type"] = "application/json";
             if (loginToken && loginToken != "") {
-                let myToken = "";
+                let myToken = loginToken;
                 if (useBearer) {
                     myToken = "Bearer " + loginToken;
                 }
