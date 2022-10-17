@@ -66,6 +66,8 @@ export abstract class ApiBase {
         processName: string,
         method: string,
         issuer: string,
+        authHeader?: string,
+        useBearer?: boolean,
         options?: CommunicationOptions | undefined): Promise<CommonResponse | undefined> {
         let body: string = "";
 
@@ -104,10 +106,21 @@ export abstract class ApiBase {
             this._commonResponse = res.data;
         } else {
             uri = import.meta.env.VITE_APP_API_ENDPOINT + this.locationURL;
-            const headers: { [key: string]: string } = {};
+            let headers: { [key: string]: string } = {};
             headers["content-type"] = "application/json";
             if (loginToken && loginToken != "") {
-                headers[DapandaConst.DapandaAccessTokenHeader] = loginToken;
+                let myToken = "";
+                if (useBearer) {
+                    myToken = "Bearer " + loginToken;
+                }
+                let myAuthHeader = DapandaConst.DapandaAccessTokenHeader;
+                if (authHeader) {
+                    myAuthHeader = authHeader;
+                }
+                headers[myAuthHeader] = myToken;
+            }
+            if (options && options.additionalHeaders) {
+                headers = Object.assign(headers, options.additionalHeaders);
             }
             try {
                 switch (method) {

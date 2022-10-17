@@ -70,7 +70,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
                     commonStatusStore.changeProcessing(true);
                 }
             }
-            const commonResponse = await process.send(request, processName, httpMethod, issuer, options);
+            const commonResponse = await process.send(request, processName, httpMethod, issuer, props.authHeader, props.useBearer, options);
 
             console.log("CommunicationController : return response = " + JSON.stringify(commonResponse));
 

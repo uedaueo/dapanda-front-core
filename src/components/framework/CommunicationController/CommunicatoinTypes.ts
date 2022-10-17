@@ -10,6 +10,7 @@ export interface CommunicationOptions {
     showOverlay?: boolean;
     noSnackbarOnSuccess?: boolean;
     showInfoOnlyOnException?: boolean;
+    additionalHeaders?: { [key: string]: string };
 }
 
 /**

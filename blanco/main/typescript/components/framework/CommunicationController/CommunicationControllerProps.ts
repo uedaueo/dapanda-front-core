@@ -35,6 +35,16 @@ export interface CommunicationControllerInterface {
      * 認証に失敗した場合のrouteを指定染ます。Appコンポーネントに渡します。
      */
     noAuthPath: string;
+
+    /**
+     * 認証トークンを保持する HTTP ヘッダです。
+     */
+    authHeader: string;
+
+    /**
+     * 認可トークンに Bearer を付与するかどうか。
+     */
+    useBearer: boolean;
 }
 
 /** propsの型を定義します */
@@ -62,5 +72,11 @@ export const communicationControllerProps: ComponentPropsOptions<CommunicationCo
     },
     noAuthPath: {
         default: "/login"
+    },
+    authHeader: {
+        default: "X-Dapanda-AccessToken"
+    },
+    useBearer: {
+        default: false
     }
 };
