@@ -14,8 +14,8 @@ export namespace DapandaConst {
     export const HttpMethodPost = "POST";
     export const HttpMethodPut = "PUT";
     export const HttpMethodDelete = "DELETE";
-    export const ResultSuccess = "success";
-    export const ResultError = "error";
+    export const ResultSuccess = "SUCCESS";
+    export const ResultError = "ERROR";
     export const SnackbarColorInfo = "info";
     export const SnackbarColorSuccess = "success";
     export const SnackbarColorError = "error";
