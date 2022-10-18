@@ -131,11 +131,11 @@ export abstract class ApiBase {
                         res = await axios.put<CommonResponse>(uri, body, {headers});
                         break;
                     case DapandaConst.HttpMethodGet:
-                        /* TODO: Generate queryParams here */
+                        uri += "?request=" + encodeURI(body);
                         res = await axios.get<CommonResponse>(uri, {headers});
                         break;
                     case DapandaConst.HttpMethodDelete:
-                        /* TODO: Generate queryParams here */
+                        uri += "?request=" + encodeURI(body);
                         res = await axios.delete<CommonResponse>(uri, {headers});
                         break;
                     default:
