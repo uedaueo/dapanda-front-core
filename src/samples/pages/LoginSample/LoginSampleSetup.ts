@@ -10,6 +10,9 @@ import {useAuthenticationControllerStore} from "%/stores/AuthenticationControlle
 import {LoginInfo} from "%/common/LoginInfo";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
 import {storeToRefs} from "pinia";
+import {useSnackbarStore} from "%/stores/SnackbarStore/SnackbarStore";
+import {SnackbarUtils} from "@/utils/SnackbarUtils";
+import {MessageItem} from "%/blanco/restgenerator/valueobject/MessageItem";
 
 export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext, factory: LoginSampleRequestFactory) => {
     const { t } = useI18n();
@@ -22,6 +25,8 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     const { response } = storeToRefs(responseStore);
     const authStore = useAuthenticationControllerStore();
     const { status } = storeToRefs(authStore);
+    const snackbarStore = useSnackbarStore();
+
     const onSubmit = (values: any) => {
         console.log("Submitted : " + values.id + ", " + values.password);
         postRequest.id = values.id;
@@ -41,10 +46,17 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
                 authStore.update(loginInfo, props.componentId);
                 // save loginInfo into LocalStorage
                 authStore.persist(props.componentId); // preparedFlg will be down.
-            } else {
-                // remove loginInfo
-                authStore.remove(props.componentId);
+                const messages = new Array<MessageItem>();
+                const messageItem = new MessageItem();
+                messages.push(messageItem);
+                messageItem.code = "INFO";
+                messageItem.messages ="SUCCESS TO LOGIN";
+                SnackbarUtils.showMessages(snackbarStore, messages);
             }
+            // else {
+            //     // remove loginInfo
+            //     authStore.remove(props.componentId);
+            // }
         }
         /* Errors are processed in CommunicationController#send */
     });

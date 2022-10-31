@@ -7,6 +7,9 @@ import {DapandaConst} from "@/common/DapandaGlobals";
 import {ApiConstructors} from "@/common/ApiConstructors";
 import {ApiBase} from "@/common/ApiBase";
 import {useCommonStatusStore} from "%/stores/CommonStatusStore/CommonStatusStore";
+import {useSnackbarStore} from "%/stores/SnackbarStore/SnackbarStore";
+import {SnackbarAttribute} from "%/components/snackbar/SnackbarAttribute";
+import {SnackbarUtils} from "@/utils/SnackbarUtils";
 
 export const communicationControllerSetup = (props: CommunicationControllerProps, context: SetupContext) => {
 
@@ -20,6 +23,7 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
         console.log('send called: ' + request);
 
         const commonStatusStore = useCommonStatusStore();
+        const snackbarStore = useSnackbarStore();
         try {
             if (request === null || request === undefined) {
                 throw new Error("communicationControllerSetup#send: ApiTelegram is not specified.");
@@ -74,8 +78,19 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
 
             console.log("CommunicationController : return response = " + JSON.stringify(commonResponse));
 
+            /*
+             * Show error on snackbar
+             */
+            if ((!options || (options && !options.manualHandling)) && commonResponse && commonResponse.info) {
+                const info = commonResponse.info;
+                if (info.result !== DapandaConst.ResultSuccess) {
+                    const messages = commonResponse.messages;
+                    if (messages) {
+                        SnackbarUtils.showErrors(snackbarStore, messages);
+                    }
+                }
+            }
             store.setResponse(commonResponse);
-
         } catch (exception) {
             /* TODO handle exception */
             console.log("CommunicationController#Exception = " + JSON.stringify(exception));

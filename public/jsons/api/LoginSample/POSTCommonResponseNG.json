@@ -1,0 +1,23 @@
+{
+  "info": {
+    "locale": {
+      "lang": "ja",
+      "tz": "Asia/Tokyo",
+      "currency": "JPY"
+    },
+    "time": 100,
+    "result": "ERROR"
+  },
+  "messages": [
+    {
+      "code": "E001",
+      "messages": "Authentication Error!!!"
+    },
+    {
+      "code": "E001",
+      "messages": "Please Check Password or ID!!!"
+    }
+  ],
+  "telegram": {
+  }
+}

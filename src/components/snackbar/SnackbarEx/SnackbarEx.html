@@ -1,0 +1,26 @@
+<v-container class="pa-0">
+  <v-snackbar
+    v-model="snackbar"
+    color="white"
+    :timeout="-1"
+    location="top"
+  >
+    <!-- メッセージを縦並びにするためdivタグでラップする -->
+    <div style="width: 100%; margin: -14px auto;">
+      <div style="margin: 0 -24px;">
+        <div v-for="(snackbarAttribute, index) in snackbarAttributes" :key="index">
+            <SnackbarMessage
+                    :key="snackbarAttribute.id"
+                    @remove="removeMessage(snackbarAttribute)"
+                    :snackbarAttribute="snackbarAttribute"
+            />
+            <div
+                    style="margin: 1px 0;"
+                    v-if="index != lastIndex"
+                    :key="`${snackbarAttribute.id}-divider`"
+            />
+        </div>
+      </div>
+    </div>
+  </v-snackbar>
+</v-container>

@@ -275,6 +275,31 @@ npm install axios
 
 これで @latest が入った模様。0.27.1。
 
+### uuidv4
+
+uuidv4 が、uuid に取り込まれた模様？
+
+```aidl
+npm install uuid
+npm install --save-dev @types/uuid
+```
+
+として、使う時は
+
+```
+import { v4 as uuidv4 } from "uuid"
+const id = uuidv4();
+```
+
+とかする。
+
+### icon, font関連
+
+```aidl
+npm install -D @mdi/js
+npm install -D @mdi/font
+```
+
 ### library-mode
 
 * https://vitejs.dev/guide/build.html#library-mode

@@ -14,6 +14,7 @@ import {
 } from "@/common/RestorePageTransitDataOptions";
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {useI18n} from "vue-i18n";
+import SnackbarEx from "%/components/snackbar/SnackbarEx/SnackbarEx.vue";
 
 let logoutProcessCount = 0;
 
@@ -21,6 +22,7 @@ export default defineComponent({
     name: 'App',
     components: {
         MenuBar,
+        SnackbarEx
     },
     props: {
         componentId: {

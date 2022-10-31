@@ -88,6 +88,12 @@ export namespace DapandaConst {
     /** ページ遷移データ更新者のデフォルト値 */
     export const PageTransitDataStatusIssuerDefault = "default";
 
+    /* snackbar の状態遷移定義 */
+    /** 有効 */
+    export const SnackbarStatusValid = "valid";
+    /** 無効 */
+    export const SnackbarStatusInvalid = "invalid";
+
 }
 
 /**

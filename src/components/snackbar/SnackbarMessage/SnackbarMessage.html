@@ -1,0 +1,14 @@
+<v-card
+  style="display: flex; padding: 6px 12px;"
+  :color="color"
+>
+  <div style="display: flex; align-items: center; font-weight: bold; word-wrap: anywhere; white-space: pre-wrap;" class="white--text">{{ text }}</div>
+  <v-spacer></v-spacer>
+  <v-btn
+    icon="true"
+    @click="remove()"
+  >
+<!--    <v-icon color="rgba(51, 51, 51, 0.3)">mdi-close-circle-outline</v-icon>-->
+      <v-icon :icon="mdiCloseCircleOutline" />
+  </v-btn>
+</v-card>
