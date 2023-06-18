@@ -7,14 +7,14 @@ import {MessagesJa} from "%/messages/MessagesJa";
 import {LabelsEn} from "%/labels/LabelsEn";
 import {MessagesEn} from "%/messages/MessagesEn";
 import {ValidateMessageEn} from "%/validators/ValidateMessageEn";
-import {LocaleMessageDictionary} from "@intlify/core-base";
+import {LocaleMessage, LocaleMessageDictionary} from "@intlify/core-base";
 import {VueMessageType} from "vue-i18n";
 import {LocaleLabels} from "@/i18n/LocaleLabels";
 
 const builtInJa = validateJa.messages as AbstractLocaleMessageObject;
 const builtInEn = validateEn.messages as AbstractLocaleMessageObject;
 
-export interface DapandaI18nResources extends LocaleMessageDictionary<VueMessageType> {
+export interface DapandaI18nResources extends LocaleMessageDictionary<LocaleMessage<VueMessageType>> {
     labels: LocaleLabels,
     messages: LocaleLabels,
     validations: AbstractLocaleMessageObject

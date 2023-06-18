@@ -9,14 +9,14 @@ plugins {
 }
 
 group 'dapanda.front'
-version '0.0.0'
+version '0.1.0'
 
 apply plugin: 'application'
 
 repositories {
     mavenLocal()
     maven {
-        url 'https://raw.github.com/uedaueo/blancofw-maven2/gh-pages-poi5/'
+        url 'https://raw.github.com/uedaueo/blancofw-maven2/gh-pages-v3/'
     }
     mavenCentral()
 }
@@ -26,19 +26,10 @@ configurations {
 }
 
 dependencies {
-    blancoFramework 'blanco.anttask:blanco-anttask:[2.0,3.0)'
-    blancoFramework 'blanco.batchprocess:blanco-batchprocess:[2.0,3.0)'
-    blancoFramework 'blanco.commons.io:blanco-commons:[2.0,3.0)'
-    blancoFramework 'blanco.cg:blanco-cg:[2.0,3.0)'
-    blancoFramework 'blanco.valueobjectts:blanco-valueobjectts:[0.0,1.0)'
-    blancoFramework 'blanco.restgeneratorts:blanco-restgeneratorts:[0.0,1.0)'
-    blancoFramework 'blanco.pinia:blanco-pinia:[0.0,1.0)'
-    blancoFramework 'blanco.vuecomponent:blanco-vuecomponent:[1.0,2.0)'
-    blancoFramework 'blanco.veevalidate:blanco-veevalidate:[1.0,2.0)'
-    blancoFramework 'blanco.constants:blanco-constants:[2.0,3.0)'
-    blancoFramework 'blanco.meta2xml:blanco-meta2xml:[2.0,3.0)'
-    blancoFramework 'blanco.resourcebundle:blanco-resourcebundle:[2.0,3.0)'
-    blancoFramework 'blanco.xml.bind:blanco-xmlbinding:[2.0,3.0)'
+    blancoFramework 'blanco.restgeneratorts:blanco-restgeneratorts:[3.0,4.0)'
+    blancoFramework 'blanco.pinia:blanco-pinia:[3.0,4.0)'
+    blancoFramework 'blanco.vuecomponent:blanco-vuecomponent:[3.0,4.0)'
+    blancoFramework 'blanco.veevalidate:blanco-veevalidate:[3.0,4.0)'
 }
 
 task metaObjects {

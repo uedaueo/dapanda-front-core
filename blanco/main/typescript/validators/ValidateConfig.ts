@@ -3,8 +3,9 @@
  */
 import { configure, defineRule } from "vee-validate";
 import { LocaleMessageDictionary, LocaleMessages } from "@intlify/core-base";
-import {I18n, VueMessageType} from "vue-i18n";
+import { I18n } from "vue-i18n";
 import { useLocaleSettingStore } from "%/stores/LocaleSettingStore/LocaleSettingStore";
+import { DapandaI18nResources } from "@/i18n/DapandaMessages";
 import { 
     between,
     required
@@ -87,7 +88,7 @@ export class ValidateConfig {
     /**
      * vue-i18nのインスタンスを保持します。
      */
-    static i18n?: I18n<LocaleMessages<VueMessageType>, unknown, unknown, false>;
+    static i18n?: I18n<LocaleMessages<DapandaI18nResources>, unknown, unknown, string, false>;
 
     /**
      * VeeValidateの初期化を実行します。
@@ -132,14 +133,14 @@ export const validateConfig: Partial<VeeValidateConfig> = {
          * we get raw messages from dictionary and pass it to interpolator
          */
         const localeSettings = useLocaleSettingStore();
-        const localeMessages = ValidateConfig.i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;
+        const localeMessages = ValidateConfig.i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary<DapandaI18nResources>;
         if (localeMessages === undefined) {
             return field;
         }
-        let message = (localeMessages.validations as LocaleMessageDictionary)[rule.name] as string;
+        let message = (localeMessages.validations as LocaleMessageDictionary<DapandaI18nResources>)[rule.name] as string;
 
         if (message === undefined) {
-            message = (localeMessages.validations as LocaleMessageDictionary)["_default"] as string;
+            message = (localeMessages.validations as LocaleMessageDictionary<DapandaI18nResources>)["_default"] as string;
         }
         return interpolate(message, {...form, field: fieldName, params: rule.params});
     }

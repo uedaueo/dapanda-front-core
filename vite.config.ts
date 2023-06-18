@@ -16,8 +16,8 @@ export default defineConfig({
   define: { 'process.env': {} },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, '/src'),
-      '%': path.resolve(__dirname, '/blanco/main/typescript'),
+      '@': path.resolve(__dirname, './src'),
+      '%': path.resolve(__dirname, './blanco/main/typescript'),
     }
   },
   server: {
