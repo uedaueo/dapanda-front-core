@@ -1,12 +1,15 @@
 {
   "name": "dapanda-front-core",
+  "description": "frontend core for dapanda framework",
   "version": "0.0.2",
-  "private": true,
+  "files": ["src","blanco"],
+  "private": false,
   "scripts": {
     "serve": "vite preview",
     "build": "vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pack": "vite build && tsc --emitDeclarationOnly"
   },
   "dependencies": {
     "@vee-validate/i18n": "^4.9.6",
