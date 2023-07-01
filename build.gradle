@@ -112,6 +112,60 @@ task metaTelegrams {
     }
 }
 
+task metaTelegramsPlain {
+    dependsOn "metaTelegrams"
+    logging.captureStandardOutput LogLevel.INFO
+    group "blanco"
+    description "Generate plain API object source for typescript by blancoRestGeneratorTs"
+    doFirst {
+        println 'A task message which is logged at INFO level'
+    }
+    doLast {
+        ant.taskdef(name: 'blancovalueobjectts',
+                classname: 'blanco.valueobjectts.task.BlancoValueObjectTsTask',
+                classpath: configurations.blancoFramework.asPath
+        )
+        ant.taskdef(name: 'blancorestgeneratorts',
+                classname: 'blanco.restgeneratorts.task.BlancoRestGeneratorTsTask',
+                classpath: configurations.blancoFramework.asPath
+        )
+//        /* telegrams */
+//        ant.blancovalueobjectts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/telegrams",
+//                tmpdir: "${buildDir}/tmpTelegrams",
+//                targetdir: "${projectDir}/blanco",
+//                targetStyle: "maven",
+//                sheetType: 'php',
+//                tabs: 4,
+//                lineSeparator: 'LF',
+//                verbose: true,
+//                generateToJson: true,
+//                encoding: getProperty("blanco.encoding")
+//        )
+        /*
+         * API
+         * create empty dir tmpApiSamles/valueobjectts because blancoRestGeneratorTs is
+         * default search the directory for API parmaeter objects.
+         */
+        new File("${buildDir}/tmpApiPlainSamples/valueobjectts").mkdirs();
+        ant.blancorestgeneratorts(metadir: "${projectDir}" + getProperty("blanco.metadir") + "/meta/apiPlain",
+                tmpdir: "${buildDir}/tmpApiPlainSamples",
+                targetdir: "${projectDir}/blanco",
+                targetStyle: "maven",
+                sheetType: 'php',
+                encoding: getProperty("blanco.encoding"),
+                verbose: "true",
+                generateToJson: true,
+                tabs: 4,
+                searchTmpdir: "${buildDir}/tmpObjects,${buildDir}/tmpTelegrams",
+                lineSeparator: 'LF',
+                processlist: "samples.SamplePlainApiList",
+                processlistBase: "@",
+                client: "true",
+                telegramStyle: "plain"
+        )
+    }
+}
+
 task metaLabels {
     dependsOn "metaObjects"
     logging.captureStandardOutput LogLevel.INFO
@@ -213,7 +267,7 @@ task metaMessages {
 }
 
 task metaComponents {
-    dependsOn "metaTelegrams"
+    dependsOn "metaTelegramsPlain"
     logging.captureStandardOutput LogLevel.INFO
     group "blanco"
     description "Generate vue components for typescript by blancoVueComponent"
