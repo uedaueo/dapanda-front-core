@@ -6,13 +6,20 @@ import { ApiGetTelegram } from "%/blanco/restgenerator/valueobject/ApiGetTelegra
 /**
  * blancoRestのサンプルAPIの応答電文です。
  */
-export class ApiPlainSampleGetError001 extends ApiGetTelegram {
+export class ApiPlainCommonGetError extends ApiGetTelegram {
     /**
-     * データ
+     * エラーコード
      *
-     * 規定値   [new Array&lt;string&gt;()]
+     * 規定値   [&quot;&quot;]
      */
-    private fData: Array<string> = new Array<string>();
+    private fCode: string = "";
+
+    /**
+     * エラーメッセージ
+     *
+     * 規定値   [&quot;&quot;]
+     */
+    private fMessage: string = "";
 
     /**
      * 規定値   [null]
@@ -25,49 +32,72 @@ export class ApiPlainSampleGetError001 extends ApiGetTelegram {
     private _statusCode: string = "500";
 
     /**
-     * フィールド [data]のセッターメソッド
+     * フィールド [code]のセッターメソッド
      *
-     * 項目の型 [データ]
+     * 項目の型 [エラーコード]
      *
-     * @param argData フィールド[data]に格納したい値
+     * @param argCode フィールド[code]に格納したい値
      */
-    set data(argData: Array<string>) {
-        this.fData = argData;
+    set code(argCode: string) {
+        this.fCode = argCode;
     }
 
     /**
-     * フィールド[data]のゲッターメソッド
+     * フィールド[code]のゲッターメソッド
      *
-     * 項目の型 [データ]
-     * 規定値   [new Array&lt;string&gt;()]
+     * 項目の型 [エラーコード]
+     * 規定値   [&quot;&quot;]
      *
-     * @return フィールド[data]に格納されている値
+     * @return フィールド[code]に格納されている値
      */
-    get data(): Array<string> {
-        return this.fData;
+    get code(): string {
+        return this.fCode;
     }
 
     /**
-     * フィールド[data]のゲッターメソッド
-     *
-     * 項目の型 [Array]
-     * データ
-     *
-     * @return フィールド[data]の型名文字列
-     */
-    static typeData(): string | undefined {
-        return "Array";
-    }
-
-    /**
-     * フィールド[data]のゲッターメソッド
+     * フィールド[code]のゲッターメソッド
      *
      * 項目の型 [string]
-     * データ
+     * エラーコード
      *
-     * @return フィールド[data]の型名文字列
+     * @return フィールド[code]の型名文字列
      */
-    static genericData(): string | undefined {
+    static typeCode(): string | undefined {
+        return "string";
+    }
+
+    /**
+     * フィールド [message]のセッターメソッド
+     *
+     * 項目の型 [エラーメッセージ]
+     *
+     * @param argMessage フィールド[message]に格納したい値
+     */
+    set message(argMessage: string) {
+        this.fMessage = argMessage;
+    }
+
+    /**
+     * フィールド[message]のゲッターメソッド
+     *
+     * 項目の型 [エラーメッセージ]
+     * 規定値   [&quot;&quot;]
+     *
+     * @return フィールド[message]に格納されている値
+     */
+    get message(): string {
+        return this.fMessage;
+    }
+
+    /**
+     * フィールド[message]のゲッターメソッド
+     *
+     * 項目の型 [string]
+     * エラーメッセージ
+     *
+     * @return フィールド[message]の型名文字列
+     */
+    static typeMessage(): string | undefined {
         return "string";
     }
 
@@ -77,7 +107,7 @@ export class ApiPlainSampleGetError001 extends ApiGetTelegram {
      * @return The class name of this telegram.
      */
     get telegramId(): string {
-        return "ApiPlainSampleGetError001";
+        return "ApiPlainCommonGetError";
     }
 
     /**
@@ -149,7 +179,8 @@ export class ApiPlainSampleGetError001 extends ApiGetTelegram {
      */
     toJSON(): any {
         return {
-            data: this.data
+            code: this.code,
+            message: this.message
         };
     }
 }

@@ -15,6 +15,11 @@ export class ApiPlainSampleGetResponse extends ApiGetTelegram {
     private fData: Array<string> = new Array<string>();
 
     /**
+     * 規定値   [null]
+     */
+    private _additionalPath: string | undefined = undefined;
+
+    /**
      * フィールド [data]のセッターメソッド
      *
      * 項目の型 [データ]
@@ -86,6 +91,28 @@ export class ApiPlainSampleGetResponse extends ApiGetTelegram {
      */
     get telegramMethod(): string {
         return "GET";
+    }
+
+    /**
+     * フィールド [_additionalPath]のセッターメソッド
+     *
+     * 項目の型 [string | undefined]
+     *
+     * @param argAdditionalPath フィールド[_additionalPath]に格納したい値
+     */
+    set additionalPath(argAdditionalPath: string | undefined) {
+        this._additionalPath = argAdditionalPath;
+    }
+
+    /**
+     * フィールド[_additionalPath]のゲッターメソッド
+     *
+     * 項目の型 [string|undefined]
+     *
+     * @return フィールド[_additionalPath]に格納されている値
+     */
+    get additionalPath(): string | undefined {
+        return this._additionalPath;
     }
 
     /**

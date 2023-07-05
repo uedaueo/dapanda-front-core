@@ -13,6 +13,10 @@ import {Locale} from "%/blanco/restgenerator/valueobject/Locale";
 import {RestoreLoginDataCallbackType, RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
 import {ResponseHeader} from "%/blanco/restgenerator/valueobject/ResponseHeader";
+import {ApiPlainCommonPostError} from "%/common/api/plain/ApiPlainCommonPostError";
+import {ApiPlainCommonGetError} from "%/common/api/plain/ApiPlainCommonGetError";
+import {ApiPlainCommonPutError} from "%/common/api/plain/ApiPlainCommonPutError";
+import {ApiPlainCommonDeleteError} from "%/common/api/plain/ApiPlainCommonDeleteError";
 
 /**
  * API 電文処理のベースクラスです。
@@ -58,10 +62,39 @@ export abstract class ApiBase {
      * @param request
      * @param processName
      * @param method
+     * @param issuer
+     * @param authHeader?
+     * @param useBearer?
      * @param options?
      *
      */
     async send(
+        request: ApiTelegram,
+        processName: string,
+        method: string,
+        issuer: string,
+        authHeader?: string,
+        useBearer?: boolean,
+        options?: CommunicationOptions | undefined): Promise<CommonResponse | undefined> {
+        if (import.meta.env.VITE_APP_API_TELEGRAM_STYLE === "plain") {
+            return this.sendPlain(request, processName, method, issuer, authHeader, useBearer, options);
+        } else {
+            return this.sendBlanco(request, processName, method, issuer, authHeader, useBearer, options);
+        }
+    }
+
+    /**
+     * API呼び出しのEntryポイント
+     * @param request
+     * @param processName
+     * @param method
+     * @param issuer
+     * @param authHeader?
+     * @param useBearer?
+     * @param options?
+     *
+     */
+    async sendBlanco(
         request: ApiTelegram,
         processName: string,
         method: string,
@@ -99,6 +132,145 @@ export abstract class ApiBase {
             message.messages = "Auth Error";
             message.code = "";
             this._commonResponse.messages = [message];
+        } else if (!("VITE_APP_API_ENDPOINT" in import.meta.env)) {
+            /* GET JSON FILE */
+            uri = this.getJsonFileName(request, processName, method, options);
+            res = await axios.get<CommonResponse>(uri);
+            this._commonResponse = res.data;
+        } else {
+            uri = import.meta.env.VITE_APP_API_ENDPOINT + this.locationURL;
+            let headers: { [key: string]: string } = {};
+            headers["content-type"] = "application/json";
+            if (loginToken && loginToken != "") {
+                let myToken = loginToken;
+                if (useBearer) {
+                    myToken = "Bearer " + loginToken;
+                }
+                let myAuthHeader = DapandaConst.DapandaAccessTokenHeader;
+                if (authHeader) {
+                    myAuthHeader = authHeader;
+                }
+                headers[myAuthHeader] = myToken;
+            }
+            if (options && options.additionalHeaders) {
+                headers = Object.assign(headers, options.additionalHeaders);
+            }
+            try {
+                switch (method) {
+                    case DapandaConst.HttpMethodPost:
+                        res = await axios.post<CommonResponse>(uri, body, {headers});
+                        break;
+                    case DapandaConst.HttpMethodPut:
+                        res = await axios.put<CommonResponse>(uri, body, {headers});
+                        break;
+                    case DapandaConst.HttpMethodGet:
+                        uri += "?request=" + encodeURI(body);
+                        res = await axios.get<CommonResponse>(uri, {headers});
+                        break;
+                    case DapandaConst.HttpMethodDelete:
+                        uri += "?request=" + encodeURI(body);
+                        res = await axios.delete<CommonResponse>(uri, {headers});
+                        break;
+                    default:
+                        throw "Invalid method.";
+                }
+            } catch (exception) {
+                res = (exception as AxiosError).response;
+            }
+
+            if (res) {
+                this._commonResponse = res.data as CommonResponse;
+            } else {
+                console.log("ApiBase#send !!! NO RESPONSE FOUND !!!");
+                return undefined;
+            }
+        }
+
+        if (this._commonResponse) {
+            if (
+                this._commonResponse.messages &&
+                this._commonResponse.messages.length !== 0
+            ) {
+                console.log("API message num = " + this._commonResponse.messages.length);
+                this.messages = this._commonResponse.messages;
+            }
+        }
+
+        if (!this._commonResponse) {
+            return undefined;
+        }
+        return this._commonResponse;
+    }
+
+    /**
+     * telegramType plain の時の API 呼び出しのEntryポイント
+     * @param request
+     * @param processName
+     * @param method
+     * @param issuer
+     * @param authHeader?
+     * @param useBearer?
+     * @param options?
+     *
+     */
+    async sendPlain(
+        request: ApiTelegram,
+        processName: string,
+        method: string,
+        issuer: string,
+        authHeader?: string,
+        useBearer?: boolean,
+        options?: CommunicationOptions | undefined): Promise<CommonResponse | undefined> {
+
+        /* prepare accessToken for X-Dapanda-AccessToken header */
+        let authError = false;
+        let loginToken = "";
+        if (this.isAuthenticationRequired()) {
+            const loginInfo = await this.prepareLoginInfo(issuer);
+            if (loginInfo) {
+                loginToken = loginInfo.loginToken;
+            } else {
+                /* TODO Error handling */
+                authError = true;
+            }
+        }
+
+        let isMethodPost = method === DapandaConst.HttpMethodPost;
+        let isMethodPut = method === DapandaConst.HttpMethodPut;
+        let isMethodGet = method === DapandaConst.HttpMethodGet;
+        let isMethodDelete = method === DapandaConst.HttpMethodDelete;
+
+        if (!isMethodPost && !isMethodPut && !isMethodGet && !isMethodDelete) {
+                throw "Invalid method.";
+        }
+
+        let body: string = "";
+
+        body = JSON.stringify(request);
+        console.log("ApiBase#send: json = " + body);
+
+        let uri: string;
+        let res;
+        if (authError) {
+            console.log("ApiBase#sendPlain: authError");
+            this._commonResponse = new CommonResponse();
+            const info = new ResponseHeader();
+            // TODO set locale etc.
+            info.result = "403";
+            let telegram;
+            if (isMethodPost) {
+                telegram = new ApiPlainCommonPostError();
+            } else if (isMethodPut) {
+                telegram = new ApiPlainCommonPutError();
+            } else if (isMethodGet) {
+                telegram = new ApiPlainCommonGetError();
+            } else {
+                /* delete */
+                telegram = new ApiPlainCommonDeleteError();
+            }
+            telegram.code = "";
+            telegram.message = "Auth Error";
+            this._commonResponse.telegram = telegram;
         } else if (!("VITE_APP_API_ENDPOINT" in import.meta.env)) {
             /* GET JSON FILE */
             uri = this.getJsonFileName(request, processName, method, options);
