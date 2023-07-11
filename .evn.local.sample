@@ -1,2 +1,3 @@
 VITE_APP_API_ENDPOINT=https://apiserv.example.com/api
 VITE_APP_API_TELEGRAM_STYLE=blanco
+VITE_APP_ROUTE_BASE=/route/base/

@@ -52,9 +52,9 @@ export default defineComponent({
         const { showProcessing, logout } = storeToRefs(commonStatusStore);
 
         /* remove baseUrl from current pathname */
-        const baseUrl = process.env.BASE_URL;
+        const baseUrl = import.meta.env.VITE_APP_ROUTE_BASE;
         let targetPath = window.location.pathname;
-        if (baseUrl) {
+        if (baseUrl && baseUrl !== "/") {
             targetPath = targetPath.slice(baseUrl.length);
         }
         console.log("targetPath: " + targetPath);
