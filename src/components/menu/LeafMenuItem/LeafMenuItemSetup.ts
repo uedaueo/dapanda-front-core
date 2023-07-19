@@ -22,7 +22,7 @@ export const leafMenuItemSetup = (props: LeafMenuItemProps, context: SetupContex
         return klass;
     };
     const onClickMenu = (menu: MenuItem) => {
-        pageTransitDataStore.updateLocation("" + menu.path);
+        pageTransitDataStore.updateLocation("" + menu.path, undefined, undefined, menu.queryAndHash);
     }
     return {
         color,

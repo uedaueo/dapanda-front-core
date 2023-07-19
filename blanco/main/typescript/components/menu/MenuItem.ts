@@ -1,3 +1,5 @@
+import { RouteQueryAndHash } from "vue-router";
+
 /**
  * メニュー項目を表すクラスです。
  */
@@ -71,4 +73,11 @@ export interface MenuItem {
      * フィールド: [disabled]。
      */
     disabled?: boolean;
+
+    /**
+     * 遷移先URLに付加するqueryとhash
+     *
+     * フィールド: [queryAndHash]。
+     */
+    queryAndHash?: RouteQueryAndHash;
 }

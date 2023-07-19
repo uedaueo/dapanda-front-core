@@ -8,7 +8,7 @@ export const validationSampleRouteRecord: RouteRecordRaw = {
     name: "validation",
     component: () => import("%/samples/pages/ValidationSample/ValidationSample.vue"),
     meta: {
-        reload: false,
+        reload: true,
         authRequired: true
     },
     props: route => ({

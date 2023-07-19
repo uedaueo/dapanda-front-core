@@ -57,6 +57,12 @@ export const dummyMenuData: Array<MenuItem> = [
                 menuId: 'Validation',
                 description: 'Validation',
                 path: validationSampleRouteRecord.path,
+                queryAndHash: {
+                    query: {
+                        qname: 'menu!'
+                    },
+                    hash: '#bogege'
+                },
                 nameId: validationSampleRouteRecord.name as string,
                 icon: "mdi-information-outline"
             }

@@ -99,8 +99,9 @@ export class RouterHooks {
              * ここではページのリロードを行うかどうかのみチェックする。
              */
             if (isReload) {
-                console.log(" reload!");
-                window.location.href = to.path;
+                const location = router.resolve(to);
+                console.log(" reload! href = " + location.href);
+                window.location.href = location.href;
             } else {
                 console.log(" next!");
                 next();
