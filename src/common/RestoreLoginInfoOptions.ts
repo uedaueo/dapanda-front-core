@@ -1,10 +1,11 @@
 import {LoginInfo} from "%/common/LoginInfo";
+import {RouteQueryAndHash} from "vue-router";
 
 /**
  * LoginInfo を restore した後に呼ばれる callback の型定義
  */
 export interface RestoreLoginDataCallbackType {
-    (loginInfo: LoginInfo | undefined, authRequired: boolean, restoreTransitData: boolean, transitTo: string): void;
+    (loginInfo: LoginInfo | undefined, authRequired: boolean, restoreTransitData: boolean, transitTo: string, queryAndHash?: RouteQueryAndHash): void;
 }
 
 /**
@@ -15,5 +16,6 @@ export interface RestoreLoginDataOptions {
     callback: RestoreLoginDataCallbackType,
     authRequired: boolean,
     restoreTransitData: boolean,
-    transitTo: string
+    transitTo: string,
+    queryAndHash?: RouteQueryAndHash
 }

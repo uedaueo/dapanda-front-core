@@ -1,4 +1,5 @@
 import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOptions";
+import { RouteQueryAndHash } from "vue-router";
 import { PageTransitDataStoreState } from "./PageTransitDataStoreState";
 import { UnwrapRef } from "vue";
 import { PageTransitData } from "%/common/PageTransitData";
@@ -11,12 +12,14 @@ export declare type PageTransitDataStoreActionsTree = {
      * @param location null
      * @param data null
      * @param issuer 更新を発行したコンポーネントです
+     * @param queryAndHash null
      * @return void
      */
     updateLocation(
             location: string,
             data?: PageTransitData,
-            issuer?: string
+            issuer?: string,
+            queryAndHash?: RouteQueryAndHash
     ): void;
     /**
      * ページリロード時にリストアを試みます

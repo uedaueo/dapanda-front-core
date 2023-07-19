@@ -19,6 +19,10 @@ export interface ValidationSampleInterface {
      * コンポーネントのaliasプロパティです
      */
     alias?: string;
+
+    /**
+     */
+    pname?: string;
 }
 
 /** propsの型を定義します */
@@ -36,5 +40,8 @@ export const validationSampleProps: ComponentPropsOptions<ValidationSampleInterf
     },
     alias: {
         default: "Validationサンプル"
+    },
+    pname: {
+        default: ""
     }
 };

@@ -1,6 +1,6 @@
 import {defineComponent, provide, ref, watch} from "vue";
 import MenuBar from "%/components/menu/MenuBar/MenuBar.vue";
-import {useRouter} from "vue-router";
+import {LocationQuery, parseQuery, RouteLocationRaw, RouteQueryAndHash, useRouter} from "vue-router";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
 import {useCommonStatusStore} from "%/stores/CommonStatusStore/CommonStatusStore";
 import {storeToRefs} from "pinia";
@@ -57,21 +57,36 @@ export default defineComponent({
         if (baseUrl && baseUrl !== "/") {
             targetPath = targetPath.slice(baseUrl.length);
         }
-        console.log("targetPath: " + targetPath);
+        /* support queryString */
+        let queryString = window.location.search;
+        let locationQuery: LocationQuery|undefined = undefined;
+        if (typeof queryString !== 'undefined' && queryString.length > 0) {
+            locationQuery = parseQuery(queryString);
+        }
+        /* Support hash */
+        let hashString: string|undefined = window.location.hash;
+        console.log("targetPath: " + targetPath + ", query: " + queryString + ", hash: " + hashString);
 
         /* Check page exist on directly specified with GET method */
         const router = useRouter();
+
+        const routeLocation: RouteLocationRaw = {
+            path: targetPath,
+            query: locationQuery,
+            hash: hashString
+        }
 
         /* Set Global guards */
         router.beforeResolve((to, from, next) => {
             RouterHooks.beforeResolve(router, to, from, next, props.nopagePath);
         });
 
-        let resolved = router.resolve({path: targetPath});
+        let resolved = router.resolve(routeLocation);
         console.log("matched: " + resolved.matched.length);
         console.log("path: " + resolved.path);
         console.log("name: " + (resolved.name as string));
         console.log("href: " + resolved.href);
+        console.log("query: " + JSON.stringify(resolved.query));
 
         /* Restore Authentication Info. */
         const authStore = useAuthenticationControllerStore();
@@ -84,7 +99,8 @@ export default defineComponent({
             loginInfo: LoginInfo | undefined,
             authRequired: boolean,
             restoreTransitData: boolean,
-            transitTo: string
+            transitTo: string,
+            queryAndHash?: RouteQueryAndHash
         ): void => {
             console.log("Auth Restore callback: loginInfo = " + loginInfo + ", authRequired = " + authRequired);
             let noAuth = false;
@@ -106,7 +122,7 @@ export default defineComponent({
                     if (pageTransitDataStore.dataStatus === DapandaConst.PageTransitDataStatusUpdated) {
                         pageTransitDataStore.setDataStatus(DapandaConst.PageTransitDataStatusValid, props.componentId);
                     }
-                    pageTransitDataStore.updateLocation(transitTo);
+                    pageTransitDataStore.updateLocation(transitTo, undefined, props.componentId, queryAndHash);
                 }
                 const pageDataOptions: RestorePageTransitDataOptions = {
                     callback: pageDataRestoreCallback
@@ -118,7 +134,8 @@ export default defineComponent({
             callback: restoreLoginDataCallback,
             authRequired: resolved.meta.authRequired as boolean,
             restoreTransitData: true,
-            transitTo: resolved.matched.length == 0 ? props.nopagePath : resolved.path
+            transitTo: resolved.matched.length == 0 ? props.nopagePath : resolved.path,
+            queryAndHash: routeLocation as RouteQueryAndHash
         };
         /* async */
         authStore.restore(options, props.componentId);

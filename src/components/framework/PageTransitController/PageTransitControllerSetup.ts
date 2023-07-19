@@ -1,10 +1,9 @@
 import {SetupContext, watch} from "vue";
 import {storeToRefs} from "pinia";
-import {useRouter} from "vue-router";
+import {RouteLocationRaw, useRouter} from "vue-router";
 import {PageTransitControllerProps} from "%/components/framework/PageTransitController/PageTransitControllerProps";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
 import {DapandaConst} from "@/common/DapandaGlobals";
-import {pageTransitDataStoreState} from "%/stores/PageTransitDataStore/PageTransitDataStoreState";
 import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOptions";
 
 export const pageTransitControllerSetup = (props: PageTransitControllerProps, context: SetupContext) => {
@@ -13,8 +12,15 @@ export const pageTransitControllerSetup = (props: PageTransitControllerProps, co
     console.log("pageTransitControllerSetup: location = " + location.value);
     const router = useRouter();
     watch(location, () => {
-        console.log("toLocation " + location.value);
-        router.push(location.value);
+        console.log("pageTransitControllerSetup toLocation " + location.value + ", query = " + JSON.stringify(pageTransitData.queryAndHash));
+        const routeLocation: RouteLocationRaw = {
+            path: location.value,
+            query: undefined,
+            hash: undefined
+        };
+        routeLocation.query = pageTransitData.queryAndHash?.query;
+        routeLocation.hash = pageTransitData.queryAndHash?.hash;
+        router.push(routeLocation);
     });
     watch(dataStatus, () => {
         console.log("pageTransitionControllerSetup: dataStatus = " + dataStatus.value + ", dataIssuer = " + pageTransitData.dataIssuer);

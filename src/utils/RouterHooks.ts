@@ -1,4 +1,4 @@
-import {NavigationGuardNext, RouteLocationNormalized, Router} from "vue-router";
+import {NavigationGuardNext, RouteLocationNormalized, RouteQueryAndHash, Router} from "vue-router";
 import {LoginInfo} from "%/common/LoginInfo";
 import {RestoreLoginDataCallbackType, RestoreLoginDataOptions} from "@/common/RestoreLoginInfoOptions";
 import {useAuthenticationControllerStore} from "%/stores/AuthenticationControllerStore/AuthenticationControllerStore";
@@ -17,10 +17,12 @@ export class RouterHooks {
      * @param to
      * @param from
      * @param next
+     * @param nopagePath
+     * @param queryAndHash to には query 情報がないので明示的に
      */
     static beforeResolve(router: Router, to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext, nopagePath: string) {
         console.log(
-            "RouterHooks#beforeResolve: from " + from.path + " to " + to.path
+            "RouterHooks#beforeResolve: from " + from.path + " to " + to.path + " to.query = " + JSON.stringify(to.query)
         );
 
         /*
@@ -31,6 +33,17 @@ export class RouterHooks {
         console.log("guard path: " + resolved.path);
         console.log("guard name: " + (resolved.name as string));
         console.log("guard href: " + resolved.href);
+        console.log("guard query: " + JSON.stringify(resolved.query));
+
+        const query = resolved.query;
+        const hash = resolved.hash;
+        let hashAndQuery: RouteQueryAndHash|undefined = undefined;
+        if (query || hash) {
+            hashAndQuery = {
+                query: query,
+                hash: hash
+            }
+        }
 
         /*
          * route が登録済み。
@@ -45,9 +58,9 @@ export class RouterHooks {
                 next();
             } else {
                 if (pageStore.data) {
-                    pageStore.updateLocation(resolved.path, pageStore.data as PageTransitData);
+                    pageStore.updateLocation(resolved.path, pageStore.data as PageTransitData, undefined, hashAndQuery);
                 } else {
-                    pageStore.updateLocation(resolved.path);
+                    pageStore.updateLocation(resolved.path, undefined, undefined, hashAndQuery);
                 }
             }
             return;

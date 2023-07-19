@@ -1,4 +1,5 @@
 import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOptions";
+import { RouteQueryAndHash } from "vue-router";
 import { PageTransitData } from "%/common/PageTransitData";
 
 /**
@@ -38,6 +39,11 @@ export interface PageTransitDataStoreState {
      * restore, saveなどの更新操作を行ったコンポーネントのId
      */
     dataIssuer: string;
+
+    /**
+     * 遷移先ページのURLに付加するqueryとhash情報です。
+     */
+    queryAndHash?: RouteQueryAndHash;
 }
 
 /**

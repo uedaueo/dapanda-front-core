@@ -2,13 +2,20 @@ import {definePageTransitDataStoreActions} from "%/stores/PageTransitDataStore/D
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {PageTransitData} from "%/common/PageTransitData";
 import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOptions";
+import {LocationQuery, RouteLocationRaw, RouteQueryAndHash} from "vue-router";
 
 export const pageTransitDataStoreActions = definePageTransitDataStoreActions(
     {
-        updateLocation(location: string, data?: PageTransitData, issuer?: string) {
+        updateLocation(location: string, data?: PageTransitData, issuer?: string, queryAndHash?: RouteQueryAndHash) {
             console.log("current store.location is : " + this.location);
             console.log("pageTransitDataStoreOptions.actions.update to : " + location);
             this.location = location;
+            if (queryAndHash) {
+                console.log("query = " + JSON.stringify(queryAndHash.query));
+                this.queryAndHash = queryAndHash;
+            } else {
+                this.queryAndHash = undefined;
+            }
             if (data) {
                 this.data = data;
                 /* Store it into session storage */

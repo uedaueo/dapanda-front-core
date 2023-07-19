@@ -1,5 +1,5 @@
 import {ValidationSampleProps} from "%/samples/pages/ValidationSample/ValidationSampleProps";
-import {inject, ref, SetupContext} from "vue";
+import {inject, onMounted, ref, SetupContext} from "vue";
 import {useI18n} from "vue-i18n";
 import {ChartSampleInitData} from "%/samples/pages/ChartSample/ChartSampleInitData";
 import {usePageTransitDataStore} from "%/stores/PageTransitDataStore/PageTransitDataStore";
@@ -8,6 +8,7 @@ import {PageTransitData} from "%/common/PageTransitData";
 export const validationSampleSetup = (props: ValidationSampleProps, context: SetupContext) => {
     const { t } = useI18n();
     const title = ref(props.subject);
+    const dname = ref(props.pname);
 
     const send = inject('send');
 
@@ -19,11 +20,16 @@ export const validationSampleSetup = (props: ValidationSampleProps, context: Set
         const data = new PageTransitData();
         data.type = "ChartSampleInitData";
         data.data = chartData;
-        pageStore.updateLocation("/chartSample", data);
+        pageStore.updateLocation("/chartSample", data, props.componentId, pageStore.queryAndHash);
     }
+    onMounted(() => {
+        console.log("query param name = " + dname.value);
+    })
+
     return {
         t,
         title,
-        onSubmit
+        onSubmit,
+        dname
     }
 }

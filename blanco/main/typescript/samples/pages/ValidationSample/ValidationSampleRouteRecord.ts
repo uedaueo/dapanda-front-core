@@ -10,5 +10,8 @@ export const validationSampleRouteRecord: RouteRecordRaw = {
     meta: {
         reload: false,
         authRequired: true
-    }
+    },
+    props: route => ({
+        pname: route.query.qname
+    })
 };

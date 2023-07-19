@@ -47,7 +47,7 @@ export const authenticationControllerSetup = (props: AuthenticationControllerPro
             } else {
                 authStore.update(restored, authStore.issuer); // status changed to updated.
                 if (options) {
-                    options.callback(restored, options.authRequired, options.restoreTransitData, options.transitTo);
+                    options.callback(restored, options.authRequired, options.restoreTransitData, options.transitTo, options.queryAndHash);
                 }
             }
         } else if (status.value === DapandaConst.AuthenticationStatusRemoving) {
