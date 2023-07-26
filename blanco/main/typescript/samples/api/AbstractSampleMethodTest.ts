@@ -8,9 +8,9 @@ import { ApiBase } from "@/common/ApiBase";
  */
 export abstract class AbstractSampleMethodTest extends ApiBase {
     /**
-     * 規定値   [null/sample_methods]
+     * 規定値   [/sample_methods]
      */
-    private _locationURL: string = "null/sample_methods";
+    private _locationURL: string = "/sample_methods";
 
     /**
      * APIが認証を必要とするかどうかのフラグです．必要な場合はtrueです．

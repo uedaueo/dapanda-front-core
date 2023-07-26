@@ -26,6 +26,7 @@ export namespace DapandaConst {
     export const EnvironmentNameProduction = "PRD";
     export const LocalStorageItemKey = "dapanda";
     export const SessionStorageItemKey = "sepanda";
+    export const AccessControlExposeHeaders = "Access-Control-Expose-Headers";
     export const DapandaAccessTokenHeader = "X-Dapanda-AccessToken";
     export const DapandaLanguage = "X-Dapanda-Language";
     export const DapandaTimezone = "X-Dapanda-Timezone";

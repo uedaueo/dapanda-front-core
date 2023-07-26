@@ -259,7 +259,7 @@ export abstract class ApiBase {
         console.log("ApiBase#send: json = " + body);
 
         let uri: string;
-        let res;
+        let res: AxiosResponse<CommonResponse> | undefined;
         if (authError) {
             console.log("ApiBase#sendPlain: authError");
             this._commonResponse = new CommonResponse();
@@ -331,11 +331,13 @@ export abstract class ApiBase {
                         throw "Invalid method.";
                 }
             } catch (exception) {
-                res = (exception as AxiosError).response;
+                res = undefined;
+                const err = exception as AxiosError;
+                console.log("CommunicationError: error = " + JSON.stringify(err))
             }
 
             if (res) {
-                this._commonResponse = res.data as CommonResponse;
+                this._commonResponse = res.data;
             } else {
                 console.log("ApiBase#send !!! NO RESPONSE FOUND !!!");
                 return undefined;
@@ -450,10 +452,10 @@ export abstract class ApiBase {
      * @param error
      */
     private responseOnRejected = (error: any): AxiosResponse<CommonResponse> => {
-        const axiosError: AxiosError = error;
+        const axiosError: AxiosError<ApiTelegram> = error;
         if (axiosError.response) {
             /* application error */
-            const response = axiosError.response as AxiosResponse<ApiTelegram>;
+            const response = axiosError.response;
             return this.convertToCommonResponse(response, DapandaConst.ResultError);
         } else {
             throw axiosError
@@ -467,16 +469,26 @@ export abstract class ApiBase {
      * @private
      */
     private convertToCommonResponse(response: AxiosResponse<ApiTelegram>, result: string): AxiosResponse<CommonResponse> {
+        /* check error parsed */
+        const testResponse = (response as unknown) as AxiosResponse<CommonResponse>;
+        if (testResponse.data && testResponse.data.info) {
+            console.log("convertToCommonResponse maybe second time.");
+            console.log("convertToCommonResponse headers = " + JSON.stringify(response.headers));
+            /* already parsed */
+            return testResponse;
+        }
+
         const commonResponse = new CommonResponse();
         const info = new PlainResponseHeader();
         info.result = result;
         info.statusText = response.statusText;
         info.status = response.status;
-        info.time = response.headers[DapandaConst.DapandaElapsedTime];
+        console.log("convertToCommonResponse headers = " + JSON.stringify(response.headers));
+        info.time = response.headers[DapandaConst.DapandaElapsedTime.toLowerCase()];
         const locale = new Locale();
-        locale.lang = response.headers[DapandaConst.DapandaLanguage];
-        locale.tz = response.headers[DapandaConst.DapandaTimezone];
-        locale.currency = response.headers[DapandaConst.DapandaCurrency];
+        locale.lang = response.headers[DapandaConst.DapandaLanguage.toLowerCase()];
+        locale.tz = response.headers[DapandaConst.DapandaTimezone.toLowerCase()];
+        locale.currency = response.headers[DapandaConst.DapandaCurrency.toLowerCase()];
         info.locale = locale;
         commonResponse.info = info;
         commonResponse.telegram = response.data;
@@ -487,7 +499,7 @@ export abstract class ApiBase {
             headers: response.headers,
             config: response.config,
             request: response.request
-        };
+        } as AxiosResponse<CommonResponse>;
     }
 
     protected isAuthenticationRequired(): boolean | undefined {

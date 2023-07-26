@@ -4,7 +4,7 @@ import {
 import {CommonResponse} from "%/blanco/restgenerator/valueobject/CommonResponse";
 
 export const sampleMethodTestPostResponseStoreActions = defineSampleMethodTestPostResponseStoreActions({
-    setResponse(respnse: CommonResponse) {
-        this.response = respnse;
+    setResponse(response: CommonResponse) {
+        this.response = response;
     }
 });

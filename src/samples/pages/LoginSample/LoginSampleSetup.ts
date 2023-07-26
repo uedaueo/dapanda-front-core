@@ -33,7 +33,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     /* call dapanda-api-core */
     const dapandaRequest = factory.createSampleMethodTestPostRequest();
     const dapandaStore = useSampleMethodTestPostResponseStore();
-    const { dapandaResponse } = storeToRefs(dapandaStore);
+    const { response: dapandaResponse } = storeToRefs(dapandaStore);
 
     const onSubmitDapanda = (values: any) => {
         console.log("onSubmitDapanda : " + values.id + ", " + values.password);
@@ -43,7 +43,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     }
 
     watch(dapandaResponse, () => {
-        console.log("sampleMethodTest#watch(dapandaResponse : " + JSON.stringify(dapandaResponse));
+        console.log("sampleMethodTest#watch(dapandaResponse : " + JSON.stringify(dapandaResponse.value));
     });
 
     const onSubmit = (values: any) => {
