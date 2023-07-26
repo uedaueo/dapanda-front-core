@@ -13,6 +13,9 @@ import {storeToRefs} from "pinia";
 import {useSnackbarStore} from "%/stores/SnackbarStore/SnackbarStore";
 import {SnackbarUtils} from "@/utils/SnackbarUtils";
 import {MessageItem} from "%/blanco/restgenerator/valueobject/MessageItem";
+import {
+    useSampleMethodTestPostResponseStore
+} from "%/stores/SampleMethodTestPostResponseStore/SampleMethodTestPostResponseStore";
 
 export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext, factory: LoginSampleRequestFactory) => {
     const { t } = useI18n();
@@ -27,6 +30,22 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     const { status } = storeToRefs(authStore);
     const snackbarStore = useSnackbarStore();
 
+    /* call dapanda-api-core */
+    const dapandaRequest = factory.createSampleMethodTestPostRequest();
+    const dapandaStore = useSampleMethodTestPostResponseStore();
+    const { dapandaResponse } = storeToRefs(dapandaStore);
+
+    const onSubmitDapanda = (values: any) => {
+        console.log("onSubmitDapanda : " + values.id + ", " + values.password);
+        dapandaRequest.userId = values.id;
+        dapandaRequest.password = values.password;
+        send(dapandaRequest, dapandaStore, props.componentId);
+    }
+
+    watch(dapandaResponse, () => {
+        console.log("sampleMethodTest#watch(dapandaResponse : " + JSON.stringify(dapandaResponse));
+    });
+
     const onSubmit = (values: any) => {
         console.log("Submitted : " + values.id + ", " + values.password);
         postRequest.id = values.id;
@@ -34,6 +53,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
         /* remove loginInfo from store and localStorage */
         authStore.remove(props.componentId); // wait removed
     }
+
     watch(response, () => {
         console.log("LoginSample#watch(responseStore : " + JSON.stringify(response));
         const header = response.value.info;
@@ -77,6 +97,7 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     return {
         t,
         title,
-        onSubmit
+        onSubmit,
+        onSubmitDapanda
     }
 }

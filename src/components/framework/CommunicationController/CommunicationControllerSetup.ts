@@ -2,7 +2,7 @@ import {
     CommunicationControllerProps
 } from "%/components/framework/CommunicationController/CommunicationControllerProps";
 import {provide, SetupContext} from "vue";
-import {SendFunction} from "@/components/framework/CommunicationController/CommunicatoinTypes";
+import {SendFunction, SetApiEndpoint} from "@/components/framework/CommunicationController/CommunicatoinTypes";
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {ApiConstructors} from "@/common/ApiConstructors";
 import {ApiBase} from "@/common/ApiBase";
@@ -12,6 +12,11 @@ import {SnackbarAttribute} from "%/components/snackbar/SnackbarAttribute";
 import {SnackbarUtils} from "@/utils/SnackbarUtils";
 
 export const communicationControllerSetup = (props: CommunicationControllerProps, context: SetupContext) => {
+    /** API Endpoint */
+    let apiEndpoint: string | undefined = undefined;
+    const setApiEndpoint = (endpoint: string | undefined) => {
+        apiEndpoint = endpoint;
+    }
 
     /**
      * default send function
@@ -68,10 +73,14 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
                 throw new Error("No such API [" + processName + "]");
             }
             const process: ApiBase = new ApiConstructors.apiConstructors[processName]();
+            process.apiEndpoint = apiEndpoint;
 
             if (options) {
                 if (options.showOverlay === true) {
                     commonStatusStore.changeProcessing(true);
+                }
+                if (typeof options.alterApiEndpoint !== 'undefined') {
+                    process.apiEndpoint = options.alterApiEndpoint;
                 }
             }
             const commonResponse = await process.send(request, processName, httpMethod, issuer, props.authHeader, props.useBearer, options);
@@ -123,4 +132,5 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
 
     /* provide send function to application components. */
     provide<SendFunction>('send', send);
+    provide<SetApiEndpoint>('setApiEndpoint', setApiEndpoint);
 }

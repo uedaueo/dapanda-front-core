@@ -5,6 +5,7 @@ import { defineComponent, inject } from "vue";
 import { loginSampleSetup } from "@/samples/pages/LoginSample/LoginSampleSetup";
 import { LoginSampleRequestFactory } from "./LoginSampleRequestFactory";
 import { LoginSamplePostRequest } from "%/samples/api/LoginSamplePostRequest";
+import { SampleMethodTestPostRequest } from "%/samples/api/SampleMethodTestPostRequest";
 import { onBeforeRouteLeave, useRouter } from "vue-router";
 
 /**
@@ -23,6 +24,9 @@ export default defineComponent({
         const factory: LoginSampleRequestFactory = {
             createLoginSamplePostRequest(): LoginSamplePostRequest {
                 return new LoginSamplePostRequest();
+            },
+            createSampleMethodTestPostRequest(): SampleMethodTestPostRequest {
+                return new SampleMethodTestPostRequest();
             }
         };
         const noAuthPath = inject<string>('noAuthPath');

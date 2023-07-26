@@ -27,6 +27,10 @@ export namespace DapandaConst {
     export const LocalStorageItemKey = "dapanda";
     export const SessionStorageItemKey = "sepanda";
     export const DapandaAccessTokenHeader = "X-Dapanda-AccessToken";
+    export const DapandaLanguage = "X-Dapanda-Language";
+    export const DapandaTimezone = "X-Dapanda-Timezone";
+    export const DapandaCurrency = "X-Dapanda-Currency";
+    export const DapandaElapsedTime = "X-Dapanda-Elapsed-Time";
 
     /**
      * ApiBaseで取り扱うCommonResponseのresultの判定用

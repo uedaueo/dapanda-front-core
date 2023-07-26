@@ -1,7 +1,7 @@
 import {ApiTelegram} from "%/blanco/restgenerator/valueobject/ApiTelegram";
 import {CommonRequest} from "%/blanco/restgenerator/valueobject/CommonRequest";
 import {CommonResponse} from "%/blanco/restgenerator/valueobject/CommonResponse";
-import axios, {AxiosError} from "axios";
+import axios, {AxiosError, AxiosResponse} from "axios";
 import {MessageItem} from "%/blanco/restgenerator/valueobject/MessageItem";
 import {CommunicationOptions} from "@/components/framework/CommunicationController/CommunicatoinTypes";
 import {DapandaConst} from "@/common/DapandaGlobals";
@@ -17,6 +17,7 @@ import {ApiPlainCommonPostError} from "%/common/api/plain/ApiPlainCommonPostErro
 import {ApiPlainCommonGetError} from "%/common/api/plain/ApiPlainCommonGetError";
 import {ApiPlainCommonPutError} from "%/common/api/plain/ApiPlainCommonPutError";
 import {ApiPlainCommonDeleteError} from "%/common/api/plain/ApiPlainCommonDeleteError";
+import {PlainResponseHeader} from "%/blanco/restgenerator/valueobject/PlainResponseHeader";
 
 /**
  * API 電文処理のベースクラスです。
@@ -33,6 +34,8 @@ export abstract class ApiBase {
      */
     private _commonResponse?: CommonResponse = undefined;
 
+    private _apiEndpoint: string | undefined;
+
     get messages(): Array<MessageItem> {
         return this._messages;
     }
@@ -47,6 +50,14 @@ export abstract class ApiBase {
 
     get commonResponse(): CommonResponse | undefined {
         return this._commonResponse;
+    }
+
+    get apiEndpoint(): string | undefined {
+        return this._apiEndpoint;
+    }
+
+    set apiEndpoint(endpoint: string | undefined) {
+        this._apiEndpoint = endpoint;
     }
 
     /**
@@ -244,9 +255,7 @@ export abstract class ApiBase {
                 throw "Invalid method.";
         }
 
-        let body: string = "";
-
-        body = JSON.stringify(request);
+        let body = JSON.stringify(request);
         console.log("ApiBase#send: json = " + body);
 
         let uri: string;
@@ -254,9 +263,11 @@ export abstract class ApiBase {
         if (authError) {
             console.log("ApiBase#sendPlain: authError");
             this._commonResponse = new CommonResponse();
-            const info = new ResponseHeader();
+            const info = new PlainResponseHeader();
             // TODO set locale etc.
-            info.result = "403";
+            info.result = DapandaConst.ResultError;
+            info.status = 403;
+            info.statusText = "Authentication Error";
             let telegram;
             if (isMethodPost) {
                 telegram = new ApiPlainCommonPostError();
@@ -277,9 +288,14 @@ export abstract class ApiBase {
             res = await axios.get<CommonResponse>(uri);
             this._commonResponse = res.data;
         } else {
-            uri = import.meta.env.VITE_APP_API_ENDPOINT + this.locationURL;
+            if (typeof this._apiEndpoint !== 'undefined') {
+                uri = this._apiEndpoint + this.locationURL;
+            } else {
+                uri = import.meta.env.VITE_APP_API_ENDPOINT + this.locationURL;
+            }
             let headers: { [key: string]: string } = {};
             headers["content-type"] = "application/json";
+            /* TODO: Add locale information headers here. */
             if (loginToken && loginToken != "") {
                 let myToken = loginToken;
                 if (useBearer) {
@@ -295,20 +311,21 @@ export abstract class ApiBase {
                 headers = Object.assign(headers, options.additionalHeaders);
             }
             try {
+                const params = request;
+                /* TODO axiosStatic を呼び出しているので毎回セットしなくていいのでは？という気がする。 */
+                axios.interceptors.response.use(this.responseOnFulfilled, this.responseOnRejected)
                 switch (method) {
                     case DapandaConst.HttpMethodPost:
-                        res = await axios.post<CommonResponse>(uri, body, {headers});
+                        res = await axios.post<CommonResponse>(uri, request, {headers});
                         break;
                     case DapandaConst.HttpMethodPut:
-                        res = await axios.put<CommonResponse>(uri, body, {headers});
+                        res = await axios.put<CommonResponse>(uri, request, {headers});
                         break;
                     case DapandaConst.HttpMethodGet:
-                        uri += "?request=" + encodeURI(body);
-                        res = await axios.get<CommonResponse>(uri, {headers});
+                        res = await axios.get<CommonResponse>(uri,  {params, headers});
                         break;
                     case DapandaConst.HttpMethodDelete:
-                        uri += "?request=" + encodeURI(body);
-                        res = await axios.delete<CommonResponse>(uri, {headers});
+                        res = await axios.delete<CommonResponse>(uri, {params, headers});
                         break;
                     default:
                         throw "Invalid method.";
@@ -324,20 +341,7 @@ export abstract class ApiBase {
                 return undefined;
             }
         }
-
-        if (this._commonResponse) {
-            if (
-                this._commonResponse.messages &&
-                this._commonResponse.messages.length !== 0
-            ) {
-                console.log("API message num = " + this._commonResponse.messages.length);
-                this.messages = this._commonResponse.messages;
-            }
-        }
-
-        if (!this._commonResponse) {
-            return undefined;
-        }
+        /* possibly undefined. */
         return this._commonResponse;
     }
 
@@ -431,6 +435,59 @@ export abstract class ApiBase {
         locale.tz = states.tz();
         locale.currency = states.currency();
         return header;
+    }
+
+    /**
+     * axios interceptor for onFulfilled.
+     * @param response
+     */
+    private responseOnFulfilled = (response: AxiosResponse<ApiTelegram>): AxiosResponse<CommonResponse> => {
+        return this.convertToCommonResponse(response, DapandaConst.ResultSuccess);
+    }
+
+    /**
+     * axios interceptor for onRejected.
+     * @param error
+     */
+    private responseOnRejected = (error: any): AxiosResponse<CommonResponse> => {
+        const axiosError: AxiosError = error;
+        if (axiosError.response) {
+            /* application error */
+            const response = axiosError.response as AxiosResponse<ApiTelegram>;
+            return this.convertToCommonResponse(response, DapandaConst.ResultError);
+        } else {
+            throw axiosError
+        }
+    }
+
+    /**
+     * Convert AxiosResponse<ApiTelegram> into AxiosResponse<CommonResponse>
+     * @param response
+     * @param result
+     * @private
+     */
+    private convertToCommonResponse(response: AxiosResponse<ApiTelegram>, result: string): AxiosResponse<CommonResponse> {
+        const commonResponse = new CommonResponse();
+        const info = new PlainResponseHeader();
+        info.result = result;
+        info.statusText = response.statusText;
+        info.status = response.status;
+        info.time = response.headers[DapandaConst.DapandaElapsedTime];
+        const locale = new Locale();
+        locale.lang = response.headers[DapandaConst.DapandaLanguage];
+        locale.tz = response.headers[DapandaConst.DapandaTimezone];
+        locale.currency = response.headers[DapandaConst.DapandaCurrency];
+        info.locale = locale;
+        commonResponse.info = info;
+        commonResponse.telegram = response.data;
+        return {
+            data: commonResponse,
+            status: response.status,
+            statusText: response.statusText,
+            headers: response.headers,
+            config: response.config,
+            request: response.request
+        };
     }
 
     protected isAuthenticationRequired(): boolean | undefined {

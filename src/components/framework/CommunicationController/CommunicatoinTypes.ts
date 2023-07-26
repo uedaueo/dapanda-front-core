@@ -11,6 +11,7 @@ export interface CommunicationOptions {
     noSnackbarOnSuccess?: boolean;
     showInfoOnlyOnException?: boolean;
     additionalHeaders?: { [key: string]: string };
+    alterApiEndpoint?: string;
 }
 
 /**
@@ -37,3 +38,5 @@ export declare type SendFunction = (
     issuer: string,
     options?: CommunicationOptions
 ) => void;
+
+export declare type SetApiEndpoint = (endpoint: string | undefined) => void;
