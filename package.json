@@ -1,7 +1,7 @@
 {
   "name": "dapanda-front-core",
   "description": "frontend core for dapanda framework",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "files": ["src","blanco"],
   "private": false,
   "scripts": {

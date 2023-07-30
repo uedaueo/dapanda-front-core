@@ -31,7 +31,8 @@ export const loginSampleSetup = (props: LoginSampleProps, context: SetupContext,
     const snackbarStore = useSnackbarStore();
 
     /* call dapanda-api-core */
-    const dapandaRequest = factory.createSampleMethodTestPostRequest();
+    // const dapandaRequest = factory.createSampleMethodTestGetRequest();
+    const dapandaRequest = factory.createSampleMethodTestPutRequest();
     const dapandaStore = useSampleMethodTestPostResponseStore();
     const { response: dapandaResponse } = storeToRefs(dapandaStore);
 

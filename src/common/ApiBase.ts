@@ -293,6 +293,7 @@ export abstract class ApiBase {
             } else {
                 uri = import.meta.env.VITE_APP_API_ENDPOINT + this.locationURL;
             }
+            console.log("original uri = " + uri);
             let headers: { [key: string]: string } = {};
             headers["content-type"] = "application/json";
             /* TODO: Add locale information headers here. */
@@ -311,21 +312,47 @@ export abstract class ApiBase {
                 headers = Object.assign(headers, options.additionalHeaders);
             }
             try {
-                const params = request;
                 /* TODO axiosStatic を呼び出しているので毎回セットしなくていいのでは？という気がする。 */
                 axios.interceptors.response.use(this.responseOnFulfilled, this.responseOnRejected)
+                const calcuratedUrl = this.calcurateUrl(uri, request);
+                console.log("calcuratedUrl = " + calcuratedUrl);
+                let params: any, bodyParams: any;
+                try {
+                    params = this.getQueryParams(request);
+                    console.log("params = " + JSON.stringify(params));
+                    bodyParams = this.getBodyParams(request);
+                    console.log(("bodyParams = ") + JSON.stringify(bodyParams));
+                } catch (e) {
+                    console.log("Error on calcurate params : " + e);
+                }
                 switch (method) {
                     case DapandaConst.HttpMethodPost:
-                        res = await axios.post<CommonResponse>(uri, request, {headers});
+                        if (typeof bodyParams === 'undefined') {
+                            bodyParams = {};
+                        }
+                        res = await axios.post<CommonResponse>(
+                            calcuratedUrl,
+                            bodyParams,
+                            {params, headers});
                         break;
                     case DapandaConst.HttpMethodPut:
-                        res = await axios.put<CommonResponse>(uri, request, {headers});
+                        if (typeof bodyParams === 'undefined') {
+                            bodyParams = {};
+                        }
+                        res = await axios.put<CommonResponse>(
+                            calcuratedUrl,
+                            bodyParams,
+                            {params, headers});
                         break;
                     case DapandaConst.HttpMethodGet:
-                        res = await axios.get<CommonResponse>(uri,  {params, headers});
+                        res = await axios.get<CommonResponse>(
+                            calcuratedUrl,
+                            {params, headers});
                         break;
                     case DapandaConst.HttpMethodDelete:
-                        res = await axios.delete<CommonResponse>(uri, {params, headers});
+                        res = await axios.delete<CommonResponse>(
+                            calcuratedUrl,
+                            {params, headers});
                         break;
                     default:
                         throw "Invalid method.";
@@ -500,6 +527,55 @@ export abstract class ApiBase {
             config: response.config,
             request: response.request
         } as AxiosResponse<CommonResponse>;
+    }
+
+    /**
+     * ApiTelegram から url を生成します。
+     * 前提条件
+     * * url は / で終端しない
+     * * additionalPath は / で始まり終端なし。
+     * * pathParams は / で始まり終端なし。
+     */
+    private calcurateUrl = (original: string, request: ApiTelegram): string => {
+        const anyRequest = request as any;
+        let calcurated = original;
+        const funcAdditionalPath = anyRequest.additionalPath;
+        if (funcAdditionalPath && typeof funcAdditionalPath === 'function') {
+            const additional = anyRequest.additionalPath();
+            if (typeof additional !== 'undefined') {
+                calcurated = calcurated + additional;
+            }
+        }
+        const funcPathParams = anyRequest.getPathParams;
+        console.log("funcPathParams = " + funcPathParams);
+        if (funcPathParams && typeof funcPathParams === 'function') {
+            const pathParam = anyRequest.getPathParams();
+            if (typeof pathParam !== 'undefined') {
+                calcurated = calcurated + pathParam;
+            }
+        }
+        console.log("calcurated = " + calcurated);
+        return calcurated;
+    }
+
+    private getQueryParams = (request: ApiTelegram): any => {
+        const anyRequest = request as any;
+        let calcurated: any = undefined;
+        const funcQueryParams = anyRequest.getQueryParams;
+        if (funcQueryParams && typeof funcQueryParams === 'function') {
+            calcurated = anyRequest.getQueryParams();
+        }
+        return calcurated;
+    }
+
+    private getBodyParams = (request: ApiTelegram): any => {
+        const anyRequest = request as any;
+        let calcurated: any = undefined;
+        const funcBodyParams = anyRequest.getBodyParams;
+        if (funcBodyParams && typeof funcBodyParams === 'function') {
+            calcurated = anyRequest.getBodyParams();
+        }
+        return calcurated;
     }
 
     protected isAuthenticationRequired(): boolean | undefined {

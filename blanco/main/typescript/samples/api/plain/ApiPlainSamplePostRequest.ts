@@ -218,7 +218,13 @@ export class ApiPlainSamplePostRequest extends ApiPostTelegram {
      * @return A string returned by getPathParams
      */
     getPathParams(): string | undefined {
-        return "/get_sample";
+        let pathParams = "";
+        if (typeof this.get_sample !== 'undefined') {
+            pathParams += ("/" + this.get_sample);
+        } else {
+            throw 'Invalid PathParam, get_sample is undefined.';
+        }
+        return pathParams;
     }
 
     /**

@@ -22,6 +22,11 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
     private fPassword?: string = "";
 
     /**
+     * 規定値   [null]
+     */
+    private _additionalPath: string | undefined = undefined;
+
+    /**
      * フィールド [userId]のセッターメソッド
      *
      * 項目の型 [ユーザーID]
@@ -98,6 +103,72 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      */
     get telegramId(): string {
         return "SampleMethodTestGetRequest";
+    }
+
+    /**
+     * Returns the kind of this telegram as a string.
+     *
+     * @return The kind of this telegram.
+     */
+    get telegramType(): string {
+        return "Input";
+    }
+
+    /**
+     * Returns the method of this telegram as a string.
+     *
+     * @return The method of this telegram.
+     */
+    get telegramMethod(): string {
+        return "GET";
+    }
+
+    /**
+     * フィールド [_additionalPath]のセッターメソッド
+     *
+     * 項目の型 [string | undefined]
+     *
+     * @param argAdditionalPath フィールド[_additionalPath]に格納したい値
+     */
+    set additionalPath(argAdditionalPath: string | undefined) {
+        this._additionalPath = argAdditionalPath;
+    }
+
+    /**
+     * フィールド[_additionalPath]のゲッターメソッド
+     *
+     * 項目の型 [string|undefined]
+     *
+     * @return フィールド[_additionalPath]に格納されている値
+     */
+    get additionalPath(): string | undefined {
+        return this._additionalPath;
+    }
+
+    /**
+     * Get the path parameters from this telegram.
+     *
+     * @return A string returned by getPathParams
+     */
+    getPathParams(): string | undefined {
+        let pathParams = "";
+        if (typeof this.userId !== 'undefined') {
+            pathParams += ("/" + this.userId);
+        } else {
+            throw 'Invalid PathParam, userId is undefined.';
+        }
+        return pathParams;
+    }
+
+    /**
+     * Get the query parameters from this telegram.
+     *
+     * @return A string returned by getQueryParams
+     */
+    getQueryParams(): any {
+        return {
+            password: this.password
+        };
     }
 
     /**
