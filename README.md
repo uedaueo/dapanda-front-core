@@ -58,7 +58,7 @@ npm run preview
 
 ## blancoFramework
 
-コンポーネント、ストア、i18nのラベル定義、VeeValidation 定義は blancoFramework により自動生成されます。
+コンポーネント、ストア、i18n のラベル定義、VeeValidation 定義は blancoFramework により自動生成されます。
 
 ### Java 11 の導入
 
@@ -74,16 +74,16 @@ blancoFramework を使用するために、Java 11 を導入しておく必要�
 4. 手動作成するソースコードの作成
 
 * 自動生成されるソースコード（blanco/main/typescript 以下に生成）
-  * <ComponentId>.vue : コンポーネント定義
-  * <ComponentId>.ts : コンポーネント定義 (composition API)
-  * <ComponentId>Props.ts : プロパティ定義 (optional)
-  * <ComponentId>Emits.ts : Emits定義 (optional)
+  * `<ComponentId>.vue` : コンポーネント定義
+  * `<ComponentId>.ts` : コンポーネント定義 (composition API)
+  * `<ComponentId>Props.ts` : プロパティ定義 (optional)
+  * `<ComponentId>Emits.ts` : Emits定義 (optional)
 * 手動生成するソースコード (src/ 以下に生成)
-  * <ComponentId>.html : テンプレート (optional)
-  * <ComponentId>Render.ts : render 関数 (optional, テンプレートを使用しない場合は必須)
-  * <ComponentId>.scss : スタイルシート (optional)
-  * <ComponentId>Setup.ts : setup 関数 (optional)
-  * <ComponentId>Data.ts : data 関数 (optional, 非推奨)
+  * `<ComponentId>.html` : テンプレート (optional)
+  * `<ComponentId>Render.ts` : render 関数 (optional, テンプレートを使用しない場合は必須)
+  * `<ComponentId>.scss` : スタイルシート (optional)
+  * `<ComponentId>Setup.ts` : setup 関数 (optional)
+  * `<ComponentId>Data.ts` : data 関数 (optional, 非推奨)
 
 ### Store の作成
 
@@ -94,13 +94,13 @@ blancoFramework を使用するために、Java 11 を導入しておく必要�
 3. 手動作成するソースコードの作成
 
 * 自動生成されるソースコード（blanco/main/typescript 以下に生成）
-  * <StoreId>.ts : store 定義
-  * Define<StoreId>Actions.ts : actions 定義
-  * Define<StoreId>Getters.ts : getters 定義
-  * <StreId>State.ts : state 定義
+  * `<StoreId>.ts` : store 定義
+  * `Define<StoreId>Actions.ts` : actions 定義
+  * `Define<StoreId>Getters.ts` : getters 定義
+  * `<StreId>State.ts` : state 定義
 * 手動生成するソースコード (src/ 以下に生成)
-  * <StoreId>Actions.ts : actions 実装
-  * <StoreId>Getters.ts : getters 実装
+  * `<StoreId>Actions.ts` : actions 実装
+  * `<StoreId>Getters.ts` : getters 実装
 
 ### i18n ラベル定義
 
@@ -137,9 +137,9 @@ npm run dev
 
 ### tsconfig.json の編集
 
-この状態で `npm run build` を実行すると、isolatedModules フラグに関わるエラーが発生します。これは、node_modules に配置された既存のコードまでチェックしてしまうために発生します。isolatedModules 自体は true としておく事が必須とされているので、エラーを避ける為に `"skipLibCheck": true` を tsconfig.json に追記します。
+この状態で `npm run build` を実行すると、`isolatedModules` フラグに関わるエラーが発生します。これは、node_modules に配置された既存のコードまでチェックしてしまうために発生します。`isolatedModules` 自体は true としておく事が必須とされているので、エラーを避ける為に `"skipLibCheck": true` を tsconfig.json に追記します。
 
-```aidl
+```json
 {
   "compilerOptions": {
     "target": "esnext",
@@ -164,7 +164,7 @@ npm run dev
 
 ### npm で導入するパッケージの確認
 
-開発開始時には vue 関連のパッケージは 3 未対応のものがある (vuetifyとか)ので、@latest でインス取るしていいかどうか確認する必要がある。
+開発開始時には vue 関連のパッケージは 3 未対応のものがある (vuetifyとか)ので、@latest でインストールしていいかどうか確認する必要がある。
 
 ```aidl
 $ npm view vuetify
@@ -199,7 +199,7 @@ npm install sass@latest
 * 4/23 時点では 3.0.0.beta.1 が最新。
   * ただし vue add vuetify だけでは beta.0 が入る
   * **main.ts, App.vue, HelloWorld.vue, vite.config.ts などが上書きされるので注意。**
-  * tsconfig.json で "esModuleInterop": true を設定しているが、vite.config.ts で @vuetify/vite-plugin で default export が無いエラーになる（IntelliJ の不具合？）
+  * tsconfig.json で `"esModuleInterop": true` を設定しているが、vite.config.ts で @vuetify/vite-plugin で `default export` が無いエラーになる（IntelliJ の不具合？）
     * 参考: https://numb86-tech.hatenablog.com/entry/2020/07/11/160159
     * コマンドラインからはコンパイルできるので一旦無視しておく(@ts-ignoreを付与)
 * vite プロジェクトであっても、導入に vue-cli (5.0 later) が必要
@@ -286,7 +286,7 @@ npm install --save-dev @types/uuid
 
 として、使う時は
 
-```
+```js
 import { v4 as uuidv4 } from "uuid"
 const id = uuidv4();
 ```
@@ -353,13 +353,13 @@ blancoの自動生成用。
 
 * 親コンポーネントの TS ファイルで、コンポーネント import 時に .vue が抜けて居る
 
-```aidl
+```ts
 import HelloVuetify from "@/sample/pages/HelloVuetify/HelloVuetify";
 ```
 
 これだと ts ファイルを見に行く
 
-```aidl
+```ts
 import HelloVuetify from "@/sample/pages/HelloVuetify/HelloVuetify.vue";
 ```
 
