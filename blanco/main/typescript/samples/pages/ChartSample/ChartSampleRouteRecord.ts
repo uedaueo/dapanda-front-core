@@ -9,6 +9,6 @@ export const chartSampleRouteRecord: RouteRecordRaw = {
     component: () => import("%/samples/pages/ChartSample/ChartSample.vue"),
     meta: {
         reload: false,
-        authRequired: true
+        authRequired: false
     }
 };
