@@ -41,6 +41,10 @@ stable -> 17.9 (-> v17.9.1) (default)
 lts/* -> lts/gallium (-> v16.15.1)
 ```
 
+#### nvm + Windows で使う場合
+
+[chocolateyでnodeを入れるとnpmが管理者権限の時しか実行できない問題](https://kuree.hatenablog.com/entry/2020/07/23/chocolatey%E3%81%A7node%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B%E3%81%A8npm%E3%81%8C%E7%AE%A1%E7%90%86%E8%80%85%E6%A8%A9%E9%99%90%E3%81%AE%E6%99%82%E3%81%97%E3%81%8B%E5%AE%9F%E8%A1%8C%E3%81%A7%E3%81%8D)を参考にシステム環境変数の `PATH` に nvm のパスを追加する。この操作をしないと管理者モードでしか node, vite, gulp などのコマンドを使えない。
+
 ## プレビュー
 
 デバグモードで実行
@@ -69,8 +73,8 @@ blancoFramework を使用するために、Java 11 を導入しておく必要�
 画面等のコンポーネントは以下の手順で作成します。
 
 1. コンポーネント定義書の作成
-2. ./gradlew meta を実行
-3. ./gradlew metaLabels を実行(忘れると LabelsJa、LabelsEn が空になる)
+2. `./gradlew meta` を実行(フォルダやファイルの削除や名前の変更をした場合 `gradlew clean meta` を実行)
+3. `./gradlew metaLabels` を実行(忘れると LabelsJa、LabelsEn が空になる)
 4. 手動作成するソースコードの作成
 
 * 自動生成されるソースコード（blanco/main/typescript 以下に生成）
@@ -90,7 +94,7 @@ blancoFramework を使用するために、Java 11 を導入しておく必要�
 ストアの定義は以下の手順で行います。
 
 1. ストア定義書の作成
-2. ./gradlew meta の実行
+2. `./gradlew meta` の実行(フォルダやファイルの削除や名前の変更をした場合 `gradlew clean meta` を実行)
 3. 手動作成するソースコードの作成
 
 * 自動生成されるソースコード（blanco/main/typescript 以下に生成）
@@ -313,6 +317,10 @@ npm install -D @mdi/font
 ```aidl
 sudo port install gradle@7.4.2
 ```
+
+### Windows の場合
+
+[Windows10にGradleをインストール](https://qiita.com/quwahara/items/9c4e5fbda421cfcb09ad)
 
 ### 初期化
 
