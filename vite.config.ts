@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite'
+import { defineConfig, normalizePath } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from "vite-plugin-vuetify";
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const path = require('path')
 
@@ -12,6 +13,14 @@ export default defineConfig({
     vuetify({
       autoImport: true,
     }),
+    viteStaticCopy({
+      targets: [
+        { // asset
+          src: normalizePath( path.resolve(__dirname, './src/assets/*') ),
+          dest: normalizePath( path.resolve(__dirname, './dist/assets') )
+        },
+      ],
+    })
   ],
   define: { 'process.env': {} },
   resolve: {
