@@ -551,7 +551,7 @@ export abstract class ApiBase {
         if (funcPathParams && typeof funcPathParams === 'function') {
             const pathParam = anyRequest.getPathParams();
             if (typeof pathParam !== 'undefined') {
-                calcurated = calcurated + pathParam;
+                calcurated = calcurated + '/' + (pathParam as []).join('/');
             }
         }
         console.log("calcurated = " + calcurated);
