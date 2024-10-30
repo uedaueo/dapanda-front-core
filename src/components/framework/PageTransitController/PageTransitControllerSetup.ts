@@ -8,10 +8,10 @@ import {RestorePageTransitDataOptions} from "@/common/RestorePageTransitDataOpti
 
 export const pageTransitControllerSetup = (props: PageTransitControllerProps, context: SetupContext) => {
     const pageTransitData = usePageTransitDataStore();
-    const { location, dataStatus } = storeToRefs(pageTransitData);
+    const { location, dataStatus, transit } = storeToRefs(pageTransitData);
     console.log("pageTransitControllerSetup: location = " + location.value);
     const router = useRouter();
-    watch(location, () => {
+    watch(transit, () => {
         console.log("pageTransitControllerSetup toLocation " + location.value + ", query = " + JSON.stringify(pageTransitData.queryAndHash));
         const routeLocation: RouteLocationRaw = {
             path: location.value,

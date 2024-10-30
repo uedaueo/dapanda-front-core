@@ -44,6 +44,11 @@ export interface PageTransitDataStoreState {
      * 遷移先ページのURLに付加するqueryとhash情報です。
      */
     queryAndHash?: RouteQueryAndHash;
+
+    /**
+     * ページ遷移を検知するためのtoggleスイッチです。
+     */
+    transit: boolean;
 }
 
 /**
@@ -53,5 +58,6 @@ export const pageTransitDataStoreState: PageTransitDataStoreState = {
     location: "/",
     dataStatus: "invalid",
     dataRestoreOptions: undefined,
-    dataIssuer: "default"
+    dataIssuer: "default",
+    transit: false
 };
