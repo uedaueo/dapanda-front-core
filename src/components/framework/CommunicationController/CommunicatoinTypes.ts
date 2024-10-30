@@ -21,11 +21,11 @@ export declare type CommonResponseActionsTree = {
     /**
      * APIの戻り値をセットします
      *
-     * @param respnse API の戻り値です
+     * @param response API の戻り値です
      * @return void
      */
     setResponse(
-        respnse: CommonResponse
+        response: CommonResponse
     ): void;
 }
 
