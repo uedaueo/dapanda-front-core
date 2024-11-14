@@ -49,7 +49,7 @@ export default defineComponent({
 
         /* Get processing status */
         const commonStatusStore = useCommonStatusStore();
-        const { showProcessing, logout } = storeToRefs(commonStatusStore);
+        const { processing: showProcessing, logout } = storeToRefs(commonStatusStore);
 
         /* remove baseUrl from current pathname */
         const baseUrl = import.meta.env.VITE_APP_ROUTE_BASE;
