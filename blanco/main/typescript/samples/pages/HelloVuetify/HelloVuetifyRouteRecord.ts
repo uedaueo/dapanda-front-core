@@ -8,6 +8,8 @@ export const helloVuetifyRouteRecord: RouteRecordRaw = {
     name: "top",
     component: () => import("%/samples/pages/HelloVuetify/HelloVuetify.vue"),
     meta: {
+        breadCrumb: "トップページサンプル",
+        componentId: "HelloVuetify",
         reload: false,
         authRequired: true
     }

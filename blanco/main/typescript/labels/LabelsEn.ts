@@ -2,8 +2,8 @@ import {LocaleLabels} from "@/i18n/LocaleLabels";
 import { NoPageSampleEn } from "./NoPageSampleEn";
 import { ChartSampleEn } from "./ChartSampleEn";
 import { DapandaCommonEn } from "./DapandaCommonEn";
-import { LoginSampleEn } from "./LoginSampleEn";
 import { LocaleSelectEn } from "./LocaleSelectEn";
+import { LoginSampleEn } from "./LoginSampleEn";
 import { ValidationSampleEn } from "./ValidationSampleEn";
 
 /**
@@ -11,20 +11,20 @@ import { ValidationSampleEn } from "./ValidationSampleEn";
  */
 export class LabelsEn extends LocaleLabels {
     /**
-     * Loginサンプルページで使用するラベルを定義します。
-     *
-     * フィールド: [loginSample]。
-     * デフォルト: [new LoginSampleEn()]。
-     */
-    loginSample: LoginSampleEn = new LoginSampleEn();
-
-    /**
      * サンプル図ページで使用するラベルを定義します。
      *
      * フィールド: [ChartSample]。
      * デフォルト: [new ChartSampleEn()]。
      */
     ChartSample: ChartSampleEn = new ChartSampleEn();
+
+    /**
+     * dapanda framework 全体で共通に使用するラベルを定義します。
+     *
+     * フィールド: [DapandaCommon]。
+     * デフォルト: [new DapandaCommonEn()]。
+     */
+    DapandaCommon: DapandaCommonEn = new DapandaCommonEn();
 
     /**
      * ロケール選択コンポーネントで使用するラベルを定義します。
@@ -35,12 +35,12 @@ export class LabelsEn extends LocaleLabels {
     LocaleSelect: LocaleSelectEn = new LocaleSelectEn();
 
     /**
-     * dapanda framework 全体で共通に使用するラベルを定義します。
+     * Loginサンプルページで使用するラベルを定義します。
      *
-     * フィールド: [DapandaCommon]。
-     * デフォルト: [new DapandaCommonEn()]。
+     * フィールド: [loginSample]。
+     * デフォルト: [new LoginSampleEn()]。
      */
-    DapandaCommon: DapandaCommonEn = new DapandaCommonEn();
+    loginSample: LoginSampleEn = new LoginSampleEn();
 
     /**
      * NoPageサンプルページで使用するラベルを定義します。

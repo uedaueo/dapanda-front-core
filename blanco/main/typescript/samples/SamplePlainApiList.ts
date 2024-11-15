@@ -14,8 +14,8 @@ export class SamplePlainApiList {
    * A list of instances to be obtained from API argument string.
    */
   static constructors: SamplePlainApiListInterface = {
-    SampleMethodTest: SampleMethodTest,
+    ApiPlainCommon: ApiPlainCommon,
     ApiPlainSample: ApiPlainSample,
-    ApiPlainCommon: ApiPlainCommon
+    SampleMethodTest: SampleMethodTest
   };
 }

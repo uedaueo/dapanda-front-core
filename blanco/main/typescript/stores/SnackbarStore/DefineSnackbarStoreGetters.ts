@@ -1,9 +1,10 @@
 import { SnackbarStoreState } from "./SnackbarStoreState";
-import { StateTree } from "pinia";
+import { StateTree, _GettersTree } from "pinia";
+import { UnwrapRef } from "vue";
 
 /** gettersを定義します */
-export declare type SnackbarStoreGettersTree<S extends StateTree> = {
-    snackbar(state: S): {
+export interface SnackbarStoreGettersTree<S extends StateTree> extends _GettersTree<S> {
+    snackbar: (state: UnwrapRef<S>) => {
         /**
          * snackbar情報が存在するかどうかを返します。
          *

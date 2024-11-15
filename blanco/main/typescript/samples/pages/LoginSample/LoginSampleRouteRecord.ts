@@ -8,6 +8,8 @@ export const loginSampleRouteRecord: RouteRecordRaw = {
     name: "loginSample",
     component: () => import("%/samples/pages/LoginSample/LoginSample.vue"),
     meta: {
+        breadCrumb: "ログインページサンプル",
+        componentId: "LoginSample",
         reload: false,
         authRequired: false
     }

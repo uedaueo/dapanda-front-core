@@ -8,6 +8,8 @@ export const chartSampleRouteRecord: RouteRecordRaw = {
     name: "chartSample",
     component: () => import("%/samples/pages/ChartSample/ChartSample.vue"),
     meta: {
+        breadCrumb: "サンプル図コンポーネント",
+        componentId: "ChartSample",
         reload: false,
         authRequired: false
     }

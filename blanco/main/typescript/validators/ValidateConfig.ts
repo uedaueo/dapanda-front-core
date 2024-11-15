@@ -88,7 +88,7 @@ export class ValidateConfig {
     /**
      * vue-i18nのインスタンスを保持します。
      */
-    static i18n?: I18n<LocaleMessages<DapandaI18nResources>, unknown, unknown, string, false>;
+    static i18n?: I18n<LocaleMessages<DapandaI18nResources>, any, any, string, false>;
 
     /**
      * VeeValidateの初期化を実行します。

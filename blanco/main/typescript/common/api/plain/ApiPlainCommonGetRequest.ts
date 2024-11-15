@@ -64,9 +64,9 @@ export class ApiPlainCommonGetRequest extends ApiGetTelegram {
     /**
      * Get the path parameters from this telegram.
      *
-     * @return A string returned by getPathParams
+     * @return An array will be returned by getPathParams
      */
-    getPathParams(): string | undefined {
+    getPathParams(): any {
         return undefined;
     }
 

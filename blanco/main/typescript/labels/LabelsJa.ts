@@ -11,28 +11,20 @@ import { LoginSampleJa } from "./LoginSampleJa";
  */
 export class LabelsJa extends LocaleLabels {
     /**
+     * サンプル図ページで使用するラベルを定義します。
+     *
+     * フィールド: [ChartSample]。
+     * デフォルト: [new ChartSampleJa()]。
+     */
+    ChartSample: ChartSampleJa = new ChartSampleJa();
+
+    /**
      * dapanda framework 全体で共通に使用するラベルを定義します。
      *
      * フィールド: [DapandaCommon]。
      * デフォルト: [new DapandaCommonJa()]。
      */
     DapandaCommon: DapandaCommonJa = new DapandaCommonJa();
-
-    /**
-     * NoPgeサンプルページで使用するラベルを定義します。
-     *
-     * フィールド: [noPageSample]。
-     * デフォルト: [new NoPageSampleJa()]。
-     */
-    noPageSample: NoPageSampleJa = new NoPageSampleJa();
-
-    /**
-     * Loginサンプルページで使用するラベルを定義します。
-     *
-     * フィールド: [loginSample]。
-     * デフォルト: [new LoginSampleJa()]。
-     */
-    loginSample: LoginSampleJa = new LoginSampleJa();
 
     /**
      * ロケール選択コンポーネントで使用するラベルを定義します。
@@ -43,12 +35,20 @@ export class LabelsJa extends LocaleLabels {
     LocaleSelect: LocaleSelectJa = new LocaleSelectJa();
 
     /**
-     * サンプル図ページで使用するラベルを定義します。
+     * Loginサンプルページで使用するラベルを定義します。
      *
-     * フィールド: [ChartSample]。
-     * デフォルト: [new ChartSampleJa()]。
+     * フィールド: [loginSample]。
+     * デフォルト: [new LoginSampleJa()]。
      */
-    ChartSample: ChartSampleJa = new ChartSampleJa();
+    loginSample: LoginSampleJa = new LoginSampleJa();
+
+    /**
+     * NoPgeサンプルページで使用するラベルを定義します。
+     *
+     * フィールド: [noPageSample]。
+     * デフォルト: [new NoPageSampleJa()]。
+     */
+    noPageSample: NoPageSampleJa = new NoPageSampleJa();
 
     /**
      * Validationサンプルページで使用するラベルを定義します。

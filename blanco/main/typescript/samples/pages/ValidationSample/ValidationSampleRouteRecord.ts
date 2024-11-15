@@ -8,6 +8,8 @@ export const validationSampleRouteRecord: RouteRecordRaw = {
     name: "validation",
     component: () => import("%/samples/pages/ValidationSample/ValidationSample.vue"),
     meta: {
+        breadCrumb: "Validationサンプル",
+        componentId: "ValidationSample",
         reload: true,
         authRequired: true
     },
