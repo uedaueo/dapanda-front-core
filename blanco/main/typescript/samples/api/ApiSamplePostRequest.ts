@@ -60,7 +60,7 @@ export class ApiSamplePostRequest extends ApiPostTelegram {
      *
      * @return フィールド[kind]の型名文字列
      */
-    static typeKind(): string | undefined {
+    static typeKind(): string | undefined | null {
         return "string";
     }
 
@@ -95,7 +95,7 @@ export class ApiSamplePostRequest extends ApiPostTelegram {
      *
      * @return フィールド[options]の型名文字列
      */
-    static typeOptions(): string | undefined {
+    static typeOptions(): string | undefined | null {
         return "Array";
     }
 
@@ -107,7 +107,7 @@ export class ApiSamplePostRequest extends ApiPostTelegram {
      *
      * @return フィールド[options]の型名文字列
      */
-    static genericOptions(): string | undefined {
+    static genericOptions(): string | undefined | null {
         return "ApiSampleOptions";
     }
 
@@ -142,7 +142,7 @@ export class ApiSamplePostRequest extends ApiPostTelegram {
      *
      * @return フィールド[memo]の型名文字列
      */
-    static typeMemo(): string | undefined {
+    static typeMemo(): string | undefined | null {
         return "Array";
     }
 
@@ -154,7 +154,7 @@ export class ApiSamplePostRequest extends ApiPostTelegram {
      *
      * @return フィールド[memo]の型名文字列
      */
-    static genericMemo(): string | undefined {
+    static genericMemo(): string | undefined | null {
         return "string";
     }
 

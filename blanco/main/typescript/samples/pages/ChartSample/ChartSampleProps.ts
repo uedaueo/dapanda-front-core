@@ -13,12 +13,12 @@ export interface ChartSampleInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
-    subject?: string;
+    subject?: string | undefined | null;
 
     /**
      * コンポーネントのaliasプロパティです
      */
-    alias?: string;
+    alias?: string | undefined | null;
 
     /**
      * 図の識別子です

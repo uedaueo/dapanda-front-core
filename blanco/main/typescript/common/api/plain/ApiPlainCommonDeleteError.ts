@@ -62,7 +62,7 @@ export class ApiPlainCommonDeleteError extends ApiDeleteTelegram {
      *
      * @return フィールド[code]の型名文字列
      */
-    static typeCode(): string | undefined {
+    static typeCode(): string | undefined | null {
         return "string";
     }
 
@@ -97,7 +97,7 @@ export class ApiPlainCommonDeleteError extends ApiDeleteTelegram {
      *
      * @return フィールド[message]の型名文字列
      */
-    static typeMessage(): string | undefined {
+    static typeMessage(): string | undefined | null {
         return "string";
     }
 

@@ -50,7 +50,7 @@ export class ApiPlainSampleGetResponse extends ApiGetTelegram {
      *
      * @return フィールド[data]の型名文字列
      */
-    static typeData(): string | undefined {
+    static typeData(): string | undefined | null {
         return "Array";
     }
 
@@ -62,7 +62,7 @@ export class ApiPlainSampleGetResponse extends ApiGetTelegram {
      *
      * @return フィールド[data]の型名文字列
      */
-    static genericData(): string | undefined {
+    static genericData(): string | undefined | null {
         return "string";
     }
 

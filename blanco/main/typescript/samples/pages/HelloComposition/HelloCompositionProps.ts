@@ -13,12 +13,12 @@ export interface HelloCompositionInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
-    subject?: string;
+    subject?: string | undefined | null;
 
     /**
      * コンポーネントのaliasプロパティです
      */
-    alias?: string;
+    alias?: string | undefined | null;
 
     /**
      * メッセージのデフォルト値です。

@@ -13,12 +13,12 @@ export interface HelloMessageInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
-    subject?: string;
+    subject?: string | undefined | null;
 
     /**
      * コンポーネントのaliasプロパティです
      */
-    alias?: string;
+    alias?: string | undefined | null;
 
     /**
      * 入力メッセージを受け取るためのプロパティ

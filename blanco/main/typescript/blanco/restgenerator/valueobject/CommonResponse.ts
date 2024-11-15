@@ -12,7 +12,7 @@ export class CommonResponse {
      * フィールド: [info]。
      * デフォルト: [new ResponseHeader()]。
      */
-    private fInfo?: ResponseHeader = new ResponseHeader();
+    private fInfo?: ResponseHeader | undefined | null = new ResponseHeader();
 
     /**
      * API毎の応答電文, ApiTelegramを継承してAPI毎に独自の型を指定
@@ -20,7 +20,7 @@ export class CommonResponse {
      * フィールド: [telegram]。
      * デフォルト: [new ApiTelegram()]。
      */
-    private fTelegram?: ApiTelegram = new ApiTelegram();
+    private fTelegram?: ApiTelegram | undefined | null = new ApiTelegram();
 
     /**
      * メッセージ・エラー情報
@@ -28,7 +28,7 @@ export class CommonResponse {
      * フィールド: [messages]。
      * デフォルト: [new Array&lt;MessageItem&gt;()]。
      */
-    private fMessages?: Array<MessageItem> = new Array<MessageItem>();
+    private fMessages?: Array<MessageItem> | undefined | null = new Array<MessageItem>();
 
     /**
      * フィールド [info] の値を設定します。
@@ -37,7 +37,7 @@ export class CommonResponse {
      *
      * @param argInfo フィールド[info]に設定する値。
      */
-    set info(argInfo: ResponseHeader | undefined) {
+    set info(argInfo: ResponseHeader | undefined | null) {
         this.fInfo = argInfo;
     }
 
@@ -49,7 +49,7 @@ export class CommonResponse {
      *
      * @return フィールド[info]から取得した値。
      */
-    get info(): ResponseHeader | undefined {
+    get info(): ResponseHeader | undefined | null {
         return this.fInfo;
     }
 
@@ -60,7 +60,7 @@ export class CommonResponse {
      *
      * @param argTelegram フィールド[telegram]に設定する値。
      */
-    set telegram(argTelegram: ApiTelegram | undefined) {
+    set telegram(argTelegram: ApiTelegram | undefined | null) {
         this.fTelegram = argTelegram;
     }
 
@@ -72,7 +72,7 @@ export class CommonResponse {
      *
      * @return フィールド[telegram]から取得した値。
      */
-    get telegram(): ApiTelegram | undefined {
+    get telegram(): ApiTelegram | undefined | null {
         return this.fTelegram;
     }
 
@@ -83,7 +83,7 @@ export class CommonResponse {
      *
      * @param argMessages フィールド[messages]に設定する値。
      */
-    set messages(argMessages: Array<MessageItem> | undefined) {
+    set messages(argMessages: Array<MessageItem> | undefined | null) {
         this.fMessages = argMessages;
     }
 
@@ -95,7 +95,7 @@ export class CommonResponse {
      *
      * @return フィールド[messages]から取得した値。
      */
-    get messages(): Array<MessageItem> | undefined {
+    get messages(): Array<MessageItem> | undefined | null {
         return this.fMessages;
     }
 

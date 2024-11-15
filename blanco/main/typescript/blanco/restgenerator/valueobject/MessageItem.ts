@@ -8,7 +8,7 @@ export class MessageItem {
      * フィールド: [code]。
      * デフォルト: [null]。
      */
-    private fCode?: string;
+    private fCode?: string | undefined | null;
 
     /**
      * エラーメッセージの配列
@@ -16,7 +16,7 @@ export class MessageItem {
      * フィールド: [messages]。
      * デフォルト: [null]。
      */
-    private fMessages?: string;
+    private fMessages?: string | undefined | null;
 
     /**
      * フィールド [code] の値を設定します。
@@ -25,7 +25,7 @@ export class MessageItem {
      *
      * @param argCode フィールド[code]に設定する値。
      */
-    set code(argCode: string | undefined) {
+    set code(argCode: string | undefined | null) {
         this.fCode = argCode;
     }
 
@@ -36,7 +36,7 @@ export class MessageItem {
      *
      * @return フィールド[code]から取得した値。
      */
-    get code(): string | undefined {
+    get code(): string | undefined | null {
         return this.fCode;
     }
 
@@ -47,7 +47,7 @@ export class MessageItem {
      *
      * @param argMessages フィールド[messages]に設定する値。
      */
-    set messages(argMessages: string | undefined) {
+    set messages(argMessages: string | undefined | null) {
         this.fMessages = argMessages;
     }
 
@@ -58,7 +58,7 @@ export class MessageItem {
      *
      * @return フィールド[messages]から取得した値。
      */
-    get messages(): string | undefined {
+    get messages(): string | undefined | null {
         return this.fMessages;
     }
 

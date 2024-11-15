@@ -17,9 +17,9 @@ export declare type PageTransitDataStoreActionsTree = {
      */
     updateLocation(
             location: string,
-            data?: PageTransitData,
-            issuer?: string,
-            queryAndHash?: RouteQueryAndHash
+            data?: PageTransitData | undefined | null,
+            issuer?: string | undefined | null,
+            queryAndHash?: RouteQueryAndHash | undefined | null
     ): void;
     /**
      * ページリロード時にリストアを試みます
@@ -40,8 +40,8 @@ export declare type PageTransitDataStoreActionsTree = {
      * @return void
      */
     updateData(
-            data?: PageTransitData,
-            issuer?: string
+            data?: PageTransitData | undefined | null,
+            issuer?: string | undefined | null
     ): void;
     /**
      * データの削除を試みます

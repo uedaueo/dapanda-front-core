@@ -45,7 +45,7 @@ export class LoginSamplePostResponse extends ApiPostTelegram {
      *
      * @return フィールド[token]の型名文字列
      */
-    static typeToken(): string | undefined {
+    static typeToken(): string | undefined | null {
         return "string";
     }
 

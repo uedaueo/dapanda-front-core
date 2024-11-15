@@ -12,14 +12,14 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      *
      * 規定値   [&quot;&quot;]
      */
-    private fUserId?: string = "";
+    private fUserId?: string | undefined | null = "";
 
     /**
      * パスワード
      *
      * 規定値   [&quot;&quot;]
      */
-    private fPassword?: string = "";
+    private fPassword?: string | undefined | null = "";
 
     /**
      * 規定値   [null]
@@ -33,7 +33,7 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      *
      * @param argUserId フィールド[userId]に格納したい値
      */
-    set userId(argUserId: string | undefined) {
+    set userId(argUserId: string | undefined | null) {
         this.fUserId = argUserId;
     }
 
@@ -45,7 +45,7 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      *
      * @return フィールド[userId]に格納されている値
      */
-    get userId(): string | undefined {
+    get userId(): string | undefined | null {
         return this.fUserId;
     }
 
@@ -57,7 +57,7 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      *
      * @return フィールド[userId]の型名文字列
      */
-    static typeUserId(): string | undefined {
+    static typeUserId(): string | undefined | null {
         return "string";
     }
 
@@ -68,7 +68,7 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      *
      * @param argPassword フィールド[password]に格納したい値
      */
-    set password(argPassword: string | undefined) {
+    set password(argPassword: string | undefined | null) {
         this.fPassword = argPassword;
     }
 
@@ -80,7 +80,7 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      *
      * @return フィールド[password]に格納されている値
      */
-    get password(): string | undefined {
+    get password(): string | undefined | null {
         return this.fPassword;
     }
 
@@ -92,7 +92,7 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
      *
      * @return フィールド[password]の型名文字列
      */
-    static typePassword(): string | undefined {
+    static typePassword(): string | undefined | null {
         return "string";
     }
 
@@ -148,16 +148,12 @@ export class SampleMethodTestGetRequest extends ApiGetTelegram {
     /**
      * Get the path parameters from this telegram.
      *
-     * @return A string returned by getPathParams
+     * @return An array will be returned by getPathParams
      */
-    getPathParams(): string | undefined {
-        let pathParams = "";
-        if (typeof this.userId !== 'undefined') {
-            pathParams += ("/" + this.userId);
-        } else {
-            throw 'Invalid PathParam, userId is undefined.';
-        }
-        return pathParams;
+    getPathParams(): any {
+        return [
+        this.userId
+        ];
     }
 
     /**

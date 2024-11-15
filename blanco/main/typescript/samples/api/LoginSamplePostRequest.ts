@@ -52,7 +52,7 @@ export class LoginSamplePostRequest extends ApiPostTelegram {
      *
      * @return フィールド[id]の型名文字列
      */
-    static typeId(): string | undefined {
+    static typeId(): string | undefined | null {
         return "string";
     }
 
@@ -87,7 +87,7 @@ export class LoginSamplePostRequest extends ApiPostTelegram {
      *
      * @return フィールド[password]の型名文字列
      */
-    static typePassword(): string | undefined {
+    static typePassword(): string | undefined | null {
         return "string";
     }
 

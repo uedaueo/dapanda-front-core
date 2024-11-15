@@ -14,12 +14,12 @@ export interface NodeMenuItemInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
-    subject?: string;
+    subject?: string | undefined | null;
 
     /**
      * コンポーネントのaliasプロパティです
      */
-    alias?: string;
+    alias?: string | undefined | null;
 
     /**
      * このノードに割り当てられるMenuItemを指定します。
@@ -29,7 +29,7 @@ export interface NodeMenuItemInterface {
     /**
      * ルートノードの場合はtrueを指定染ます。
      */
-    root?: boolean;
+    root?: boolean | undefined | null;
 }
 
 /** propsの型を定義します */

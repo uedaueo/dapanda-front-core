@@ -13,12 +13,12 @@ export interface SnackbarExInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
-    subject?: string;
+    subject?: string | undefined | null;
 
     /**
      * コンポーネントのaliasプロパティです
      */
-    alias?: string;
+    alias?: string | undefined | null;
 }
 
 /** propsの型を定義します */

@@ -19,7 +19,7 @@ export class CommonRequest {
      * フィールド: [telegram]。
      * デフォルト: [new ApiTelegram()]。
      */
-    private fTelegram?: ApiTelegram = new ApiTelegram();
+    private fTelegram?: ApiTelegram | undefined | null = new ApiTelegram();
 
     /**
      * フィールド [info] の値を設定します。
@@ -51,7 +51,7 @@ export class CommonRequest {
      *
      * @param argTelegram フィールド[telegram]に設定する値。
      */
-    set telegram(argTelegram: ApiTelegram | undefined) {
+    set telegram(argTelegram: ApiTelegram | undefined | null) {
         this.fTelegram = argTelegram;
     }
 
@@ -63,7 +63,7 @@ export class CommonRequest {
      *
      * @return フィールド[telegram]から取得した値。
      */
-    get telegram(): ApiTelegram | undefined {
+    get telegram(): ApiTelegram | undefined | null {
         return this.fTelegram;
     }
 

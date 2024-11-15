@@ -57,7 +57,7 @@ export class SampleMethodTestPostRequest extends ApiPostTelegram {
      *
      * @return フィールド[userId]の型名文字列
      */
-    static typeUserId(): string | undefined {
+    static typeUserId(): string | undefined | null {
         return "string";
     }
 
@@ -92,7 +92,7 @@ export class SampleMethodTestPostRequest extends ApiPostTelegram {
      *
      * @return フィールド[password]の型名文字列
      */
-    static typePassword(): string | undefined {
+    static typePassword(): string | undefined | null {
         return "string";
     }
 
@@ -148,16 +148,12 @@ export class SampleMethodTestPostRequest extends ApiPostTelegram {
     /**
      * Get the path parameters from this telegram.
      *
-     * @return A string returned by getPathParams
+     * @return An array will be returned by getPathParams
      */
-    getPathParams(): string | undefined {
-        let pathParams = "";
-        if (typeof this.userId !== 'undefined') {
-            pathParams += ("/" + this.userId);
-        } else {
-            throw 'Invalid PathParam, userId is undefined.';
-        }
-        return pathParams;
+    getPathParams(): any {
+        return [
+        this.userId
+        ];
     }
 
     /**

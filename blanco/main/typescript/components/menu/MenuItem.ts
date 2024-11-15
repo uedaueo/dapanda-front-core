@@ -23,61 +23,61 @@ export interface MenuItem {
      *
      * フィールド: [description]。
      */
-    description?: string;
+    description?: string | undefined | null;
 
     /**
      * icon
      *
      * フィールド: [icon]。
      */
-    icon?: string;
+    icon?: string | undefined | null;
 
     /**
      * vue-router の path
      *
      * フィールド: [path]。
      */
-    path?: string;
+    path?: string | undefined | null;
 
     /**
      * 親メニュー項目
      *
      * フィールド: [parent]。
      */
-    parent?: MenuItem;
+    parent?: MenuItem | undefined | null;
 
     /**
      * 子メニュー項目たち
      *
      * フィールド: [children]。
      */
-    children?: Array<MenuItem>;
+    children?: Array<MenuItem> | undefined | null;
 
     /**
      * このメニューを表示する事が許されたroleの配列
      *
      * フィールド: [permitTo]。
      */
-    permitTo?: Array<string>;
+    permitTo?: Array<string> | undefined | null;
 
     /**
      * 依存する画面ID（権限チェック用）
      *
      * フィールド: [screenId]。
      */
-    screenId?: string;
+    screenId?: string | undefined | null;
 
     /**
      * 無効化の場合はTRUE
      *
      * フィールド: [disabled]。
      */
-    disabled?: boolean;
+    disabled?: boolean | undefined | null;
 
     /**
      * 遷移先URLに付加するqueryとhash
      *
      * フィールド: [queryAndHash]。
      */
-    queryAndHash?: RouteQueryAndHash;
+    queryAndHash?: RouteQueryAndHash | undefined | null;
 }

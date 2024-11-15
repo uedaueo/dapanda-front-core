@@ -13,17 +13,17 @@ export interface HelloVuetifyInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
-    subject?: string;
+    subject?: string | undefined | null;
 
     /**
      * コンポーネントのaliasプロパティです
      */
-    alias?: string;
+    alias?: string | undefined | null;
 
     /**
      * ダミー的なプロパティ定義
      */
-    dumm?: boolean;
+    dumm?: boolean | undefined | null;
 }
 
 /** propsの型を定義します */

@@ -14,7 +14,7 @@ export interface PageTransitDataStoreState {
     /**
      * 遷移先ページに渡すデータです。
      */
-    data?: PageTransitData;
+    data?: PageTransitData | undefined | null;
 
     /**
      * 遷移先ページに渡すデータの状態です。
@@ -43,7 +43,7 @@ export interface PageTransitDataStoreState {
     /**
      * 遷移先ページのURLに付加するqueryとhash情報です。
      */
-    queryAndHash?: RouteQueryAndHash;
+    queryAndHash?: RouteQueryAndHash | undefined | null;
 
     /**
      * ページ遷移を検知するためのtoggleスイッチです。
