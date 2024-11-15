@@ -19,7 +19,7 @@ export const nodeMenuItemSetup = (props: NodeMenuItemProps, context: SetupContex
         return klass2;
     };
     const isLeafItem = (child: MenuItem): boolean => {
-        return child.children === undefined || child.children.length === 0;
+        return child.children === undefined || child.children === null || child.children.length === 0;
     }
     const offsety = (): boolean => {
         return root.value === true;

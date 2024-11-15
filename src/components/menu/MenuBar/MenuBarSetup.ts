@@ -15,7 +15,7 @@ export const menuBarSetup = (props: MenuBarProps, context: SetupContext) => {
         return true;
     };
     const isLeafItem = (child: MenuItem): boolean => {
-        return child.children === undefined || child.children.length === 0;
+        return child.children === undefined || child.children === null || child.children.length === 0;
     }
 
     const commonStatusStore = useCommonStatusStore();
