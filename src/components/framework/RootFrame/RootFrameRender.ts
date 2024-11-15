@@ -17,6 +17,6 @@ export const rootFrameRender = () => {
             h(LocaleController),
             h(AuthenticationController),
             /* App は CommunicationController の子コンポーネントとする */
-            h<Component>(CommunicationController, {appComponent: App, nopagePath: "/nopageSample", noAuthPath: "/loginSample", authHeader: DapandaConst.DapandaAccessTokenHeader, useBearer: false})
+            h(CommunicationController, {appComponent: App, nopagePath: "/nopageSample", noAuthPath: "/loginSample", authHeader: DapandaConst.DapandaAccessTokenHeader, useBearer: false})
         ]);
 }
