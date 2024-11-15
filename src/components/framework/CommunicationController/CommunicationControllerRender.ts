@@ -1,4 +1,4 @@
-import {getCurrentInstance, h} from "vue";
+import { Component, getCurrentInstance, h } from "vue";
 import App from "@/App.vue";
 import {
     CommunicationControllerProps
@@ -7,7 +7,7 @@ import {
 export const communicationControllerRender = () => {
     // console.log("CommunicationController is loaded.");
     const instance = getCurrentInstance();
-    let myApp = App;
+    let myApp: Component = App;
     let myNopagePath = "/nopageSample";
     let myNoAuthPath = "/login";
     if (instance) {

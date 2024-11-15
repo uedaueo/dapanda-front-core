@@ -1,4 +1,4 @@
-import {h} from "vue";
+import { Component, h } from "vue";
 import PageTransitController from "%/components/framework/PageTransitController/PageTransitController";
 import LocaleController from "%/components/framework/LocaleController/LocaleController";
 import CommunicationController from "%/components/framework/CommunicationController/CommunicationController";
@@ -17,6 +17,6 @@ export const rootFrameRender = () => {
             h(LocaleController),
             h(AuthenticationController),
             /* App は CommunicationController の子コンポーネントとする */
-            h(CommunicationController, {appComponent: App, nopagePath: "/nopageSample", noAuthPath: "/loginSample", authHeader: DapandaConst.DapandaAccessTokenHeader, useBearer: false})
+            h<Component>(CommunicationController, {appComponent: App, nopagePath: "/nopageSample", noAuthPath: "/loginSample", authHeader: DapandaConst.DapandaAccessTokenHeader, useBearer: false})
         ]);
 }

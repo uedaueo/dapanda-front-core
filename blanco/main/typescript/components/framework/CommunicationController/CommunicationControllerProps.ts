@@ -1,4 +1,4 @@
-import { DefineComponent } from "vue";
+import { Component, ComponentObjectPropsOptions } from "vue";
 import { LooseRequired } from "@vue/shared";
 import { ComponentPropsOptions } from "vue";
 
@@ -14,17 +14,17 @@ export interface CommunicationControllerInterface {
     /**
      * コンポーネントのsubjectプロパティです
      */
-    subject?: string;
+    subject?: string | undefined | null;
 
     /**
      * コンポーネントのaliasプロパティです
      */
-    alias?: string;
+    alias?: string | undefined | null;
 
     /**
      * CommunicationController 配下に置く App コンポーネントを指定します。
      */
-    appComponent: DefineComponent;
+    appComponent: Component;
 
     /**
      * ページが存在しなかった場合のrouteを指定染ます。Appコンポーネントに渡します。
@@ -53,7 +53,7 @@ export declare type CommunicationControllerProps = Readonly<LooseRequired<Commun
 /**
  * propsの定義です
  */
-export const communicationControllerProps: ComponentPropsOptions<CommunicationControllerInterface> = {
+export const communicationControllerProps = defineProps<ComponentObjectPropsOptions<CommunicationControllerInterface>>({
     componentId: {
         default: "CommunicationController"
     },
@@ -79,4 +79,4 @@ export const communicationControllerProps: ComponentPropsOptions<CommunicationCo
     useBearer: {
         default: false
     }
-};
+});

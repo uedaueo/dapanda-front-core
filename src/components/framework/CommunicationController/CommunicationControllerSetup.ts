@@ -83,7 +83,8 @@ export const communicationControllerSetup = (props: CommunicationControllerProps
                     process.apiEndpoint = options.alterApiEndpoint;
                 }
             }
-            const commonResponse = await process.send(request, processName, httpMethod, issuer, props.authHeader, props.useBearer, options);
+            const useBearer: boolean = props.useBearer || false
+            const commonResponse = await process.send(request, processName, httpMethod, issuer, props.authHeader, useBearer, options);
 
             console.log("CommunicationController : return response = " + JSON.stringify(commonResponse));
 
