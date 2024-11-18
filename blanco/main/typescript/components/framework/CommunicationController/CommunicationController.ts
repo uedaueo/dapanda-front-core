@@ -1,7 +1,11 @@
 import { communicationControllerSetup } from "@/components/framework/CommunicationController/CommunicationControllerSetup";
 import { communicationControllerRender } from "@/components/framework/CommunicationController/CommunicationControllerRender";
 import { defineComponent } from "vue";
-import { CommunicationControllerProps, communicationControllerProps } from "./CommunicationControllerProps";
+import {
+    CommunicationControllerInterface,
+    CommunicationControllerProps,
+    communicationControllerProps
+} from "./CommunicationControllerProps";
 
 /**
  * 通信を制御するためのコンポーネントです。

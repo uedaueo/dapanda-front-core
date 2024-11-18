@@ -1,4 +1,4 @@
-import { Component, ComponentObjectPropsOptions } from "vue";
+import {Component, ComponentObjectPropsOptions, ExtractPropTypes} from "vue";
 import { LooseRequired } from "@vue/shared";
 import { ComponentPropsOptions } from "vue";
 
@@ -48,12 +48,14 @@ export interface CommunicationControllerInterface {
 }
 
 /** propsの型を定義します */
-export declare type CommunicationControllerProps = Readonly<LooseRequired<CommunicationControllerInterface>>;
+// export declare type CommunicationControllerProps = Readonly<LooseRequired<CommunicationControllerInterface>>;
+
+export type CommunicationControllerProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<CommunicationControllerInterface>>> & Readonly<LooseRequired<CommunicationControllerInterface>> & {}>
 
 /**
  * propsの定義です
  */
-export const communicationControllerProps = defineProps<ComponentObjectPropsOptions<CommunicationControllerInterface>>({
+export const communicationControllerProps: ComponentObjectPropsOptions<CommunicationControllerInterface> = {
     componentId: {
         default: "CommunicationController"
     },
@@ -79,4 +81,4 @@ export const communicationControllerProps = defineProps<ComponentObjectPropsOpti
     useBearer: {
         default: false
     }
-});
+};

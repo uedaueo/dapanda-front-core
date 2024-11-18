@@ -1,7 +1,7 @@
 import {
     CommunicationControllerProps
 } from "%/components/framework/CommunicationController/CommunicationControllerProps";
-import {provide, SetupContext} from "vue";
+import {provide, SetupContext, toRef, toRefs} from "vue";
 import {SendFunction, SetApiEndpoint} from "@/components/framework/CommunicationController/CommunicatoinTypes";
 import {DapandaConst} from "@/common/DapandaGlobals";
 import {ApiConstructors} from "@/common/ApiConstructors";

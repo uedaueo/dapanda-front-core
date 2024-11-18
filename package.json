@@ -2,6 +2,7 @@
   "name": "dapanda-front-core",
   "description": "frontend core for dapanda framework",
   "version": "0.0.7",
+  "type": "module",
   "files": [
     "src",
     "blanco"
