@@ -300,7 +300,8 @@ task metaComponents {
                 searchTmpdir: "${buildDir}/tmpObjects",
                 lineSeparator: 'LF',
                 strictNullable: true,
-                listClass: ""
+                listClass: "",
+                supportedVueVersion: "3.5"
         )
         ant.blancovuecomponent(metadir: "${projectDir}" + "/meta/samples/components",
                 tmpdir: "${buildDir}/tmpComponents",
@@ -313,7 +314,8 @@ task metaComponents {
                 searchTmpdir: "${buildDir}/tmpObjects",
                 lineSeparator: 'LF',
                 strictNullable: true,
-                listClass: ""
+                listClass: "",
+                supportedVueVersion: "3.5"
         )
     }
 }
@@ -354,7 +356,8 @@ task metaPages {
                 searchTmpdir: "${buildDir}/tmpComponents,${buildDir}/tmpObjects",
                 lineSeparator: 'LF',
                 strictNullable: true,
-                listClass: "samples.pages.RouteSettings"
+                listClass: "samples.pages.RouteSettings",
+                supportedVueVersion: "3.5"
         )
     }
 }
