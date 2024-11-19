@@ -22,6 +22,21 @@ export declare type PageTransitDataStoreActionsTree = {
             queryAndHash?: RouteQueryAndHash | undefined | null
     ): void;
     /**
+     * ページ遷移する場合に呼び出します。
+     *
+     * @param location null
+     * @param data null
+     * @param issuer 更新を発行したコンポーネントです
+     * @param queryAndHash null
+     * @return void
+     */
+    setLocation(
+            location: string,
+            data?: PageTransitData | undefined | null,
+            issuer?: string | undefined | null,
+            queryAndHash?: RouteQueryAndHash | undefined | null
+    ): void;
+    /**
      * ページリロード時にリストアを試みます
      *
      * @param options データをリストアする際のオプションです。

@@ -7,6 +7,11 @@ import {LocationQuery, RouteLocationRaw, RouteQueryAndHash} from "vue-router";
 export const pageTransitDataStoreActions = definePageTransitDataStoreActions(
     {
         updateLocation(location: string, data?: PageTransitData, issuer?: string, queryAndHash?: RouteQueryAndHash) {
+            console.log("updateLocation > setLocation");
+            this.transit = !this.transit;
+            this.setLocation(location, data, issuer, queryAndHash);
+        },
+        setLocation(location: string, data?: PageTransitData, issuer?: string, queryAndHash?: RouteQueryAndHash) {
             console.log("current store.location is : " + this.location);
             console.log("pageTransitDataStoreOptions.actions.update to : " + location);
             this.location = location;
