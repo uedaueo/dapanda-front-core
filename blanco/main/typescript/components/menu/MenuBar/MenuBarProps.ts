@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface MenuBarInterface {
 }
 
 /** propsの型を定義します */
-export declare type MenuBarProps = Readonly<LooseRequired<MenuBarInterface>>;
+export type MenuBarProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<MenuBarInterface>>> & Readonly<LooseRequired<MenuBarInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const menuBarProps: ComponentPropsOptions<MenuBarInterface> = {
+export const menuBarProps: ComponentObjectPropsOptions<MenuBarInterface> = {
     componentId: {
         default: "MenuBar"
     },

@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface LocaleControllerInterface {
 }
 
 /** propsの型を定義します */
-export declare type LocaleControllerProps = Readonly<LooseRequired<LocaleControllerInterface>>;
+export type LocaleControllerProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<LocaleControllerInterface>>> & Readonly<LooseRequired<LocaleControllerInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const localeControllerProps: ComponentPropsOptions<LocaleControllerInterface> = {
+export const localeControllerProps: ComponentObjectPropsOptions<LocaleControllerInterface> = {
     componentId: {
         default: "LocaleController"
     },

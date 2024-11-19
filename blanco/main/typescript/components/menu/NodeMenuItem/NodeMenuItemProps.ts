@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 import { MenuItem } from "%/components/menu/MenuItem";
 
 /**
@@ -33,12 +33,12 @@ export interface NodeMenuItemInterface {
 }
 
 /** propsの型を定義します */
-export declare type NodeMenuItemProps = Readonly<LooseRequired<NodeMenuItemInterface>>;
+export type NodeMenuItemProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<NodeMenuItemInterface>>> & Readonly<LooseRequired<NodeMenuItemInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const nodeMenuItemProps: ComponentPropsOptions<NodeMenuItemInterface> = {
+export const nodeMenuItemProps: ComponentObjectPropsOptions<NodeMenuItemInterface> = {
     componentId: {
         default: "NodeMenuItem"
     },

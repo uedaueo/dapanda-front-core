@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface RootFrameInterface {
 }
 
 /** propsの型を定義します */
-export declare type RootFrameProps = Readonly<LooseRequired<RootFrameInterface>>;
+export type RootFrameProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<RootFrameInterface>>> & Readonly<LooseRequired<RootFrameInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const rootFrameProps: ComponentPropsOptions<RootFrameInterface> = {
+export const rootFrameProps: ComponentObjectPropsOptions<RootFrameInterface> = {
     componentId: {
         default: "RootFrame"
     },

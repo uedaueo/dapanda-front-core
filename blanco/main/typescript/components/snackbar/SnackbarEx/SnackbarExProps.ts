@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface SnackbarExInterface {
 }
 
 /** propsの型を定義します */
-export declare type SnackbarExProps = Readonly<LooseRequired<SnackbarExInterface>>;
+export type SnackbarExProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<SnackbarExInterface>>> & Readonly<LooseRequired<SnackbarExInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const snackbarExProps: ComponentPropsOptions<SnackbarExInterface> = {
+export const snackbarExProps: ComponentObjectPropsOptions<SnackbarExInterface> = {
     componentId: {
         default: "SnackbarEx"
     },

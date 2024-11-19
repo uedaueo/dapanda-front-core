@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -27,12 +27,12 @@ export interface HelloMessageInterface {
 }
 
 /** propsの型を定義します */
-export declare type HelloMessageProps = Readonly<LooseRequired<HelloMessageInterface>>;
+export type HelloMessageProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<HelloMessageInterface>>> & Readonly<LooseRequired<HelloMessageInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const helloMessageProps: ComponentPropsOptions<HelloMessageInterface> = {
+export const helloMessageProps: ComponentObjectPropsOptions<HelloMessageInterface> = {
     componentId: {
         default: "HelloMessage"
     },

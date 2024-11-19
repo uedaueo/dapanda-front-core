@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 import { MenuItem } from "%/components/menu/MenuItem";
 
 /**
@@ -33,12 +33,12 @@ export interface LeafMenuItemInterface {
 }
 
 /** propsの型を定義します */
-export declare type LeafMenuItemProps = Readonly<LooseRequired<LeafMenuItemInterface>>;
+export type LeafMenuItemProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<LeafMenuItemInterface>>> & Readonly<LooseRequired<LeafMenuItemInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const leafMenuItemProps: ComponentPropsOptions<LeafMenuItemInterface> = {
+export const leafMenuItemProps: ComponentObjectPropsOptions<LeafMenuItemInterface> = {
     componentId: {
         default: "LeafMenuItem"
     },

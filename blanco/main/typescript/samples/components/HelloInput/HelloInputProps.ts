@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface HelloInputInterface {
 }
 
 /** propsの型を定義します */
-export declare type HelloInputProps = Readonly<LooseRequired<HelloInputInterface>>;
+export type HelloInputProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<HelloInputInterface>>> & Readonly<LooseRequired<HelloInputInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const helloInputProps: ComponentPropsOptions<HelloInputInterface> = {
+export const helloInputProps: ComponentObjectPropsOptions<HelloInputInterface> = {
     componentId: {
         default: "HelloInput"
     },

@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -26,12 +26,12 @@ export interface ValidationSampleInterface {
 }
 
 /** propsの型を定義します */
-export declare type ValidationSampleProps = Readonly<LooseRequired<ValidationSampleInterface>>;
+export type ValidationSampleProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<ValidationSampleInterface>>> & Readonly<LooseRequired<ValidationSampleInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const validationSampleProps: ComponentPropsOptions<ValidationSampleInterface> = {
+export const validationSampleProps: ComponentObjectPropsOptions<ValidationSampleInterface> = {
     componentId: {
         default: "ValidationSample"
     },

@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface AuthenticationControllerInterface {
 }
 
 /** propsの型を定義します */
-export declare type AuthenticationControllerProps = Readonly<LooseRequired<AuthenticationControllerInterface>>;
+export type AuthenticationControllerProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<AuthenticationControllerInterface>>> & Readonly<LooseRequired<AuthenticationControllerInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const authenticationControllerProps: ComponentPropsOptions<AuthenticationControllerInterface> = {
+export const authenticationControllerProps: ComponentObjectPropsOptions<AuthenticationControllerInterface> = {
     componentId: {
         default: "AuthenticationController"
     },

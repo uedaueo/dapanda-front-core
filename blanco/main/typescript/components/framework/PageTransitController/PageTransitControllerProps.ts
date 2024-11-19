@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface PageTransitControllerInterface {
 }
 
 /** propsの型を定義します */
-export declare type PageTransitControllerProps = Readonly<LooseRequired<PageTransitControllerInterface>>;
+export type PageTransitControllerProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<PageTransitControllerInterface>>> & Readonly<LooseRequired<PageTransitControllerInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const pageTransitControllerProps: ComponentPropsOptions<PageTransitControllerInterface> = {
+export const pageTransitControllerProps: ComponentObjectPropsOptions<PageTransitControllerInterface> = {
     componentId: {
         default: "PageTransitController"
     },

@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 import { SnackbarAttribute } from "%/components/snackbar/SnackbarAttribute";
 
 /**
@@ -28,12 +28,12 @@ export interface SnackbarMessageInterface {
 }
 
 /** propsの型を定義します */
-export declare type SnackbarMessageProps = Readonly<LooseRequired<SnackbarMessageInterface>>;
+export type SnackbarMessageProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<SnackbarMessageInterface>>> & Readonly<LooseRequired<SnackbarMessageInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const snackbarMessageProps: ComponentPropsOptions<SnackbarMessageInterface> = {
+export const snackbarMessageProps: ComponentObjectPropsOptions<SnackbarMessageInterface> = {
     componentId: {
         default: "SnackbarMessage"
     },

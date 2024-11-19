@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface NoPageSampleInterface {
 }
 
 /** propsの型を定義します */
-export declare type NoPageSampleProps = Readonly<LooseRequired<NoPageSampleInterface>>;
+export type NoPageSampleProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<NoPageSampleInterface>>> & Readonly<LooseRequired<NoPageSampleInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const noPageSampleProps: ComponentPropsOptions<NoPageSampleInterface> = {
+export const noPageSampleProps: ComponentObjectPropsOptions<NoPageSampleInterface> = {
     componentId: {
         default: "NoPageSample"
     },

@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -53,12 +53,12 @@ export interface ChartSampleInterface {
 }
 
 /** propsの型を定義します */
-export declare type ChartSampleProps = Readonly<LooseRequired<ChartSampleInterface>>;
+export type ChartSampleProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<ChartSampleInterface>>> & Readonly<LooseRequired<ChartSampleInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const chartSampleProps: ComponentPropsOptions<ChartSampleInterface> = {
+export const chartSampleProps: ComponentObjectPropsOptions<ChartSampleInterface> = {
     componentId: {
         default: "ChartSample"
     },

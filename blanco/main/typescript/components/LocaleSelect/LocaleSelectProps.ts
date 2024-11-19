@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface LocaleSelectInterface {
 }
 
 /** propsの型を定義します */
-export declare type LocaleSelectProps = Readonly<LooseRequired<LocaleSelectInterface>>;
+export type LocaleSelectProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<LocaleSelectInterface>>> & Readonly<LooseRequired<LocaleSelectInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const localeSelectProps: ComponentPropsOptions<LocaleSelectInterface> = {
+export const localeSelectProps: ComponentObjectPropsOptions<LocaleSelectInterface> = {
     componentId: {
         default: "LocaleSelect"
     },

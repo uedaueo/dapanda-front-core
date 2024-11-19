@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -27,12 +27,12 @@ export interface HelloVuetifyInterface {
 }
 
 /** propsの型を定義します */
-export declare type HelloVuetifyProps = Readonly<LooseRequired<HelloVuetifyInterface>>;
+export type HelloVuetifyProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<HelloVuetifyInterface>>> & Readonly<LooseRequired<HelloVuetifyInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const helloVuetifyProps: ComponentPropsOptions<HelloVuetifyInterface> = {
+export const helloVuetifyProps: ComponentObjectPropsOptions<HelloVuetifyInterface> = {
     componentId: {
         default: "HelloVuetify"
     },

@@ -1,5 +1,5 @@
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -22,12 +22,12 @@ export interface LoginSampleInterface {
 }
 
 /** propsの型を定義します */
-export declare type LoginSampleProps = Readonly<LooseRequired<LoginSampleInterface>>;
+export type LoginSampleProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<LoginSampleInterface>>> & Readonly<LooseRequired<LoginSampleInterface>> & {}>;
 
 /**
  * propsの定義です
  */
-export const loginSampleProps: ComponentPropsOptions<LoginSampleInterface> = {
+export const loginSampleProps: ComponentObjectPropsOptions<LoginSampleInterface> = {
     componentId: {
         default: "LoginSample"
     },

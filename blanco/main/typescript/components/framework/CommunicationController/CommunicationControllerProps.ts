@@ -1,6 +1,6 @@
-import {Component, ComponentObjectPropsOptions, ExtractPropTypes} from "vue";
+import { Component } from "vue";
 import { LooseRequired } from "@vue/shared";
-import { ComponentPropsOptions } from "vue";
+import { ComponentObjectPropsOptions, ExtractPropTypes } from "vue";
 
 /**
  * コンポーネントのプロパティを定義するインタフェイスです
@@ -48,9 +48,7 @@ export interface CommunicationControllerInterface {
 }
 
 /** propsの型を定義します */
-// export declare type CommunicationControllerProps = Readonly<LooseRequired<CommunicationControllerInterface>>;
-
-export type CommunicationControllerProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<CommunicationControllerInterface>>> & Readonly<LooseRequired<CommunicationControllerInterface>> & {}>
+export type CommunicationControllerProps = LooseRequired<Readonly<ExtractPropTypes<ComponentObjectPropsOptions<CommunicationControllerInterface>>> & Readonly<LooseRequired<CommunicationControllerInterface>> & {}>;
 
 /**
  * propsの定義です
